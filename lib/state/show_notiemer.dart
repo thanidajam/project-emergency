@@ -1,5 +1,8 @@
+import 'dart:convert';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dio/dio.dart';
+import 'package:emer_projectnew/main.dart';
 import 'package:emer_projectnew/models/emergency_model.dart';
 import 'package:emer_projectnew/models/user_model.dart';
 import 'package:emer_projectnew/utility/my_constant.dart';
@@ -19,6 +22,8 @@ class ShownotiEmergency extends StatefulWidget {
 class _ShownotiEmergencyState extends State<ShownotiEmergency> {
   EmergencyModel? emergencyModel;
   UserModel? userModel;
+  String? rec_emer;
+  String? status;
   List<String> pathPic = [];
 
   @override
@@ -27,6 +32,29 @@ class _ShownotiEmergencyState extends State<ShownotiEmergency> {
     super.initState();
     emergencyModel = widget.emergencyModel;
     convertStringToArray();
+    editValueToMySQL();
+  }
+
+  Future<Null> editValueToMySQL() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    String rec_emer = preferences.getString('Name')!;
+
+    print('$rec_emer');
+
+    String? status;
+    String path = '${MyConstant.domain}/emer_projectnew/api/getEmergency.php';
+    await Dio().get(path).then((value) {
+      print('## name_rec => $rec_emer');
+      for (var item in json.decode(value.data)) {
+        setState(() {
+          userModel = UserModel.fromMap(item);
+          print('## name logined = ${userModel!.Name}');
+        });
+        print('## อัพเดตสำเร็จ');
+
+        processEditToMySQL(rec_emer, status);
+      }
+    });
   }
 
   Future<Null> processEditToMySQL(
@@ -35,9 +63,13 @@ class _ShownotiEmergencyState extends State<ShownotiEmergency> {
   ) async {
     String apiEditData =
         '${MyConstant.domain}/emer_projectnew/api/editEmergency.php?isAdd=true&eid=${emergencyModel!.EID}&status=$status&rec_emer=$rec_emer';
-    await Dio().get(apiEditData).then((value) {
+    await Dio().get(apiEditData).then((value) async {
+      SharedPreferences preferences = await SharedPreferences.getInstance();
+      String rec_emer = preferences.getString('Name')!;
       if (value.toString() == 'true') {
         Navigator.pop(context);
+      } else {
+        print('อัพเดตไม่สำเร็จ');
       }
     });
   }
@@ -93,7 +125,12 @@ class _ShownotiEmergencyState extends State<ShownotiEmergency> {
       child: Container(
         padding: EdgeInsets.only(top: 20),
         child: ElevatedButton(
-          onPressed: () {},
+          onPressed: () {
+            setState(() {
+              status = 'F';
+            });
+            processEditToMySQL(rec_emer, status);
+          },
           style: MyConstant().myButtonStyle4(),
           child: Text(
             'แจ้งเหตุเท็จ',
@@ -109,10 +146,17 @@ class _ShownotiEmergencyState extends State<ShownotiEmergency> {
   }
 
   Container buildButton1() {
+    debugPrint('rec_emer: $rec_emer');
     return Container(
       padding: EdgeInsets.only(top: 20),
       child: ElevatedButton(
-        onPressed: () {},
+        onPressed: () {
+          setState(() {
+            status = 'T';
+            rec_emer = '${rec_emer}';
+          });
+          processEditToMySQL(rec_emer, status);
+        },
         style: MyConstant().myButtonStyle3(),
         child: Text(
           'ยืนยันการแจ้งเหตุ',

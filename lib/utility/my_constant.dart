@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 
 class MyConstant {
-  
   // Gerneral
   static String appName = 'Welcome To Appication';
   static String appName1 = 'Rmutt Emergency Notification';
   static String appName2 = 'นักศึกษา/บุคคลากร';
   static String appName3 = 'พนักงานขับรถพยาบาล';
-  static String domain = 'http://37f7-124-120-230-148.ngrok.io';
+  static String domain = 'http://6682-124-120-230-148.ngrok.io';
 
   //Route
   static String routeUser = '/user';
@@ -25,7 +24,7 @@ class MyConstant {
   static String routeAddUser = '/addUser';
   static String routeshowNotiEmer = '/showNotiEmer';
   static String routeshowNotiEmergency = '/shownotiEmergency';
-
+  static String routeshowNotiEmergen = '/showNotiEmergen';
 
   //Image
   static String image = 'assets/images/ambulance.png';
@@ -49,93 +48,91 @@ class MyConstant {
 
   //Style
   TextStyle h1Style() => TextStyle(
-    fontSize: 24,
-    color: dark,
-    fontWeight: FontWeight.bold,
-  );
+        fontSize: 24,
+        color: dark,
+        fontWeight: FontWeight.bold,
+      );
 
   TextStyle h2Style() => TextStyle(
-    fontSize: 20,
-    color: dark,
-    fontWeight: FontWeight.w700,
-  );
+        fontSize: 20,
+        color: dark,
+        fontWeight: FontWeight.w700,
+      );
 
   TextStyle h3Style() => TextStyle(
-    fontSize: 16,
-    color: primary,
-    fontWeight: FontWeight.bold,
-  );
+        fontSize: 16,
+        color: primary,
+        fontWeight: FontWeight.bold,
+      );
 
   TextStyle h4Style() => TextStyle(
-    fontSize: 16,
-    color: dark,
-    fontWeight: FontWeight.normal,
-  );
+        fontSize: 16,
+        color: dark,
+        fontWeight: FontWeight.normal,
+      );
 
   TextStyle h5Style() => TextStyle(
-    fontSize: 16,
-    color: dark,
-    fontWeight: FontWeight.w700,
-  );
+        fontSize: 16,
+        color: dark,
+        fontWeight: FontWeight.w700,
+      );
 
-    TextStyle h6Style() => TextStyle(
-    fontSize: 14,
-    color: dark,
-    fontWeight: FontWeight.normal,
-  );
+  TextStyle h6Style() => TextStyle(
+        fontSize: 14,
+        color: dark,
+        fontWeight: FontWeight.normal,
+      );
 
   TextStyle h7Style() => TextStyle(
-    fontSize: 20,
-    color: dark,
-    fontWeight: FontWeight.normal,
-  );
+        fontSize: 20,
+        color: dark,
+        fontWeight: FontWeight.normal,
+      );
 
-    TextStyle h8Style() => TextStyle(
-    fontSize: 18,
-    color: dark,
-    fontWeight: FontWeight.normal,
-  );
+  TextStyle h8Style() => TextStyle(
+        fontSize: 18,
+        color: dark,
+        fontWeight: FontWeight.normal,
+      );
 
-    TextStyle h9Style() => TextStyle(
-    fontSize: 20,
-    color: primary,
-    fontWeight: FontWeight.bold,
-  );
+  TextStyle h9Style() => TextStyle(
+        fontSize: 20,
+        color: primary,
+        fontWeight: FontWeight.bold,
+      );
 
   ButtonStyle myButtonStyle() => ElevatedButton.styleFrom(
-                    primary: MyConstant.white,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(5),
-                      ),
-                    );
+        primary: MyConstant.white,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(5),
+        ),
+      );
 
   ButtonStyle myButtonStyle1() => ElevatedButton.styleFrom(
-                    primary: MyConstant.bg2,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(5),
-                      ),
-                    );
+        primary: MyConstant.bg2,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(5),
+        ),
+      );
 
   ButtonStyle myButtonStyle2() => ElevatedButton.styleFrom(
-                    primary: MyConstant.light,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(5),
-                      ),
-                    );
+        primary: MyConstant.light,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(5),
+        ),
+      );
 
-  
   ButtonStyle myButtonStyle3() => ElevatedButton.styleFrom(
-                    primary: MyConstant.bg3,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(5),
-                      ),
-                    );
+        primary: MyConstant.bg3,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(5),
+        ),
+      );
 
   ButtonStyle myButtonStyle4() => ElevatedButton.styleFrom(
-                    primary: MyConstant.bg4,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(5),
-                      ),
-                    );
-
+        primary: MyConstant.bg4,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(5),
+        ),
+      );
 }
