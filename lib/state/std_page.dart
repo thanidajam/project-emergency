@@ -48,6 +48,9 @@ class _StdServerState extends State<StdServer> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        actions: [
+          IconButton(onPressed: () {}, icon: Icon(Icons.notifications))
+        ],
         backgroundColor: MyConstant.bg2,
       ),
       body: Form(

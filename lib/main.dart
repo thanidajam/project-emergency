@@ -1,9 +1,11 @@
 import 'package:emer_projectnew/models/user_model.dart';
 import 'package:emer_projectnew/state/adduser.dart';
+import 'package:emer_projectnew/state/notiemer.dart';
 import 'package:emer_projectnew/state/show_aidpage.dart';
 import 'package:emer_projectnew/state/show_aidpagefull.dart';
 import 'package:emer_projectnew/state/show_contactpage.dart';
 import 'package:emer_projectnew/state/show_driperson.dart';
+import 'package:emer_projectnew/state/show_notiemer.dart';
 import 'package:emer_projectnew/state/show_telemerpage.dart';
 import 'package:emer_projectnew/state/show_telemerpage2.dart';
 import 'package:emer_projectnew/state/show_telemerpage3.dart';
@@ -31,6 +33,8 @@ final Map<String, WidgetBuilder> map = {
   '/showTelemerpage4': (BuildContext context) => ShowTelemerPage4(),
   '/showAidpagefull': (BuildContext context) => ShowAidpagefull(),
   '/addUser' : (BuildContext context) => AddUser(),
+  '/showNotiEmer' :(BuildContext context) => showNotiEmer(),
+  '/showNotiEmergency' :(BuildContext context) => ShownotiEmergency(),
   
 };
 

@@ -7,7 +7,7 @@ class MyConstant {
   static String appName1 = 'Rmutt Emergency Notification';
   static String appName2 = 'นักศึกษา/บุคคลากร';
   static String appName3 = 'พนักงานขับรถพยาบาล';
-  static String domain = 'http://2242-183-89-95-250.ngrok.io';
+  static String domain = 'http://37f7-124-120-230-148.ngrok.io';
 
   //Route
   static String routeUser = '/user';
@@ -23,6 +23,8 @@ class MyConstant {
   static String routeShowTelemerpage4 = '/showTelemerpage4';
   static String routeShowAidpagefull = '/showAidpagefull';
   static String routeAddUser = '/addUser';
+  static String routeshowNotiEmer = '/showNotiEmer';
+  static String routeshowNotiEmergency = '/shownotiEmergency';
 
 
   //Image
@@ -42,6 +44,8 @@ class MyConstant {
   static Color white = Color(0xffffffff);
   static Color bg1 = Color(0xfffce4ec);
   static Color bg2 = Color(0xffef5350);
+  static Color bg3 = Color(0xFF64DD17);
+  static Color bg4 = Color(0xFFFF7043);
 
   //Style
   TextStyle h1Style() => TextStyle(
@@ -107,6 +111,28 @@ class MyConstant {
 
   ButtonStyle myButtonStyle1() => ElevatedButton.styleFrom(
                     primary: MyConstant.bg2,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(5),
+                      ),
+                    );
+
+  ButtonStyle myButtonStyle2() => ElevatedButton.styleFrom(
+                    primary: MyConstant.light,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(5),
+                      ),
+                    );
+
+  
+  ButtonStyle myButtonStyle3() => ElevatedButton.styleFrom(
+                    primary: MyConstant.bg3,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(5),
+                      ),
+                    );
+
+  ButtonStyle myButtonStyle4() => ElevatedButton.styleFrom(
+                    primary: MyConstant.bg4,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(5),
                       ),

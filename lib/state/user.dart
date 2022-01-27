@@ -160,7 +160,7 @@ class _PageLoginState extends State<PageLogin> {
     String apiCheckUser =
         '${MyConstant.domain}/emer_projectnew/api/getUserWhereUser.php?isAdd=true&username=$username';
     await Dio().get(apiCheckUser).then((value) async {
-      print('## value for API ==>> $value');
+     // print('## value for API ==>> $value');
       if (value.toString() == 'null') {
         MyDialog().normalDialog(context, 'ตรวจสอบข้อมูล',
             'กรุณาระบุชื่อผู้ใช้งาน และรหัสผ่านให้ถูกต้อง');
@@ -172,7 +172,8 @@ class _PageLoginState extends State<PageLogin> {
             String type = model.Type;
             print('## user success in Type ==> $type');
 
-            SharedPreferences preferences = await SharedPreferences.getInstance();
+            SharedPreferences preferences =
+                await SharedPreferences.getInstance();
             preferences.setString('type', type);
             preferences.setString('UID', model.UID);
             preferences.setString('Name', model.Name);
@@ -181,19 +182,20 @@ class _PageLoginState extends State<PageLogin> {
             preferences.setString('image', model.image);
 
             switch (type) {
-              case 'S': 
+              case 'S':
                 Navigator.pushNamedAndRemoveUntil(
-                  context, MyConstant.routeStdServer, (route) => false);
+                    context, MyConstant.routeStdServer, (route) => false);
                 break;
               case 'D':
                 Navigator.pushNamedAndRemoveUntil(
-                  context, MyConstant.routeDriverServer, (route) => false);
+                    context, MyConstant.routeDriverServer, (route) => false);
                 break;
               default:
             }
           } else {
             //user false
-            MyDialog().normalDialog(context, 'ตรวจสอบข้อมูล', 'รหัสผ่านไม่ถูกต้อง กรุณาลองใหม่อีกครั้ง');
+            MyDialog().normalDialog(context, 'ตรวจสอบข้อมูล',
+                'รหัสผ่านไม่ถูกต้อง กรุณาลองใหม่อีกครั้ง');
           }
         }
       }

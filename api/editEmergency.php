@@ -15,23 +15,18 @@ if (!$link->set_charset("utf8")) {
     exit();
 	}
 
+
 if (isset($_GET)) {
 	if ($_GET['isAdd'] == 'true') {
-				
-		$e_type = $_GET['e_type'];
-		$e_name = $_GET['e_name'];
-		$e_date = date('d-m-Y h:i:s');
-		$pic = $_GET['pic'];
-		$lat = $_GET['lat'];
-		$lng = $_GET['lng'];
-		$location = $_GET['location'];
-		$status = $_GET['status'];
-		$send_emer = $_GET['send_emer'];
+			
+		$EID = $_GET['eid'];
+		$status = $_GET['status'];		
 		$rec_emer = $_GET['rec_emer'];
+
+		
 		
 							
-		$sql = "INSERT INTO `emergency`(`EID`, `E_type`, `E_name`, `E_date`, `Pic`, `lat`, `lng`, `Location` , `Status` , `Send_emer` , 
-		`Rec_emer`) VALUES (Null,'$e_type','$e_name','$e_date','$pic','$lat','$lng','$location','$status','$send_emer','$rec_emer')";
+		$sql = "UPDATE `emergency` SET `status` = '$status', `rec_emer` = '$rec_emer' WHERE eid = '$EID'";
 
 		$result = mysqli_query($link, $sql);
 
@@ -41,8 +36,9 @@ if (isset($_GET)) {
 			echo "false";
 		}
 
-	} else echo "Welcome to emergency";
+	} else echo "Welcome Master UNG";
    
 }
+
 	mysqli_close($link);
 ?>

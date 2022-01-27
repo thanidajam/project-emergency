@@ -1,5 +1,5 @@
 import 'dart:convert';
-
+import 'package:badges/badges.dart';
 import 'package:dio/dio.dart';
 import 'package:emer_projectnew/models/user_model.dart';
 import 'package:emer_projectnew/state/show_driperson.dart';
@@ -17,12 +17,12 @@ class DriverServer extends StatefulWidget {
 }
 
 class _DriverServerState extends State<DriverServer> {
-  List<Widget> widgets = [];
+  List<Widget> widgets = [ShowDriperson()];
+  int indexWidget = 0;
   UserModel? userModel;
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     findUserModel();
   }
@@ -39,10 +39,6 @@ class _DriverServerState extends State<DriverServer> {
       for (var item in json.decode(value.data)) {
         setState(() {
           userModel = UserModel.fromMap(item);
-          print('## name logined = ${userModel!.Name}');
-
-         // widgets.add(ShowDriperson(userModel: userModel!));
-
         });
       }
     });
@@ -53,8 +49,17 @@ class _DriverServerState extends State<DriverServer> {
     return Scaffold(
       appBar: AppBar(
         actions: [
-          IconButton(onPressed: () {}, icon: Icon(Icons.notifications))
+          IconButton(
+              onPressed: () =>
+                  Navigator.pushNamed(context, MyConstant.routeshowNotiEmer),
+              icon: Icon(Icons.notifications))
         ],
+        // actions: [
+        //   Badge(
+        //     badgeContent: Text('1'),
+        //     child: IconButton(icon: Icon(Icons.notifications), onPressed: () {  },),
+        //   )
+        // ],
         title: Text('ประวัติการแจ้งเหตุ'),
         backgroundColor: MyConstant.bg2,
       ),

@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
 import 'dart:math';
-
 import 'package:dio/dio.dart';
 import 'package:emer_projectnew/models/user_model.dart';
 import 'package:emer_projectnew/utility/my_constant.dart';
@@ -32,6 +31,26 @@ class _EmergentState extends State<Emergent> {
   TextEditingController phoneController = TextEditingController();
   TextEditingController e_nameController = TextEditingController();
   TextEditingController e_dateController = TextEditingController();
+
+  String? valueChoose;
+  List listItem = [
+    "ตึกสำนักงานอธิการบดี",
+    "หอประชุมมทร.ธัญบุรี",
+    "โรงอาหารกลาง",
+    "ตึกคณะวิศวกรรมศาสตร์",
+    "ตึกคณะศิลปกรรมศาสตร์",
+    "ตึกคณะพยาบาลศาสตร์",
+    "กองอำนวยการ",
+    "ตึกคณะครุศาตร์อุตสาหกรรม",
+    "คณะบริหารธุรกิจ",
+    "ตึกคณะเทคโนโลยีคหกรรมศาสตร์",
+    "คณะศิลปศาสตร์",
+    "ตึกคณะสถาปัตยกรรมศาสตร์",
+    "ตึกภาควิชานาฎดุริยางคศิลป์",
+    "ตึกคณะวิทยาศาตร์และเทคโนโลยี",
+    "ตึกคณะเทคโนโลยีสื่อสารมวลชน",
+    "อาคารเรียนรวม 13 ชั้น"
+  ];
 
   @override
   void initState() {
@@ -190,6 +209,42 @@ class _EmergentState extends State<Emergent> {
     );
   }
 
+  Padding buildLocation(double size) {
+    return Padding(
+      padding: const EdgeInsets.all(10.0),
+      child: Container(
+        padding: EdgeInsets.only(left: 16, right: 16),
+        decoration: BoxDecoration(
+            border: Border.all(color: Colors.grey, width: 1),
+            borderRadius: BorderRadius.circular(15)),
+        child: Center(
+          child: DropdownButton(
+            hint: Text("เลือกตำแหน่งที่เกิดเหตุ"),
+            icon: Icon(Icons.arrow_drop_down),
+            iconSize: 36,
+            isExpanded: true,
+            underline: SizedBox(),
+            style: TextStyle(
+              color: Colors.black,
+              fontSize: 16,
+            ),
+            value: valueChoose,
+            onChanged: (newValue) {
+              setState(() {
+                valueChoose = newValue as String?;
+              });
+            },
+            items: listItem.map((valueItem) {
+              return DropdownMenuItem(
+                value: valueItem,
+                child: Text(valueItem),
+              );
+            }).toList(),
+          ),
+        ),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -203,6 +258,8 @@ class _EmergentState extends State<Emergent> {
         key: formKey,
         child: ListView(padding: EdgeInsets.all(16), children: [
           buildMap(),
+          buildTitle('ตำแหน่ง'),
+          buildLocation(size),
           buildTitle('ประเภทอุบัติเหตุ'),
           buildRadioType1(),
           buildRadioType2(),
@@ -287,7 +344,9 @@ class _EmergentState extends State<Emergent> {
     String path =
         '${MyConstant.domain}/emer_projectnew/api/getEmergencyWhereEmer.php?isAdd=true&phone=$phone';
     await Dio().get(path).then((value) async {
-      print('## value ==>> $value');
+      SharedPreferences preferences = await SharedPreferences.getInstance();
+      String send_emer = preferences.getString('Name')!;
+      print('## name_send ==>> $send_emer');
       if (value.toString() == 'null') {
         print('## แจ้งเหตุสำเร็จ');
 
@@ -297,7 +356,6 @@ class _EmergentState extends State<Emergent> {
             e_name: e_name,
             e_date: e_date,
             phone: phone,
-
           );
         } else {
           //Have avatar
@@ -316,7 +374,7 @@ class _EmergentState extends State<Emergent> {
               e_name: e_name,
               e_date: e_date,
               phone: phone,
-
+              send_emer: send_emer,
             );
           });
         }
@@ -332,11 +390,11 @@ class _EmergentState extends State<Emergent> {
       String? e_date,
       String? phone,
       String? status,
+      String? send_emer,
       String? rec_emer}) async {
-    print(
-        '## processInsertMySQL Work and picEmergency ==>> $picEmergency , ');
+    print('## processInsertMySQL Work and picEmergency ==>> $picEmergency , ');
     String apiInsertEmergency =
-        '${MyConstant.domain}/emer_projectnew/api/insertEmergency.php?isAdd=true&e_type=$typeEmer&e_name=$e_name&e_date=$e_date&pic=$picEmergency&phone=$phone&lat=$lat&lng=$lng&status=$status&rec_emer=$rec_emer';
+        '${MyConstant.domain}/emer_projectnew/api/getEmergency.php';
     await Dio().get(apiInsertEmergency).then((value) {
       if (value.toString() == 'true') {
         Navigator.pop(context);
@@ -386,7 +444,7 @@ class _EmergentState extends State<Emergent> {
 
   RadioListTile<String> buildRadioType1() {
     return RadioListTile(
-      value: 'หมดสติ',
+      value: 'A',
       groupValue: typeEmer,
       toggleable: true,
       onChanged: (value) {
@@ -400,7 +458,7 @@ class _EmergentState extends State<Emergent> {
 
   RadioListTile<String> buildRadioType2() {
     return RadioListTile(
-      value: 'รถล้ม , รถชน',
+      value: 'B',
       groupValue: typeEmer,
       toggleable: true,
       onChanged: (value) {
@@ -415,7 +473,7 @@ class _EmergentState extends State<Emergent> {
 
   RadioListTile<String> buildRadioType3() {
     return RadioListTile(
-      value: 'อื่น ๆ',
+      value: 'C',
       groupValue: typeEmer,
       toggleable: true,
       onChanged: (value) {
