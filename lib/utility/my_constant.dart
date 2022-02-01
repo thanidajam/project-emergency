@@ -6,7 +6,7 @@ class MyConstant {
   static String appName1 = 'Rmutt Emergency Notification';
   static String appName2 = 'นักศึกษา/บุคคลากร';
   static String appName3 = 'พนักงานขับรถพยาบาล';
-  static String domain = 'http://6682-124-120-230-148.ngrok.io';
+  static String domain = 'http://d6d3-124-120-231-96.ngrok.io';
 
   //Route
   static String routeUser = '/user';
@@ -16,7 +16,6 @@ class MyConstant {
   static String routeShowAidpage = '/showAidpage';
   static String routeShowTelemerpage = '/showTelemerpage';
   static String routeShowContactpage = '/showContactpage';
-  static String routeShowDriperson = '/showDriperson';
   static String routeShowTelemerpage2 = '/showTelemerpage2';
   static String routeShowTelemerpage3 = '/showTelemerpage3';
   static String routeShowTelemerpage4 = '/showTelemerpage4';
@@ -25,6 +24,8 @@ class MyConstant {
   static String routeshowNotiEmer = '/showNotiEmer';
   static String routeshowNotiEmergency = '/shownotiEmergency';
   static String routeshowNotiEmergen = '/showNotiEmergen';
+  static String routeShowDataEmer = '/showDataEmer';
+  static String routeEditprofileDriver = '/editprofileDriver';
 
   //Image
   static String image = 'assets/images/ambulance.png';
@@ -41,10 +42,12 @@ class MyConstant {
   static Color dark = Color(0xff212121);
   static Color light = Color(0xff4c8c4a);
   static Color white = Color(0xffffffff);
+  static Color gray = Color(0xFFCFD8DC);
   static Color bg1 = Color(0xfffce4ec);
   static Color bg2 = Color(0xffef5350);
   static Color bg3 = Color(0xFF64DD17);
   static Color bg4 = Color(0xFFFF7043);
+  static Color bg5 = Color(0xFFFFD54F);
 
   //Style
   TextStyle h1Style() => TextStyle(
@@ -131,6 +134,13 @@ class MyConstant {
 
   ButtonStyle myButtonStyle4() => ElevatedButton.styleFrom(
         primary: MyConstant.bg4,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(5),
+        ),
+      );
+
+  ButtonStyle myButtonStyle5() => ElevatedButton.styleFrom(
+        primary: MyConstant.bg5,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(5),
         ),

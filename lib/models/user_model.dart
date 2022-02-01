@@ -62,15 +62,15 @@ class UserModel {
 
   factory UserModel.fromMap(Map<String, dynamic> map) {
     return UserModel(
-      UID: map['UID'],
-      Code: map['Code'],
-      Username: map['Username'],
-      Password: map['Password'],
-      Name: map['Name'],
-      Email: map['Email'],
-      Phone: map['Phone'],
-      Type: map['Type'],
-      image: map['image'],
+      UID: (map['UID'] ?? '') as String,
+      Code: (map['Code'] ?? '')as String, 
+      Username: (map['Username'] ?? '') as String,
+      Password: (map['Password'] ?? '') as String,
+      Name: (map['Name'] ?? '') as String,
+      Email: (map['Email'] ?? '') as String,
+      Phone: (map['Phone'] ?? '') as String,
+      Type: (map['Type'] ?? '') as String,
+      image: (map['image'] ?? '') as String,
     );
   }
 

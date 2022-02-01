@@ -3,39 +3,38 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:emer_projectnew/models/emergency_model.dart';
 import 'package:emer_projectnew/models/user_model.dart';
-import 'package:emer_projectnew/state/show_notiemer.dart';
+import 'package:emer_projectnew/state/show_dataemer.dart';
 import 'package:emer_projectnew/utility/my_constant.dart';
 import 'package:emer_projectnew/widgets/show_progress.dart';
 import 'package:emer_projectnew/widgets/show_title.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 
-class showNotiEmer extends StatefulWidget {
-  showNotiEmer({Key? key}) : super(key: key);
+class ShowEmergen extends StatefulWidget {
+  const ShowEmergen({Key? key}) : super(key: key);
 
   @override
-  State<showNotiEmer> createState() => _showNotiEmerState();
+  _ShowEmergenState createState() => _ShowEmergenState();
 }
 
-class _showNotiEmerState extends State<showNotiEmer> {
+class _ShowEmergenState extends State<ShowEmergen> {
   bool load = true;
   bool? haveData;
   List<EmergencyModel> emergencyModels = [];
+  EmergencyModel? emergencyModel;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    readAPI();
+    readData();
   }
 
-  Future<Null> readAPI() async {
-    String urlAPI = '${MyConstant.domain}/emer_projectnew/api/getEmergency.php';
-    await Dio().get(urlAPI).then((value) {
-      //print ('value ==> $value');
-
+  Future<Null> readData() async {
+    String? status;
+    String urlData =
+        '${MyConstant.domain}/emer_projectnew/api/getEmergencyWhereStatus.php?isAdd=true&status=$status';
+    await Dio().get(urlData).then((value) {
       if (value.toString() == 'null') {
-        //No data
         setState(() {
           haveData = false;
         });
@@ -61,10 +60,6 @@ class _showNotiEmerState extends State<showNotiEmer> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('การแจ้งเตือน'),
-        backgroundColor: MyConstant.bg2,
-      ),
       body: load
           ? ShowProgress()
           : haveData!
@@ -91,14 +86,12 @@ class _showNotiEmerState extends State<showNotiEmer> {
               children: [
                 TextButton(
                   child: ShowTitle(
-                      title: '${emergencyModels[index].E_name} ' == ' '
-                          ? 'แจ้งเหตุฉุกเฉิน'
-                          : '${emergencyModels[index].E_name}',
+                      title: '${emergencyModels[index].E_name} ' == ' ' ? 'แจ้งเหตุฉุกเฉิน' : '${emergencyModels[index].E_name}',
                       textStyle: MyConstant().h8Style()),
                   onPressed: () => Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => ShownotiEmergency(
+                        builder: (context) => ShowDataEmer(
                             emergencyModel: emergencyModels[index]),
                       )),
                 ),

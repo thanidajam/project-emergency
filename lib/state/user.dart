@@ -119,9 +119,14 @@ class _PageLoginState extends State<PageLogin> {
         //   textStyle: MyConstant().h4Style(),
         // ),
         TextButton(
-          onPressed: () => Navigator.pushNamed(context, MyConstant.routeAddUser),
-          child: Text('ลืมรหัสผ่าน', style: TextStyle(color: Colors.black, fontSize: 16),
-        )),
+            onPressed: () {
+              MyDialog().normalDialog(context, 'ลืมรหัสผ่าน',
+                  'กรุณานำบัตรนักศึกษาหรือบัตรประชาชน ติดต่อที่สำนักส่งเสริมวิชาการและงานทะเบียน ชั้น 1');
+            },
+            child: Text(
+              'ลืมรหัสผ่าน',
+              style: TextStyle(color: Colors.black, fontSize: 16),
+            )),
       ],
     );
   }
@@ -160,7 +165,7 @@ class _PageLoginState extends State<PageLogin> {
     String apiCheckUser =
         '${MyConstant.domain}/emer_projectnew/api/getUserWhereUser.php?isAdd=true&username=$username';
     await Dio().get(apiCheckUser).then((value) async {
-     // print('## value for API ==>> $value');
+      // print('## value for API ==>> $value');
       if (value.toString() == 'null') {
         MyDialog().normalDialog(context, 'ตรวจสอบข้อมูล',
             'กรุณาระบุชื่อผู้ใช้งาน และรหัสผ่านให้ถูกต้อง');
@@ -180,6 +185,7 @@ class _PageLoginState extends State<PageLogin> {
             preferences.setString('Phone', model.Phone);
             preferences.setString('Code', model.Code);
             preferences.setString('image', model.image);
+            preferences.setString('Username', model.Username);
 
             switch (type) {
               case 'S':
@@ -213,7 +219,7 @@ class _PageLoginState extends State<PageLogin> {
               controller: usernameController,
               validator: (value) {
                 if (value!.isEmpty) {
-                  return 'กรุณากรอกข้อมูลด้วย';
+                  return 'กรุณากรอกชื่อผู้ใช้/รหัสนักศึกษา';
                 } else {
                   return null;
                 }
@@ -249,7 +255,7 @@ class _PageLoginState extends State<PageLogin> {
               controller: passwordController,
               validator: (value) {
                 if (value!.isEmpty) {
-                  return 'กรุณากรอกรหัสผ่านด้วย';
+                  return 'กรุณากรอกรหัสผ่าน';
                 } else {
                   return null;
                 }

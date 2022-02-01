@@ -48,4 +48,6 @@ class MyDialog {
       ),
     );
   }
+
+  void showProgressDialog(BuildContext context) {}
 }

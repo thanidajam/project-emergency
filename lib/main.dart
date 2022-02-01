@@ -1,12 +1,13 @@
+import 'package:emer_projectnew/state/editProfile_driver.dart';
+import 'package:emer_projectnew/state/show_aidpage.dart';
 import 'package:emer_projectnew/models/user_model.dart';
 import 'package:emer_projectnew/state/adduser.dart';
 import 'package:emer_projectnew/state/notiemer.dart';
 import 'package:emer_projectnew/state/show_aidpage.dart';
 import 'package:emer_projectnew/state/show_aidpagefull.dart';
 import 'package:emer_projectnew/state/show_contactpage.dart';
-import 'package:emer_projectnew/state/show_driperson.dart';
+import 'package:emer_projectnew/state/show_dataemer.dart';
 import 'package:emer_projectnew/state/show_notiemer.dart';
-import 'package:emer_projectnew/state/show_notiemergen.dart';
 import 'package:emer_projectnew/state/show_telemerpage.dart';
 import 'package:emer_projectnew/state/show_telemerpage2.dart';
 import 'package:emer_projectnew/state/show_telemerpage3.dart';
@@ -28,7 +29,6 @@ final Map<String, WidgetBuilder> map = {
   '/showAidpage': (BuildContext context) => ShowAidpage(),
   '/showTelemerpage': (BuildContext context) => ShowTelemerpage(),
   '/showContactpage': (BuildContext context) => ShowContactpage(),
-  '/showDriperson': (BuildContext context) => ShowDriperson(),
   '/showTelemerpage2': (BuildContext context) => ShowTelemerPage2(),
   '/showTelemerpage3': (BuildContext context) => ShowTelemerPage3(),
   '/showTelemerpage4': (BuildContext context) => ShowTelemerPage4(),
@@ -36,8 +36,8 @@ final Map<String, WidgetBuilder> map = {
   '/addUser' : (BuildContext context) => AddUser(),
   '/showNotiEmer' :(BuildContext context) => showNotiEmer(),
   '/showNotiEmergency' :(BuildContext context) => ShownotiEmergency(),
-  '/showNotiEmergen' :(BuildContext context) => ShowNotiemergen(),
-  
+  '/showDataEmer' :(BuildContext context) => ShowDataEmer(),
+  '/editprofileDriver' : (BuildContext context) => EditprofileDriver(),
 };
 
 String? initlalRoute;

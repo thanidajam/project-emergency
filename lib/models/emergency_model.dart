@@ -9,6 +9,7 @@ class EmergencyModel {
   final String lat;
   final String lng;
   final String Location;
+  final String Phone;
   final String Status;
   final String Send_emer;
   final String Rec_emer;
@@ -21,6 +22,7 @@ class EmergencyModel {
     required this.lat,
     required this.lng,
     required this.Location,
+    required this.Phone,
     required this.Status,
     required this.Send_emer,
     required this.Rec_emer,
@@ -31,10 +33,11 @@ class EmergencyModel {
     String? E_type,
     String? E_name,
     String? E_date,
-    String? pic,
+    String? Pic,
     String? lat,
     String? lng,
     String? Location,
+    String? Phone,
     String? Status,
     String? Send_emer,
     String? Rec_emer,
@@ -44,10 +47,11 @@ class EmergencyModel {
       E_type: E_type ?? this.E_type,
       E_name: E_name ?? this.E_name,
       E_date: E_date ?? this.E_date,
-      Pic: pic ?? this.Pic,
+      Pic: Pic ?? this.Pic,
       lat: lat ?? this.lat,
       lng: lng ?? this.lng,
       Location: Location ?? this.Location,
+      Phone: Phone ?? this.Phone,
       Status: Status ?? this.Status,
       Send_emer: Send_emer ?? this.Send_emer,
       Rec_emer: Rec_emer ?? this.Rec_emer,
@@ -60,10 +64,11 @@ class EmergencyModel {
       'E_type': E_type,
       'E_name': E_name,
       'E_date': E_date,
-      'pic': Pic,
+      'Pic': Pic,
       'lat': lat,
       'lng': lng,
       'Location': Location,
+      'Phone': Phone,
       'Status': Status,
       'Send_emer': Send_emer,
       'Rec_emer': Rec_emer,
@@ -80,6 +85,7 @@ class EmergencyModel {
       lat: map['lat'] ?? '',
       lng: map['lng'] ?? '',
       Location: map['Location'] ?? '',
+      Phone: map['Phone'] ?? '',
       Status: map['Status'] ?? '',
       Send_emer: map['Send_emer'] ?? '',
       Rec_emer: map['Rec_emer'] ?? '',
@@ -92,7 +98,7 @@ class EmergencyModel {
 
   @override
   String toString() {
-    return 'EmergencyModel(EID: $EID, E_type: $E_type, E_name: $E_name, E_date: $E_date, Pic: $Pic, lat: $lat, lng: $lng, Location: $Location, Status: $Status, Send_emer: $Send_emer, Rec_emer: $Rec_emer)';
+    return 'EmergencyModel(EID: $EID, E_type: $E_type, E_name: $E_name, E_date: $E_date, Pic: $Pic, lat: $lat, lng: $lng, Location: $Location, Phone: $Phone, Status: $Status, Send_emer: $Send_emer, Rec_emer: $Rec_emer)';
   }
 
   @override
@@ -108,6 +114,7 @@ class EmergencyModel {
       other.lat == lat &&
       other.lng == lng &&
       other.Location == Location &&
+      other.Phone == Phone &&
       other.Status == Status &&
       other.Send_emer == Send_emer &&
       other.Rec_emer == Rec_emer;
@@ -123,6 +130,7 @@ class EmergencyModel {
       lat.hashCode ^
       lng.hashCode ^
       Location.hashCode ^
+      Phone.hashCode ^
       Status.hashCode ^
       Send_emer.hashCode ^
       Rec_emer.hashCode;

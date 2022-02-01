@@ -15,28 +15,32 @@ if (!$link->set_charset("utf8")) {
     exit();
 	}
 
+
 if (isset($_GET)) {
 	if ($_GET['isAdd'] == 'true') {
-				
+			
+		$uid = $_GET['uid'];		
+		$name = $_GET['name'];
 		$username = $_GET['username'];
+		$phone = $_GET['phone'];
+		$password = $_GET['password'];
+		$image = $_GET['image'];
+		
+		
+							
+		$sql = "UPDATE `user` SET `name` = '$name', `username` = '$username', `phone` = '$phone', `password` = '$password', `image` = '$image' WHERE uid = '$uid'";
 
-		$result = mysqli_query($link, "SELECT * FROM user WHERE username = '$username'");
+		$result = mysqli_query($link, $sql);
 
 		if ($result) {
+			echo "true";
+		} else {
+			echo "false";
+		}
 
-			while($row=mysqli_fetch_assoc($result)){
-			$output[]=$row;
-
-			}	// while
-
-			echo json_encode($output);
-
-		} //if
-
-	} else echo "Welcome to emergency";	// if2
+	} else echo "Welcome Master UNG";
    
-}	// if1
-
+}
 
 	mysqli_close($link);
 ?>

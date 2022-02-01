@@ -1,8 +1,10 @@
 import 'dart:convert';
-import 'package:badges/badges.dart';
 import 'package:dio/dio.dart';
+import 'package:emer_projectnew/bodys/showemergen.dart';
+import 'package:emer_projectnew/models/emergency_model.dart';
 import 'package:emer_projectnew/models/user_model.dart';
-import 'package:emer_projectnew/state/show_driperson.dart';
+import 'package:emer_projectnew/state/show_dataemer.dart';
+import 'package:emer_projectnew/bodys/showdriperson.dart';
 import 'package:emer_projectnew/utility/my_constant.dart';
 import 'package:emer_projectnew/widgets/show_progress.dart';
 import 'package:emer_projectnew/widgets/show_title.dart';
@@ -17,9 +19,10 @@ class DriverServer extends StatefulWidget {
 }
 
 class _DriverServerState extends State<DriverServer> {
-  List<Widget> widgets = [ShowDriperson()];
+  List<Widget> widgets = [];
   int indexWidget = 0;
   UserModel? userModel;
+  String name = 'ประวัติการแจ้งเหตุ';
 
   @override
   void initState() {
@@ -30,8 +33,8 @@ class _DriverServerState extends State<DriverServer> {
   Future<Null> findUserModel() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     String uid = preferences.getString('UID')!;
-
     print('## id Logined ==> $uid');
+
     String apiGetUserWhereUID =
         '${MyConstant.domain}/emer_projectnew/api/getUserWhereUID.php?isAdd=true&uid=$uid';
     await Dio().get(apiGetUserWhereUID).then((value) {
@@ -39,6 +42,8 @@ class _DriverServerState extends State<DriverServer> {
       for (var item in json.decode(value.data)) {
         setState(() {
           userModel = UserModel.fromMap(item);
+          widgets.add(ShowEmergen());
+          widgets.add(ShowDripersons(userModel: userModel!));
         });
       }
     });
@@ -54,28 +59,26 @@ class _DriverServerState extends State<DriverServer> {
                   Navigator.pushNamed(context, MyConstant.routeshowNotiEmer),
               icon: Icon(Icons.notifications))
         ],
-        // actions: [
-        //   Badge(
-        //     badgeContent: Text('1'),
-        //     child: IconButton(icon: Icon(Icons.notifications), onPressed: () {  },),
-        //   )
-        // ],
-        title: Text('ประวัติการแจ้งเหตุ'),
+        title: Text('$name'),
         backgroundColor: MyConstant.bg2,
       ),
-      drawer: Drawer(
-        child: Stack(
-          children: [
-            Column(
-              children: [
-                buildHead(),
-                menuDataperson(context),
-                ShowSignOut(),
-              ],
-            )
-          ],
-        ),
-      ),
+      drawer: widgets.length == 0
+          ? SizedBox()
+          : Drawer(
+              child: Stack(
+                children: [
+                  Column(
+                    children: [
+                      buildHead(),
+                      menuDataEmer(),
+                      menuDataperson(),
+                      ShowSignOut(),
+                    ],
+                  )
+                ],
+              ),
+            ),
+      body: widgets.length == 0 ? ShowProgress() : widgets[indexWidget],
     );
   }
 
@@ -90,17 +93,40 @@ class _DriverServerState extends State<DriverServer> {
       accountEmail: Text(userModel == null ? 'Phone ?' : userModel!.Phone),
     );
   }
-}
 
-ListTile menuDataperson(context) {
-  return ListTile(
-    onTap: () => Navigator.pushNamed(context, MyConstant.routeShowDriperson),
-    leading: Icon(
-      Icons.portrait,
-      size: 38,
-    ),
-    title: ShowTitle(title: 'ข้อมูลส่วนตัว', textStyle: MyConstant().h7Style()),
-  );
+  ListTile menuDataEmer() {
+    return ListTile(
+      onTap: () {
+        setState(() {
+          name = 'ประวัติการแจ้งเหตุ';
+          indexWidget = 0;
+          Navigator.pop(context);
+        });
+      },
+      leading: Icon(Icons.history, size: 38),
+      title: ShowTitle(
+        title: 'ประวัติการแจ้งเหตุ',
+        textStyle: MyConstant().h7Style(),
+      ),
+    );
+  }
+
+  ListTile menuDataperson() {
+    return ListTile(
+      onTap: () {
+        setState(() {
+          name = 'ข้อมูลส่วนตัว';
+          indexWidget = 1;
+          Navigator.pop(context);
+        });
+      },
+      leading: Icon(Icons.portrait, size: 38),
+      title: ShowTitle(
+        title: 'ข้อมูลส่วนตัว',
+        textStyle: MyConstant().h7Style(),
+      ),
+    );
+  }
 }
 
 class ShowSignOut extends StatelessWidget {

@@ -16,10 +16,11 @@ if (!$link->set_charset("utf8")) {
 	}
 
 if (isset($_GET)) {
-	if (true) {
-					
+	if ($_GET['isAdd'] == 'true') {
+				
+		$status = $_GET['status'];
 
-		$result = mysqli_query($link, "SELECT * FROM emergency ORDER BY e_date DESC ");
+		$result = mysqli_query($link, "SELECT * FROM emergency WHERE status = 'T' OR status = 'F' ");
 
 		if ($result) {
 
@@ -32,7 +33,7 @@ if (isset($_GET)) {
 
 		} //if
 
-	} else echo "Welcome Master UNG";	// if2
+	} else echo "Welcome to Emergency";	// if2
    
 }	// if1
 

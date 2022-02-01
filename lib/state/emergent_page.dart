@@ -56,22 +56,7 @@ class _EmergentState extends State<Emergent> {
   void initState() {
     super.initState();
     checkPermission();
-    //loadValueFromAPI();
   }
-
-  // Future<Null> loadValueFromAPI() async {
-  //   SharedPreferences preferences = await SharedPreferences.getInstance();
-  //   String uid = preferences.getString('UID')!;
-
-  //   String apiGetUserWhereUID =
-  //       '${MyConstant.domain}/emer_projectnew/api/getUserWhereUID.php?isAdd=true&uid=$uid';
-  //   await Dio().get(apiGetUserWhereUID).then((value) {
-  //         for (var item in json.decode(value.data)) {
-  //           UserModel model = UserModel.fromMap(item);
-  //           print('UID ==> ${model.UID}');
-  //         }
-  //       });
-  // }
 
   Future<Null> checkPermission() async {
     bool locationService;
@@ -102,8 +87,8 @@ class _EmergentState extends State<Emergent> {
       }
     } else {
       print('Service Location Close');
-      MyDialog().alertLocationService(context, 'Location Service ปิดอยู่',
-          'กรุณาเปิด Location Service ด้วยนะคะ');
+      MyDialog().alertLocationService(
+          context, 'ไม่มีการเข้าถึงตำแหน่ง', 'กรุณาเปิดตำแหน่งที่ตั้งของคุณ');
     }
   }
 
@@ -137,7 +122,7 @@ class _EmergentState extends State<Emergent> {
             child: TextFormField(
               validator: (value) {
                 if (value!.isEmpty) {
-                  return 'กรุณากรอกข้อมูลด้วยนะคะ';
+                  return 'กรุณากรอกข้อมูลด้วย';
                 } else {}
               },
               decoration: InputDecoration(
@@ -167,7 +152,7 @@ class _EmergentState extends State<Emergent> {
               keyboardType: TextInputType.phone,
               validator: (value) {
                 if (value!.isEmpty) {
-                  return 'กรุณากรอกเบอร์โทรศัพท์ด้วยนะคะ';
+                  return 'กรุณากรอกเบอร์โทรศัพท์';
                 } else {}
               },
               decoration: InputDecoration(
@@ -313,12 +298,9 @@ class _EmergentState extends State<Emergent> {
             style: MyConstant().myButtonStyle1(),
             onPressed: () {
               if (formKey.currentState!.validate()) {
-                if (typeEmer == null) {
-                  print('กรุณาเลือกประเภทอุบติเหตุ');
-                } else {
+                if (typeEmer == null ) 
                   print('Insert to Database');
                   uploadImageAndInsertData();
-                }
               }
             },
             child: Text(
@@ -341,6 +323,8 @@ class _EmergentState extends State<Emergent> {
     String e_date = e_dateController.text;
 
     print('## name = $e_name , phone = $phone');
+
+    
     String path =
         '${MyConstant.domain}/emer_projectnew/api/getEmergencyWhereEmer.php?isAdd=true&phone=$phone';
     await Dio().get(path).then((value) async {
@@ -356,6 +340,7 @@ class _EmergentState extends State<Emergent> {
             e_name: e_name,
             e_date: e_date,
             phone: phone,
+            send_emer: send_emer,
           );
         } else {
           //Have avatar
@@ -394,7 +379,7 @@ class _EmergentState extends State<Emergent> {
       String? rec_emer}) async {
     print('## processInsertMySQL Work and picEmergency ==>> $picEmergency , ');
     String apiInsertEmergency =
-        '${MyConstant.domain}/emer_projectnew/api/getEmergency.php';
+        '${MyConstant.domain}/emer_projectnew/api/insertEmergency.php?isAdd=true&e_type=$typeEmer&e_name=$e_name&e_date=$e_date&pic=$picEmergency&lat=$lat&lng=$lng&location=$valueChoose&phone=$phone&status=$status&send_emer=$send_emer&rec_emer=$rec_emer';
     await Dio().get(apiInsertEmergency).then((value) {
       if (value.toString() == 'true') {
         Navigator.pop(context);

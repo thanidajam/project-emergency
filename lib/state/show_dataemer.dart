@@ -4,23 +4,20 @@ import 'package:emer_projectnew/main.dart';
 import 'package:emer_projectnew/models/emergency_model.dart';
 import 'package:emer_projectnew/models/user_model.dart';
 import 'package:emer_projectnew/utility/my_constant.dart';
-import 'package:emer_projectnew/widgets/show_imgae.dart';
 import 'package:emer_projectnew/widgets/show_progress.dart';
 import 'package:emer_projectnew/widgets/show_title.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class ShownotiEmergency extends StatefulWidget {
+class ShowDataEmer extends StatefulWidget {
   final EmergencyModel? emergencyModel;
-  final UserModel? userModel;
-  ShownotiEmergency({Key? key, this.emergencyModel, this.userModel})
-      : super(key: key);
+  ShowDataEmer({Key? key, this.emergencyModel}) : super(key: key);
 
   @override
-  State<ShownotiEmergency> createState() => _ShownotiEmergencyState();
+  State<ShowDataEmer> createState() => _ShowDataEmerState();
 }
 
-class _ShownotiEmergencyState extends State<ShownotiEmergency> {
+class _ShowDataEmerState extends State<ShowDataEmer> {
   EmergencyModel? emergencyModel;
   UserModel? userModel;
   String? rec_emer;
@@ -32,36 +29,7 @@ class _ShownotiEmergencyState extends State<ShownotiEmergency> {
     // TODO: implement initState
     super.initState();
     emergencyModel = widget.emergencyModel;
-    userModel = widget.userModel;
     convertStringToArray();
-    processEditToMySQL(rec_emer: rec_emer, status: status);
-  }
-
-  Future<Null> processEditToMySQL({
-    String? rec_emer,
-    String? status,
-  }) async {
-    String? eid;
-    String path =
-        '${MyConstant.domain}/emer_projectnew/api/getEmergencyWhereEmer.php?isAdd=true&eid=$eid';
-    await Dio().get(path).then((value) async {
-      SharedPreferences preferences = await SharedPreferences.getInstance();
-      String rec_emer = preferences.getString('Name')!;
-      print('rec_emer ==> $rec_emer');
-      if (value.toString() == 'null') {
-        if (status == '${status}') {
-          String apiEditData =
-              '${MyConstant.domain}/emer_projectnew/api/editEmergency.php?isAdd=true&eid=${emergencyModel!.EID}&status=$status&rec_emer=$rec_emer';
-          await Dio().get(apiEditData).then((value) async {
-            if (value.toString() == 'true') {
-              Navigator.pushNamed(context, MyConstant.routeDriverServer);
-            } else {
-              print('อัพเดตไม่สำเร็จ');
-            }
-          });
-        }
-      }
-    });
   }
 
   void convertStringToArray() {
@@ -95,66 +63,9 @@ class _ShownotiEmergencyState extends State<ShownotiEmergency> {
                   buildText2(),
                   buildText3(),
                   buildText4(),
-                  Center(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        buildButton(),
-                        buildButton1(),
-                      ],
-                    ),
-                  ),
                 ],
               ),
             ),
-          ),
-        ),
-      ),
-    );
-  }
-
-  Container buildButton1() {
-    return Container(
-      padding: EdgeInsets.only(top: 20),
-      child: ElevatedButton(
-        onPressed: () {
-          setState(() {
-            status = 'T';
-            rec_emer = '$rec_emer';
-          });
-          processEditToMySQL(rec_emer: rec_emer, status: status);
-        },
-        style: MyConstant().myButtonStyle3(),
-        child: Text(
-          'ยืนยันการแจ้งเหตุ',
-          style: TextStyle(
-            color: Colors.black,
-            fontSize: 17,
-            fontWeight: FontWeight.w700,
-          ),
-        ),
-      ),
-    );
-  }
-
-  Container buildButton() {
-    return Container(
-      padding: EdgeInsets.only(top: 20),
-      child: ElevatedButton(
-        onPressed: () {
-          setState(() {
-            status = 'F';
-            rec_emer = '$rec_emer';
-          });
-          processEditToMySQL(rec_emer: rec_emer, status: status);
-        },
-        style: MyConstant().myButtonStyle1(),
-        child: Text(
-          'แจ้งเหตุเท็จ',
-          style: TextStyle(
-            color: Colors.black,
-            fontSize: 17,
-            fontWeight: FontWeight.w700,
           ),
         ),
       ),
@@ -187,10 +98,11 @@ class _ShownotiEmergencyState extends State<ShownotiEmergency> {
 
   Container buildText2() {
     return Container(
-        padding: EdgeInsets.symmetric(horizontal: 10),
-        child: Padding(
-          padding: const EdgeInsets.only(top: 20),
-          child: Row(children: [
+      padding: EdgeInsets.symmetric(horizontal: 10),
+      child: Padding(
+        padding: const EdgeInsets.only(top: 20),
+        child: Row(
+          children: [
             Text(
               'ตำแหน่ง :',
               style: TextStyle(
@@ -204,8 +116,10 @@ class _ShownotiEmergencyState extends State<ShownotiEmergency> {
                     ? 'ไม่ระบุตำแหน่งที่ตั้ง'
                     : '${emergencyModel!.Location}',
                 textStyle: MyConstant().h8Style()),
-          ]),
-        ));
+          ],
+        ),
+      ),
+    );
   }
 
   Container buildText1() {
@@ -245,7 +159,7 @@ class _ShownotiEmergencyState extends State<ShownotiEmergency> {
     );
   }
 
-  Widget buildImage(BoxConstraints constraints) {
+  Container buildImage(BoxConstraints constraints) {
     return Container(
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
