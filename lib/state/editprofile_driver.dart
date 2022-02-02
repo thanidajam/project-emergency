@@ -116,7 +116,7 @@ class _EditprofileDriverState extends State<EditprofileDriver> {
 
         List<String> nameImage = userModel!.image.split('/');
         String nameFile = nameImage[nameImage.length - 1];
-        nameFile = 'edit${Random().nextInt(100)}$nameFile';
+        nameFile = '${Random().nextInt(100)}$nameFile';
 
         print('User New Image nameFile ==>> $nameFile');
 
