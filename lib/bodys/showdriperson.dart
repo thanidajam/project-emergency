@@ -91,7 +91,7 @@ class _ShowDripersonsState extends State<ShowDripersons> {
                 Padding(
                   padding: const EdgeInsets.only(top: 10, left: 45),
                   child: ShowTitle(
-                      title: 'เบอร์โทรศัพท์',
+                      title: 'ชื่อผู้ใช้',
                       textStyle: MyConstant().h8Style()),
                 ),
               ],
@@ -102,7 +102,7 @@ class _ShowDripersonsState extends State<ShowDripersons> {
                 child: TextFormField(
                   readOnly: true,
                   decoration: InputDecoration(
-                      hintText: '${userModel!.Phone}',
+                      hintText: '${userModel!.Username}',
                       enabledBorder: OutlineInputBorder(
                           borderSide: BorderSide(color: MyConstant.gray),
                           borderRadius: BorderRadius.circular(5)),
@@ -119,7 +119,7 @@ class _ShowDripersonsState extends State<ShowDripersons> {
                 Padding(
                   padding: const EdgeInsets.only(top: 10, left: 45),
                   child: ShowTitle(
-                      title: 'ชื่อผู้ใช้', textStyle: MyConstant().h8Style()),
+                      title: 'เบอร์โทรศัพท์', textStyle: MyConstant().h8Style()),
                 ),
               ],
             ),
@@ -129,7 +129,7 @@ class _ShowDripersonsState extends State<ShowDripersons> {
                 child: TextFormField(
                   readOnly: true,
                   decoration: InputDecoration(
-                      hintText: '${userModel!.Username}',
+                      hintText: '${userModel!.Phone}',
                       enabledBorder: OutlineInputBorder(
                           borderSide: BorderSide(color: MyConstant.gray),
                           borderRadius: BorderRadius.circular(5)),
