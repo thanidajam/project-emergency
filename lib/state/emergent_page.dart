@@ -417,7 +417,7 @@ class _EmergentState extends State<Emergent> {
               : Image.file(file!),
         ),
         IconButton(
-          onPressed: () => chooseImage(ImageSource.camera),
+          onPressed: () => chooseImage(ImageSource.gallery),
           icon: Icon(
             Icons.add_a_photo,
             size: 30,

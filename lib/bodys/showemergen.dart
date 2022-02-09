@@ -61,7 +61,7 @@ class _ShowEmergenState extends State<ShowEmergen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: load
-          ? ShowProgress()
+          ? SizedBox()
           : haveData!
               ? LayoutBuilder(
                   builder: (context, constraints) => buildListView(constraints),
@@ -73,38 +73,66 @@ class _ShowEmergenState extends State<ShowEmergen> {
   ListView buildListView(BoxConstraints constraints) {
     return ListView.builder(
       itemCount: emergencyModels.length,
-      itemBuilder: (context, index) => Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
-          Container(
-            padding: const EdgeInsets.only(top: 5, left: 10),
-            width: constraints.maxWidth * 0.9,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                TextButton(
-                  child: ShowTitle(
-                      title: '${emergencyModels[index].E_name} ' == ' ' ? 'แจ้งเหตุฉุกเฉิน' : '${emergencyModels[index].E_name}',
-                      textStyle: MyConstant().h8Style()),
-                  onPressed: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => ShowDataEmer(
-                            emergencyModel: emergencyModels[index]),
-                      )),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 10),
-                  child: ShowTitle(
-                      title: '${emergencyModels[index].E_date}',
-                      textStyle: MyConstant().h8Style()),
-                )
-              ],
+      itemBuilder: (context, index) => Card(
+        color: Colors.deepOrange[50],
+        child: Row(
+          children: [
+            Container(
+              padding: const EdgeInsets.only(top: 5, left: 10, bottom: 10),
+              width: constraints.maxWidth * 0.9,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(top: 10),
+                        child: IconButton(
+                          onPressed: () {},
+                          icon: Icon(
+                            Icons.medical_services,
+                            size: 40,
+                            color: Colors.redAccent,
+                          ),
+                        ),
+                      ),
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          TextButton(
+                            child: ShowTitle(
+                                title:
+                                    '${emergencyModels[index].E_name} ' == ' '
+                                        ? 'แจ้งเหตุฉุกเฉิน'
+                                        : '${emergencyModels[index].E_name}',
+                                textStyle: MyConstant().h10Style()),
+                            onPressed: () => Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => ShowDataEmer(
+                                    emergencyModel: emergencyModels[index]),
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 10),
+                            child: ShowTitle(
+                                title: '${emergencyModels[index].E_date}',
+                                textStyle: MyConstant().h8Style()),
+                          )
+                        ],
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

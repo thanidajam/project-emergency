@@ -6,7 +6,7 @@ class MyConstant {
   static String appName1 = 'Rmutt Emergency Notification';
   static String appName2 = 'นักศึกษา/บุคคลากร';
   static String appName3 = 'พนักงานขับรถพยาบาล';
-  static String domain = 'http://223a-203-158-120-7.ngrok.io';
+  static String domain = 'http://38ac-124-120-230-148.ngrok.io';
 
   //Route
   static String routeUser = '/user';
@@ -101,6 +101,12 @@ class MyConstant {
   TextStyle h9Style() => TextStyle(
         fontSize: 20,
         color: primary,
+        fontWeight: FontWeight.bold,
+      );
+
+    TextStyle h10Style() => TextStyle(
+        fontSize: 18,
+        color: dark,
         fontWeight: FontWeight.bold,
       );
 

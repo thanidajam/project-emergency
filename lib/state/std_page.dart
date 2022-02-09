@@ -6,6 +6,7 @@ import 'package:emer_projectnew/utility/my_constant.dart';
 import 'package:emer_projectnew/widgets/show_imgae.dart';
 import 'package:emer_projectnew/widgets/show_title.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class StdServer extends StatefulWidget {
@@ -109,9 +110,9 @@ class _StdServerState extends State<StdServer> {
   ListTile menuEmergency() {
     return ListTile(
       onTap: () => Navigator.pushNamed(context, MyConstant.routeEmergent),
-      leading: Icon(
-        Icons.airport_shuttle_outlined,
-        size: 38,
+      leading: FaIcon(
+        FontAwesomeIcons.ambulance,
+        size: 30,
       ),
       title: ShowTitle(
         title: 'แจ้งเหตุฉุกเฉิน',
@@ -236,7 +237,7 @@ Row buildButtomContact(BuildContext context) {
           margin: EdgeInsets.only(top: 20),
           height: 170.0,
           child: SizedBox.fromSize(
-              size: Size(190, 170), // button width and height
+              size: Size(170, 170), // button width and height
               child: Material(
                   child: InkWell(
                       onTap: () => Navigator.pushNamed(

@@ -75,6 +75,7 @@ class _ShowAidpageState extends State<ShowAidpage> {
     return ListView.builder(
       itemCount: firstaidModels.length,
       itemBuilder: (context, index) => Card(
+        color: Colors.deepOrange[50],
         child: Row(
           children: [
             Container(
@@ -96,7 +97,9 @@ class _ShowAidpageState extends State<ShowAidpage> {
                         onPressed: () => Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => ShowAidpagefull(firstaidModel: firstaidModels[index],),
+                              builder: (context) => ShowAidpagefull(
+                                firstaidModel: firstaidModels[index],
+                              ),
                             )),
                         icon: Icon(
                           Icons.remove_red_eye_rounded,

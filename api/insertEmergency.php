@@ -1,6 +1,7 @@
 <?php
 	include 'connected.php';
 	header("Access-Control-Allow-Origin: *");
+	date_default_timezone_set('asia/bangkok');
 
 if (!$link) {
     echo "Error: Unable to connect to MySQL." . PHP_EOL;
@@ -20,7 +21,7 @@ if (isset($_GET)) {
 				
 		$e_type = $_GET['e_type'];
 		$e_name = $_GET['e_name'];
-		$e_date = date('Y-m-d h:i:s');
+		$e_date = date('Y-m-d H:i:s');
 		$pic = $_GET['pic'];
 		$lat = $_GET['lat'];
 		$lng = $_GET['lng'];

@@ -18,95 +18,120 @@ class _ShowTelemerpageState extends State<ShowTelemerpage> {
         title: Text('เบอร์โทรฉุกเฉิน'),
         backgroundColor: MyConstant.bg2,
       ),
-      body: Column(
-        children: [
-          Card (child: buildList1()),
-          Card (child: buildList2()),
-          Card (child: buildList3()),
-        ],
+      body: LayoutBuilder(
+        builder: (context, constraints) => buildListview(constraints),
       ),
     );
   }
 
-  Row buildList1() {
-    return Row(
-      children: [
-        Padding(
-          padding: const EdgeInsets.only(left: 20),
-          child: Text(
-            'สายด่วนสำหรับแจ้งเหตุด่วนเหตุร้าย',
-            style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.normal,
-                color: Color(0xff212121)),
-          ),
+  Column buildListview(BoxConstraints constraints) {
+    return Column(children: [
+      Card(
+        color: Colors.deepOrange[50],
+        child: Row(
+          children: [
+            Container(
+              padding: const EdgeInsets.only(top: 15, left: 20),
+              width: constraints.maxWidth * 0.9,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      ShowTitle(
+                        title: 'สายด่วนสำหรับแจ้งเหตุด่วนเหตุร้าย',
+                        textStyle: MyConstant().h8Style(),
+                      ),
+                      IconButton(
+                          onPressed: () => Navigator.pushNamed(
+                              context, MyConstant.routeShowTelemerpage2),
+                          icon: Icon(
+                            Icons.play_circle,
+                            size: 30,
+                          )),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ],
         ),
-        Padding(
-          padding: const EdgeInsets.only(left: 36),
-          child: IconButton(
-              onPressed: () => Navigator.pushNamed(
-                  context, MyConstant.routeShowTelemerpage2),
-              icon: Icon(
-              Icons.play_circle,
-              size: 34,
-            )),
-        )
-      ],
-    );
+      ),
+      Column(
+        children: [
+          Card(
+            color: Colors.deepOrange[50],
+              child: Row(
+            children: [
+              Container(
+                padding: const EdgeInsets.only(top: 15, left: 20),
+                width: constraints.maxWidth * 0.9,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          ShowTitle(
+                            title: 'สายด่วนแจ้งเหตุฉุกเฉิน/กู้ชีพ/กู้ภัย',
+                            textStyle: MyConstant().h8Style(),
+                          ),
+                          IconButton(
+                              onPressed: () => Navigator.pushNamed(
+                                  context, MyConstant.routeShowTelemerpage3),
+                              icon: Icon(
+                                Icons.play_circle,
+                                size: 30,
+                              )),
+                        ])
+                  ],
+                ),
+              )
+            ],
+          )),
+        ],
+      ),
+      Column(
+        children: [
+          Card(
+            color: Colors.deepOrange[50],
+              child: Row(
+            children: [
+              Container(
+                padding: const EdgeInsets.only(top: 15, left: 20),
+                width: constraints.maxWidth * 0.9,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          ShowTitle(
+                            title: 'สายด่วนบริการทางการแพทย์',
+                            textStyle: MyConstant().h8Style(),
+                          ),
+                          IconButton(
+                              onPressed: () => Navigator.pushNamed(
+                                  context, MyConstant.routeShowTelemerpage4),
+                              icon: Icon(
+                                Icons.play_circle,
+                                size: 30,
+                              )),
+                        ])
+                  ],
+                ),
+              )
+            ],
+          )),
+        ],
+      ),
+    ]);
   }
-
-   Row buildList2() {
-    return Row(
-      children: [
-        Padding(
-          padding: const EdgeInsets.only(left: 20),
-          child: Text(
-            'สายด่วนแจ้งเหตุฉุกเฉิน/กู้ชีพ/กู้ภัย',
-            style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.normal,
-                color: Color(0xff212121)),
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.only(left: 42),
-          child: IconButton(
-              onPressed: () => Navigator.pushNamed(
-                  context, MyConstant.routeShowTelemerpage3),
-              icon: Icon(
-                Icons.play_circle,
-                size: 34,
-              )),
-        )
-      ],
-    );
-  }
-
-   Row buildList3() {
-    return Row(
-      children: [
-        Padding(
-          padding: const EdgeInsets.only(left: 20),
-          child: Text(
-            'สายด่วนบริการทางการแพทย์',
-            style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.normal,
-                color: Color(0xff212121)),
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.only(left: 85),
-          child: IconButton(
-              onPressed: () => Navigator.pushNamed(
-                  context, MyConstant.routeShowTelemerpage4),
-              icon: Icon(
-                Icons.play_circle,
-                size: 34,
-              )),
-        )
-      ],
-    );
-  }
-
 }

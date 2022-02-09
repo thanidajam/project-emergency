@@ -40,6 +40,7 @@ class _ShowTelemerPage2State extends State<ShowTelemerPage2> {
       body: ListView.builder(
         itemCount: textList.length,
         itemBuilder: (context, index) => Card(
+          color: Colors.deepOrange[50],
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,

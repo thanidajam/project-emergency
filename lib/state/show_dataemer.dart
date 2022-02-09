@@ -77,9 +77,21 @@ class _ShowDataEmerState extends State<ShowDataEmer> {
       padding: EdgeInsets.symmetric(horizontal: 10),
       child: Padding(
         padding: const EdgeInsets.only(top: 20),
-        child: ShowTitle(
-            title: 'เบอร์โทร : ' '${emergencyModel!.Phone}',
-            textStyle: MyConstant().h8Style()),
+        child: Row(
+          children: [
+             Text(
+              'เบอร์โทร :  ',
+              style: TextStyle(
+                fontSize: 18,
+                color: Colors.black,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            ShowTitle(
+                title:  '${emergencyModel!.Phone}',
+                textStyle: MyConstant().h8Style()),
+          ],
+        ),
       ),
     );
   }
@@ -89,9 +101,21 @@ class _ShowDataEmerState extends State<ShowDataEmer> {
       padding: EdgeInsets.symmetric(horizontal: 10),
       child: Padding(
         padding: const EdgeInsets.only(top: 20),
-        child: ShowTitle(
-            title: 'ผู้แจ้ง : ' '${emergencyModel!.Send_emer}',
+        child:  Row(
+          children: [
+            Text(
+                  'ผู้แจ้งเหตุ :  ',
+                  style: TextStyle(
+                    fontSize: 18,
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+            ShowTitle(
+            title: '${emergencyModel!.Send_emer}',
             textStyle: MyConstant().h8Style()),
+          ],
+        ),
       ),
     );
   }
@@ -104,11 +128,11 @@ class _ShowDataEmerState extends State<ShowDataEmer> {
         child: Row(
           children: [
             Text(
-              'ตำแหน่ง :',
+              'ตำแหน่ง :  ',
               style: TextStyle(
                 fontSize: 18,
                 color: Colors.black,
-                fontWeight: FontWeight.normal,
+                fontWeight: FontWeight.bold,
               ),
             ),
             ShowTitle(
@@ -127,9 +151,21 @@ class _ShowDataEmerState extends State<ShowDataEmer> {
       padding: EdgeInsets.symmetric(horizontal: 10),
       child: Padding(
         padding: const EdgeInsets.only(top: 20),
-        child: ShowTitle(
-            title: 'วันเวลาที่แจ้ง : ' '${emergencyModel!.E_date}',
-            textStyle: MyConstant().h8Style()),
+        child: Row(
+          children: [
+             Text(
+              'วันเวลาที่แจ้ง :  ',
+              style: TextStyle(
+                fontSize: 18,
+                color: Colors.black,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            ShowTitle(
+                title: '${emergencyModel!.E_date}',
+                textStyle: MyConstant().h8Style()),
+          ],
+        ),
       ),
     );
   }
@@ -142,11 +178,11 @@ class _ShowDataEmerState extends State<ShowDataEmer> {
         child: Row(
           children: [
             Text(
-              'รับแจ้ง : ',
+              'รับแจ้ง :  ',
               style: TextStyle(
                   fontSize: 18,
                   color: Colors.black,
-                  fontWeight: FontWeight.normal),
+                  fontWeight: FontWeight.bold),
             ),
             ShowTitle(
                 title: '${emergencyModel!.E_name} ' == ' '
