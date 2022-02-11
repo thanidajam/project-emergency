@@ -44,12 +44,14 @@ class _ShowAidpagefullState extends State<ShowAidpagefull> {
         backgroundColor: MyConstant.bg2,
       ),
       body: SingleChildScrollView(
-        child: LayoutBuilder(
-          builder: (context, constraints) => Center(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [buildImage(constraints), 
-                         buildText()],
+        child: Card(
+          child: LayoutBuilder(
+            builder: (context, constraints) => Center(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [buildImage(constraints), 
+                           buildText()],
+              ),
             ),
           ),
         ),

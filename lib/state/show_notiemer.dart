@@ -192,7 +192,7 @@ class _ShownotiEmergencyState extends State<ShownotiEmergency> {
           padding: const EdgeInsets.only(top: 20),
           child: Row(children: [
             Text(
-              'ตำแหน่ง :',
+              'ตำแหน่ง : ',
               style: TextStyle(
                 fontSize: 18,
                 color: Colors.black,
@@ -201,7 +201,7 @@ class _ShownotiEmergencyState extends State<ShownotiEmergency> {
             ),
             ShowTitle(
                 title: '${emergencyModel!.Location}' == 'null'
-                    ? 'ไม่ระบุตำแหน่งที่ตั้ง'
+                    ? ' - '
                     : '${emergencyModel!.Location}',
                 textStyle: MyConstant().h8Style()),
           ]),
