@@ -128,7 +128,7 @@ packages:
     source: hosted
     version: "6.1.2"
   firebase_core:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: firebase_core
       url: "https://pub.dartlang.org"
@@ -201,7 +201,7 @@ packages:
       name: flutter_local_notifications
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "9.2.0"
+    version: "9.3.1"
   flutter_local_notifications_linux:
     dependency: transitive
     description:
@@ -596,7 +596,7 @@ packages:
     source: hosted
     version: "0.4.8"
   timezone:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: timezone
       url: "https://pub.dartlang.org"

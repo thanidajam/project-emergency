@@ -13,6 +13,12 @@ import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:timezone/data/latest_all.dart' as tz;
+import 'package:timezone/timezone.dart' as tz;
+
+FlutterLocalNotificationsPlugin notificationsPlugin =
+    FlutterLocalNotificationsPlugin();
 
 class Emergent extends StatefulWidget {
   const Emergent({Key? key}) : super(key: key);
@@ -59,6 +65,8 @@ class _EmergentState extends State<Emergent> {
   void initState() {
     super.initState();
     checkPermission();
+    initializeSetting();
+    tz.initializeTimeZones();
   }
 
   Future<Null> checkPermission() async {
@@ -301,9 +309,9 @@ class _EmergentState extends State<Emergent> {
             style: MyConstant().myButtonStyle1(),
             onPressed: () {
               if (formKey.currentState!.validate()) {
-                if (typeEmer == null ) 
-                  print('Insert to Database');
-                  uploadImageAndInsertData();
+                if (typeEmer == null) print('Insert to Database');
+                //uploadImageAndInsertData();
+                displayNotification();
               }
             },
             child: Text(
@@ -327,7 +335,6 @@ class _EmergentState extends State<Emergent> {
 
     print('## name = $e_name , phone = $phone');
 
-    
     String path =
         '${MyConstant.domain}/emer_projectnew/api/getEmergencyWhereEmer.php?isAdd=true&phone=$phone';
     await Dio().get(path).then((value) async {
@@ -420,7 +427,7 @@ class _EmergentState extends State<Emergent> {
               : Image.file(file!),
         ),
         IconButton(
-          onPressed: () => chooseImage(ImageSource.gallery),
+          onPressed: () => chooseImage(ImageSource.camera),
           icon: Icon(
             Icons.add_a_photo,
             size: 30,
@@ -492,4 +499,34 @@ class _EmergentState extends State<Emergent> {
       ),
     );
   }
+
+  Future<void> displayNotification() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    String type = preferences.getString('type')!;
+    
+    if (type == 'S') {
+      notificationsPlugin.zonedSchedule(
+        0,
+        'การแจ้งเตือนใหม่',
+        'มีการแจ้งเหตุด่วน',
+        tz.TZDateTime.now(tz.local).add(
+          Duration(seconds: 5),
+        ),
+        NotificationDetails(
+          android:
+              AndroidNotificationDetails('channel name', 'channel description'),
+        ),
+        uiLocalNotificationDateInterpretation:
+            UILocalNotificationDateInterpretation.absoluteTime,
+        androidAllowWhileIdle: true);
+    } else {
+      print('ไม่สำเร็จ');
+    }
+  }
+}
+
+void initializeSetting() async {
+  var initializeAndroid = new AndroidInitializationSettings('@mipmap/ic_launcher');
+  var initializeSetting = InitializationSettings(android: initializeAndroid);
+  notificationsPlugin.initialize(initializeSetting);
 }

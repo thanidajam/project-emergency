@@ -185,9 +185,13 @@ class _ShowDataEmerState extends State<ShowDataEmer> {
                   fontWeight: FontWeight.bold),
             ),
             ShowTitle(
-                title: '${emergencyModel!.E_name} ' == ' '
-                    ? 'แจ้งเหตุฉุกเฉิน'
-                    : '${emergencyModel!.E_name}',
+                title: '${emergencyModel!.E_type}' == 'A'
+                    ? 'หมดสติ'
+                    : '${emergencyModel!.E_type}' == 'B'
+                    ? 'รถล้ม , รถชน'
+                    : '${emergencyModel!.E_type}' == 'C'
+                    ? '${emergencyModel!.E_name}'
+                    : '${emergencyModel!.E_type}' ,
                 textStyle: MyConstant().h8Style()),
           ],
         ),

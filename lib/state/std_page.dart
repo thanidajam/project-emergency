@@ -5,6 +5,8 @@ import 'package:emer_projectnew/models/user_model.dart';
 import 'package:emer_projectnew/utility/my_constant.dart';
 import 'package:emer_projectnew/widgets/show_imgae.dart';
 import 'package:emer_projectnew/widgets/show_title.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -22,14 +24,25 @@ class _StdServerState extends State<StdServer> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     findUserModel();
   }
 
   Future<Null> findUserModel() async {
+    WidgetsFlutterBinding.ensureInitialized();
+    await Firebase.initializeApp();
+
     SharedPreferences preferences = await SharedPreferences.getInstance();
     String uid = preferences.getString('UID')!;
+    FirebaseMessaging firebaseMessaging = FirebaseMessaging.instance;
+    String? token = await firebaseMessaging.getToken();
+    print('token == $token');
+
+     if (uid != null && uid.isNotEmpty) {
+    String url =
+        '${MyConstant.domain}/emer_projectnew/api/EditTokenWhereID.php?isAdd=true&uid=$uid&Token=$token';
+    await Dio().get(url).then((value) => print('Update Token Success!'));
+  }
 
     print('## id Logined ==> $uid');
     String apiGetUserWhereUID =

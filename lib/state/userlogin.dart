@@ -1,11 +1,12 @@
 import 'dart:convert';
-
 import 'package:dio/dio.dart';
 import 'package:emer_projectnew/models/user_model.dart';
 import 'package:emer_projectnew/utility/my_constant.dart';
 import 'package:emer_projectnew/utility/my_dialog.dart';
 import 'package:emer_projectnew/widgets/show_imgae.dart';
 import 'package:emer_projectnew/widgets/show_title.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -114,10 +115,6 @@ class _PageLoginState extends State<PageLogin> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        // ShowTitle(
-        //   title: 'Non Account ? ',
-        //   textStyle: MyConstant().h4Style(),
-        // ),
         TextButton(
             onPressed: () {
               MyDialog().normalDialog(context, 'ลืมรหัสผ่าน',

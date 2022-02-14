@@ -30,7 +30,7 @@ class _showNotiEmerState extends State<showNotiEmer> {
   }
 
   Future<Null> readAPI() async {
-    String urlAPI = '${MyConstant.domain}/emer_projectnew/api/getEmergency.php';
+    String urlAPI = '${MyConstant.domain}/emer_projectnew/api/getEmerWhereStatusn.php?isAdd=true&status=n';
     await Dio().get(urlAPI).then((value) {
       //print ('value ==> $value');
 
@@ -71,7 +71,7 @@ class _showNotiEmerState extends State<showNotiEmer> {
               ? LayoutBuilder(
                   builder: (context, constraints) => buildListView(constraints),
                 )
-              : ShowTitle(title: 'No data', textStyle: MyConstant().h4Style()),
+              : ShowTitle(title: 'ไม่มีแจ้งเตือน', textStyle: MyConstant().h4Style()),
     );
   }
 

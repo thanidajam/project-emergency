@@ -106,9 +106,17 @@ class _ShowEmergenState extends State<ShowEmergen> {
                           TextButton(
                             child: ShowTitle(
                                 title:
-                                    '${emergencyModels[index].E_name} ' == ' '
-                                        ? 'แจ้งเหตุฉุกเฉิน'
-                                        : '${emergencyModels[index].E_name}',
+                                    '${emergencyModels[index].E_type}' == 'B'
+                                    ? 'รถล้ม , รถชน'
+                                    : '${emergencyModels[index].E_type}' == 'C'
+                                        ? '${emergencyModels[index].E_name}'
+                                        : '${emergencyModels[index].E_type}' == 'A' 
+                                        ? 'หมดสติ'
+                                        : '${emergencyModels[index].E_type}' == 'n'
+                                        ? 'ไม่ระบุประเภทอุบัติเหตุ'
+                                        // : '${emergencyModels[index].E_name}' == ''
+                                        // ? 'ไม่ระบุประเภทอุบัติเหตุ'
+                                        : '${emergencyModels[index].E_type}',
                                 textStyle: MyConstant().h10Style()),
                             onPressed: () => Navigator.push(
                               context,

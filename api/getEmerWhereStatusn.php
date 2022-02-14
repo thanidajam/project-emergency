@@ -20,7 +20,7 @@ if (isset($_GET)) {
 				
 		$status = $_GET['status'];
 
-		$result = mysqli_query($link, "SELECT * FROM emergency WHERE status = 'T' OR status = 'F' ORDER BY E_date DESC LIMIT 10");
+		$result = mysqli_query($link, "SELECT * FROM emergency WHERE Status = 'n' ORDER BY E_date DESC ");
 
 		if ($result) {
 
