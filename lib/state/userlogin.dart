@@ -117,7 +117,7 @@ class _PageLoginState extends State<PageLogin> {
       children: [
         TextButton(
             onPressed: () {
-              MyDialog().normalDialog(context, 'ลืมรหัสผ่าน',
+              MyDialog().normalDialog2(context, 'ลืมรหัสผ่าน',
                   'กรุณานำบัตรนักศึกษาหรือบัตรประชาชน ติดต่อที่สำนักส่งเสริมวิชาการและงานทะเบียน ชั้น 1');
             },
             child: Text(
@@ -183,6 +183,8 @@ class _PageLoginState extends State<PageLogin> {
             preferences.setString('Code', model.Code);
             preferences.setString('image', model.image);
             preferences.setString('Username', model.Username);
+            preferences.setString('token', model.Token);
+            preferences.setString('Code', model.Code);
 
             switch (type) {
               case 'S':

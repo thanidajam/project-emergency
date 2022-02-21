@@ -1,13 +1,16 @@
 import 'dart:convert';
-
+import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:emer_projectnew/models/user_model.dart';
 import 'package:emer_projectnew/utility/my_constant.dart';
+import 'package:emer_projectnew/utility/my_dialog.dart';
 import 'package:emer_projectnew/widgets/show_imgae.dart';
 import 'package:emer_projectnew/widgets/show_title.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -18,6 +21,39 @@ class StdServer extends StatefulWidget {
   _StdServerState createState() => _StdServerState();
 }
 
+const AndroidNotificationChannel channel = AndroidNotificationChannel(
+    'high_importance_channel', // id
+    'High Importance Notification', // title
+    // 'This channel is used for importance notification' , // description
+    importance: Importance.high,
+    playSound: true);
+
+final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+    FlutterLocalNotificationsPlugin();
+
+Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  print('A bg message just showed up : ${message.messageId}');
+}
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+
+  await flutterLocalNotificationsPlugin
+      .resolvePlatformSpecificImplementation<
+          AndroidFlutterLocalNotificationsPlugin>()
+      ?.createNotificationChannel(channel);
+
+  await FirebaseMessaging.instance.setForegroundNotificationPresentationOptions(
+    alert: true,
+    badge: true,
+    sound: true,
+  );
+}
+
 class _StdServerState extends State<StdServer> {
   int indexWidget = 0;
   UserModel? userModel;
@@ -26,23 +62,23 @@ class _StdServerState extends State<StdServer> {
   void initState() {
     super.initState();
     findUserModel();
+    aboutNotification();
   }
 
   Future<Null> findUserModel() async {
     WidgetsFlutterBinding.ensureInitialized();
     await Firebase.initializeApp();
+    String? token = await FirebaseMessaging.instance.getToken();
+    print('token == $token');
 
     SharedPreferences preferences = await SharedPreferences.getInstance();
     String uid = preferences.getString('UID')!;
-    FirebaseMessaging firebaseMessaging = FirebaseMessaging.instance;
-    String? token = await firebaseMessaging.getToken();
-    print('token == $token');
 
-     if (uid != null && uid.isNotEmpty) {
-    String url =
-        '${MyConstant.domain}/emer_projectnew/api/EditTokenWhereID.php?isAdd=true&uid=$uid&Token=$token';
-    await Dio().get(url).then((value) => print('Update Token Success!'));
-  }
+    if (uid != null && uid.isNotEmpty) {
+      String url =
+          '${MyConstant.domain}/emer_projectnew/api/EditTokenWhereID.php?isAdd=true&uid=$uid&Token=$token';
+      await Dio().get(url).then((value) => print('Update Token Success!'));
+    }
 
     print('## id Logined ==> $uid');
     String apiGetUserWhereUID =
@@ -58,13 +94,42 @@ class _StdServerState extends State<StdServer> {
     });
   }
 
+  Future<Null> aboutNotification() async {
+    FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+      RemoteNotification? notification = message.notification;
+      AndroidNotification? android = message.notification?.android;
+      if (notification != null && android != null) {
+        MyDialog().normalDialog2(context, 'คนขับตอบรับการแจ้งเหตุเรียบร้อยแล้ว', '');
+        flutterLocalNotificationsPlugin.show(
+          notification.hashCode,
+          notification.title,
+          notification.body,
+          NotificationDetails(
+            android: AndroidNotificationDetails(
+              channel.id,
+              channel.name,
+              playSound: true,
+              icon: '@mipmap/ambulance1',
+            ),
+          ),
+        );
+      }
+    });
+
+    FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
+      print('A new onMessageOpenedApp event was published!');
+      RemoteNotification? notification = message.notification;
+      AndroidNotification? android = message.notification?.android;
+      if (notification != null && android != null) {
+        MyDialog().normalDialog2(context, 'คนขับตอบรับการแจ้งเหตุเรียบร้อยแล้ว', '');
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        actions: [
-          IconButton(onPressed: () {}, icon: Icon(Icons.notifications))
-        ],
         backgroundColor: MyConstant.bg2,
       ),
       body: Form(
@@ -204,7 +269,31 @@ class _StdServerState extends State<StdServer> {
       ],
     );
   }
+
+  // Future<Null> aboutNotification() async {
+//     if (Platform.isAndroid) {
+//       print('Noti workAndroid');
+//       WidgetsFlutterBinding.ensureInitialized();
+//       await Firebase.initializeApp();
+//       FirebaseMessaging.instance
+//           .getInitialMessage()
+//           .then((RemoteMessage? message) {
+//         if (message != null) {
+//           Navigator.pushNamed(
+//             context,
+//             '/message',
+//           );
+//         }
+//       });
+//       FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+//         RemoteNotification? notification = message.notification;
+//         AndroidNotification? android = message.notification?.android;
+//       });
+//     } else if (Platform.isIOS) {
+//       print('Noti workiOS');
+//     }
 }
+// }
 
 Row buildButtomHospital(BuildContext context) {
   return Row(

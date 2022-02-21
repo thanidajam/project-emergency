@@ -45,7 +45,7 @@ class _ShowEmergenState extends State<ShowEmergen> {
         for (var item in result) {
           // print('item ==> $item');
           EmergencyModel model = EmergencyModel.fromMap(item);
-          print('name emergency ==> ${model.E_name}');
+          // print('name emergency ==> ${model.E_name}');
 
           setState(() {
             load = false;
@@ -74,7 +74,7 @@ class _ShowEmergenState extends State<ShowEmergen> {
     return ListView.builder(
       itemCount: emergencyModels.length,
       itemBuilder: (context, index) => Card(
-        color: Colors.deepOrange[50],
+        color: Colors.blueGrey[50],
         child: Row(
           children: [
             Container(

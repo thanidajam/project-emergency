@@ -91,8 +91,7 @@ class _ShowDripersonsState extends State<ShowDripersons> {
                 Padding(
                   padding: const EdgeInsets.only(top: 10, left: 45),
                   child: ShowTitle(
-                      title: 'ชื่อผู้ใช้',
-                      textStyle: MyConstant().h8Style()),
+                      title: 'ชื่อผู้ใช้', textStyle: MyConstant().h8Style()),
                 ),
               ],
             ),
@@ -119,7 +118,8 @@ class _ShowDripersonsState extends State<ShowDripersons> {
                 Padding(
                   padding: const EdgeInsets.only(top: 10, left: 45),
                   child: ShowTitle(
-                      title: 'เบอร์โทรศัพท์', textStyle: MyConstant().h8Style()),
+                      title: 'เบอร์โทรศัพท์',
+                      textStyle: MyConstant().h8Style()),
                 ),
               ],
             ),
@@ -176,7 +176,10 @@ class _ShowDripersonsState extends State<ShowDripersons> {
                 style: MyConstant().myButtonStyle5(),
                 child: Text(
                   'แก้ไขข้อมูล',
-                  style: TextStyle(color: Colors.black),
+                  style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 17,
+                      fontWeight: FontWeight.w700),
                 ),
               ),
             )

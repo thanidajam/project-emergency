@@ -1,15 +1,16 @@
 import 'dart:convert';
 
 class UserModel {
-  final String UID;
-  final String Code;
-  final String Username;
-  final String Password;
-  final String Name;
-  final String Email;
-  final String Phone;
-  final String Type;
-  final String image;
+  String UID;
+  String Code;
+  String Username;
+  String Password;
+  String Name;
+  String Email;
+  String Phone;
+  String Type;
+  String image;
+  String Token;
   UserModel({
     required this.UID,
     required this.Code,
@@ -20,6 +21,7 @@ class UserModel {
     required this.Phone,
     required this.Type,
     required this.image,
+    required this.Token,
   });
 
   UserModel copyWith({
@@ -32,6 +34,7 @@ class UserModel {
     String? Phone,
     String? Type,
     String? image,
+    String? Token,
   }) {
     return UserModel(
       UID: UID ?? this.UID,
@@ -43,6 +46,7 @@ class UserModel {
       Phone: Phone ?? this.Phone,
       Type: Type ?? this.Type,
       image: image ?? this.image,
+      Token: Token ?? this.Token,
     );
   }
 
@@ -57,20 +61,22 @@ class UserModel {
       'Phone': Phone,
       'Type': Type,
       'image': image,
+      'Token': Token,
     };
   }
 
   factory UserModel.fromMap(Map<String, dynamic> map) {
     return UserModel(
-      UID: (map['UID'] ?? '') as String,
-      Code: (map['Code'] ?? '')as String, 
-      Username: (map['Username'] ?? '') as String,
-      Password: (map['Password'] ?? '') as String,
-      Name: (map['Name'] ?? '') as String,
-      Email: (map['Email'] ?? '') as String,
-      Phone: (map['Phone'] ?? '') as String,
-      Type: (map['Type'] ?? '') as String,
-      image: (map['image'] ?? '') as String,
+      UID: map['UID'] ?? '',
+      Code: map['Code'] ?? '',
+      Username: map['Username'] ?? '',
+      Password: map['Password'] ?? '',
+      Name: map['Name'] ?? '',
+      Email: map['Email'] ?? '',
+      Phone: map['Phone'] ?? '',
+      Type: map['Type'] ?? '',
+      image: map['image'] ?? '',
+      Token: map['Token'] ?? '',
     );
   }
 
@@ -80,7 +86,7 @@ class UserModel {
 
   @override
   String toString() {
-    return 'UserModel(UID: $UID, Code: $Code, Username: $Username, Password: $Password, Name: $Name, Email: $Email, Phone: $Phone, Type: $Type, image: $image)';
+    return 'UserModel(UID: $UID, Code: $Code, Username: $Username, Password: $Password, Name: $Name, Email: $Email, Phone: $Phone, Type: $Type, image: $image, Token: $Token)';
   }
 
   @override
@@ -96,7 +102,8 @@ class UserModel {
       other.Email == Email &&
       other.Phone == Phone &&
       other.Type == Type &&
-      other.image == image;
+      other.image == image &&
+      other.Token == Token;
   }
 
   @override
@@ -109,6 +116,7 @@ class UserModel {
       Email.hashCode ^
       Phone.hashCode ^
       Type.hashCode ^
-      image.hashCode;
+      image.hashCode ^
+      Token.hashCode;
   }
 }

@@ -11,6 +11,7 @@ class EmergencyModel {
   final String Location;
   final String Phone;
   final String Status;
+  final String Code;
   final String Send_emer;
   final String Rec_emer;
   EmergencyModel({
@@ -24,6 +25,7 @@ class EmergencyModel {
     required this.Location,
     required this.Phone,
     required this.Status,
+    required this.Code,
     required this.Send_emer,
     required this.Rec_emer,
   });
@@ -39,6 +41,7 @@ class EmergencyModel {
     String? Location,
     String? Phone,
     String? Status,
+    String? Code,
     String? Send_emer,
     String? Rec_emer,
   }) {
@@ -53,6 +56,7 @@ class EmergencyModel {
       Location: Location ?? this.Location,
       Phone: Phone ?? this.Phone,
       Status: Status ?? this.Status,
+      Code: Code ?? this.Code,
       Send_emer: Send_emer ?? this.Send_emer,
       Rec_emer: Rec_emer ?? this.Rec_emer,
     );
@@ -70,6 +74,7 @@ class EmergencyModel {
       'Location': Location,
       'Phone': Phone,
       'Status': Status,
+      'Code': Code,
       'Send_emer': Send_emer,
       'Rec_emer': Rec_emer,
     };
@@ -87,6 +92,7 @@ class EmergencyModel {
       Location: map['Location'] ?? '',
       Phone: map['Phone'] ?? '',
       Status: map['Status'] ?? '',
+      Code: map['Code'] ?? '',
       Send_emer: map['Send_emer'] ?? '',
       Rec_emer: map['Rec_emer'] ?? '',
     );
@@ -98,7 +104,7 @@ class EmergencyModel {
 
   @override
   String toString() {
-    return 'EmergencyModel(EID: $EID, E_type: $E_type, E_name: $E_name, E_date: $E_date, Pic: $Pic, lat: $lat, lng: $lng, Location: $Location, Phone: $Phone, Status: $Status, Send_emer: $Send_emer, Rec_emer: $Rec_emer)';
+    return 'EmergencyModel(EID: $EID, E_type: $E_type, E_name: $E_name, E_date: $E_date, Pic: $Pic, lat: $lat, lng: $lng, Location: $Location, Phone: $Phone, Status: $Status, Code: $Code, Send_emer: $Send_emer, Rec_emer: $Rec_emer)';
   }
 
   @override
@@ -116,6 +122,7 @@ class EmergencyModel {
       other.Location == Location &&
       other.Phone == Phone &&
       other.Status == Status &&
+      other.Code == Code &&
       other.Send_emer == Send_emer &&
       other.Rec_emer == Rec_emer;
   }
@@ -132,6 +139,7 @@ class EmergencyModel {
       Location.hashCode ^
       Phone.hashCode ^
       Status.hashCode ^
+      Code.hashCode ^
       Send_emer.hashCode ^
       Rec_emer.hashCode;
   }

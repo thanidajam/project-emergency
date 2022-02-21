@@ -3,8 +3,8 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
    <application
-        android:label="emer_projectnew"
-        android:icon="@mipmap/ic_launcher"> 
+        android:label="EmergencyRMUTT"
+        android:icon="@mipmap/ambulance1"> 
             <meta-data android:name="com.google.android.geo.API_KEY"
                android:value="AIzaSyD3F_Rh_x2bIWzpf-rAucWt6Ki_fHLMaDo"/>
         <activity

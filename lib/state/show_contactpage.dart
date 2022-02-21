@@ -3,7 +3,7 @@ import 'package:emer_projectnew/widgets/show_title.dart';
 import 'package:flutter/material.dart';
 
 class ShowContactpage extends StatefulWidget {
-  const ShowContactpage({ Key? key }) : super(key: key);
+  const ShowContactpage({Key? key}) : super(key: key);
 
   @override
   _ShowContactpageState createState() => _ShowContactpageState();
@@ -16,8 +16,8 @@ class _ShowContactpageState extends State<ShowContactpage> {
       appBar: AppBar(
         title: Text('ติดต่อเรา'),
         backgroundColor: MyConstant.bg2,
-        ),
-        body: Column(
+      ),
+      body: Column(
         children: [
           buildContact(),
           buildContact1(),
@@ -30,57 +30,89 @@ class _ShowContactpageState extends State<ShowContactpage> {
 
   Row buildContact3() {
     return Row(
-        children: [
-          Padding(
+      children: [
+        Padding(
             padding: const EdgeInsets.only(top: 3, left: 20),
-            child: ShowTitle(
-              title: 'เว็บไซต์ : www.sd.rmutt.ac.th',
-              textStyle: MyConstant().h8Style(),
-            ),
+            child: Text(
+              'เว็บไซต์ : ',
+              style: TextStyle(
+                fontSize: 18,
+                color: Colors.black,
+                fontWeight: FontWeight.bold,
+              ),
+            )),
+        Padding(
+          padding: const EdgeInsets.only(top: 3),
+          child: ShowTitle(
+            title: 'www.sd.rmutt.ac.th',
+            textStyle: MyConstant().h8Style(),
           ),
-        ],
-      );
+        ),
+      ],
+    );
   }
 
   Row buildContact2() {
     return Row(
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(top: 3, left: 20),
-            child: ShowTitle(
-              title: 'เบอร์ติดต่อห้องพยาบาล : 025494010',
-              textStyle: MyConstant().h8Style(),
+      children: [
+        Padding(
+          padding: const EdgeInsets.only(top: 3, left: 20),
+          child: Text(
+            'เบอร์ติดต่อห้องพยาบาล : ',
+            style: TextStyle(
+              fontSize: 18,
+              color: Colors.black,
+              fontWeight: FontWeight.bold,
             ),
           ),
-        ],
-      );
+        ),
+        Padding(
+          padding: const EdgeInsets.only(top: 3),
+          child: ShowTitle(
+            title: '025494010',
+            textStyle: MyConstant().h8Style(),
+          ),
+        ),
+      ],
+    );
   }
 
   Row buildContact1() {
     return Row(
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(top: 3, left: 20),
-            child: ShowTitle(
-              title: 'สถานที่ตั้ง : อาคารสโมสรข้าราชการ ชั้น 1',
-              textStyle: MyConstant().h8Style(),
+      children: [
+        Padding(
+          padding: const EdgeInsets.only(top: 3, left: 20),
+          child: Text(
+            'สถานที่ : ',
+            style: TextStyle(
+              fontSize: 18,
+              color: Colors.black,
+              fontWeight: FontWeight.bold,
             ),
           ),
-        ],
-      );
+        ),
+        Padding(
+          padding: const EdgeInsets.only(top: 3),
+          child: ShowTitle(
+            title: 'อาคารสโมสรข้าราชการ ชั้น 1',
+            textStyle: MyConstant().h8Style(),
+          ),
+        ),
+      ],
+    );
   }
 
   Row buildContact() {
     return Row(
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(top: 20, left: 20),
-              child: ShowTitle(
-                title: 'กองพัฒนานักศึกษาฝ่ายสุขภาพและอนามัย',
-                textStyle: MyConstant().h8Style(),
-              ),
-            ),
-          ],
-        );
+      children: [
+        Padding(
+          padding: const EdgeInsets.only(top: 20, left: 20),
+          child: ShowTitle(
+            title: 'กองพัฒนานักศึกษาฝ่ายสุขภาพและอนามัย',
+            textStyle: MyConstant().h10Style(),
+          ),
+        ),
+      ],
+    );
   }
 }

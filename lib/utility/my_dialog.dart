@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:emer_projectnew/utility/my_constant.dart';
 import 'package:emer_projectnew/widgets/show_imgae.dart';
 import 'package:emer_projectnew/widgets/show_title.dart';
@@ -40,11 +39,92 @@ class MyDialog {
     showDialog(
       context: context,
       builder: (context) => SimpleDialog(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
         title: ListTile(
-          title: Text(title),
-          subtitle: Text(message),
+          title: Center(child: Text(title, style: TextStyle(fontSize: 18))),
+          subtitle:
+              Center(child: Text(message, style: TextStyle(fontSize: 18))),
         ),
-        children: [TextButton(onPressed: () => Navigator.pop(context), child: Text('OK'))],
+        children: [
+          TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: Text('OK', style: TextStyle(fontSize: 18)))
+        ],
+      ),
+    );
+  }
+
+  Future<Null> normalDialog1(
+      BuildContext context, String title, String message) async {
+    showDialog(
+      context: context,
+      builder: (context) => SimpleDialog(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
+        title: Column(
+          children: [
+            Image.asset(
+              'assets/images/ambulance.png',
+              width: 70,
+              height: 70,
+            ),
+            ListTile(
+              title: Center(
+                  child: Text(
+                title,
+                style: TextStyle(fontSize: 18),
+              )),
+              subtitle: Center(
+                  child: Text(
+                message,
+                style: TextStyle(fontSize: 18),
+              )),
+            ),
+          ],
+        ),
+        children: [
+          TextButton(
+              onPressed: () =>
+                  Navigator.pushNamed(context, MyConstant.routeStdServer),
+              child: Text('ตกลง', style: TextStyle(fontSize: 18)))
+        ],
+      ),
+    );
+  }
+
+  Future<Null> normalDialog2(
+      BuildContext context, String title, String message) async {
+    showDialog(
+      context: context,
+      builder: (context) => SimpleDialog(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
+        title: Column(
+          children: [
+            Image.asset(
+              'assets/images/ambulance.png',
+              width: 70,
+              height: 70,
+            ),
+            ListTile(
+              title: Center(
+                child: Text(
+                  title,
+                  style: TextStyle(fontSize: 18),
+                ),
+              ),
+              subtitle: Center(
+                child: Text(
+                  message,
+                  style: TextStyle(fontSize: 18),
+                ),
+              ),
+            ),
+          ],
+        ),
+        children: [
+          TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: Text('ตกลง', style: TextStyle(fontSize: 18)))
+        ],
       ),
     );
   }

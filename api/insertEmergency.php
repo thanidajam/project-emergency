@@ -28,12 +28,13 @@ if (isset($_GET)) {
 		$location = $_GET['location'];
 		$phone = $_GET['phone'];
 		$status = $_GET['status'];
+		$code = $_GET['code'];
 		$send_emer = $_GET['send_emer'];
 		$rec_emer = $_GET['rec_emer'];
 		
 							
-		$sql = "INSERT INTO `emergency`(`EID`, `E_type`, `E_name`, `E_date`, `Pic`, `lat`, `lng`, `Location` , `Phone` ,`Status` , `Send_emer` , 
-		`Rec_emer`) VALUES (Null,'$e_type','$e_name','$e_date','$pic','$lat','$lng','$location','$phone' ,'$status','$send_emer','$rec_emer')";
+		$sql = "INSERT INTO `emergency`(`EID`, `E_type`, `E_name`, `E_date`, `Pic`, `lat`, `lng`, `Location` , `Phone` ,`Status` , `Code` , `Send_emer` , 
+		`Rec_emer`) VALUES (Null,'$e_type','$e_name','$e_date','$pic','$lat','$lng','$location','$phone' ,'$status', '$code' ,'$send_emer','$rec_emer')";
 
 		$result = mysqli_query($link, $sql);
 

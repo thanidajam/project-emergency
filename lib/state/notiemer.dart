@@ -30,7 +30,8 @@ class _showNotiEmerState extends State<showNotiEmer> {
   }
 
   Future<Null> readAPI() async {
-    String urlAPI = '${MyConstant.domain}/emer_projectnew/api/getEmerWhereStatusn.php?isAdd=true&status=n';
+    String urlAPI =
+        '${MyConstant.domain}/emer_projectnew/api/getEmerWhereStatusn.php?isAdd=true&status=n';
     await Dio().get(urlAPI).then((value) {
       //print ('value ==> $value');
 
@@ -46,7 +47,7 @@ class _showNotiEmerState extends State<showNotiEmer> {
         for (var item in result) {
           // print('item ==> $item');
           EmergencyModel model = EmergencyModel.fromMap(item);
-          print('name emergency ==> ${model.E_name}');
+          // print('name emergency ==> ${model.E_name}');
 
           setState(() {
             load = false;
@@ -71,7 +72,8 @@ class _showNotiEmerState extends State<showNotiEmer> {
               ? LayoutBuilder(
                   builder: (context, constraints) => buildListView(constraints),
                 )
-              : ShowTitle(title: 'ไม่มีแจ้งเตือน', textStyle: MyConstant().h4Style()),
+              : ShowTitle(
+                  title: 'ไม่มีแจ้งเตือน', textStyle: MyConstant().h4Style()),
     );
   }
 
@@ -79,7 +81,7 @@ class _showNotiEmerState extends State<showNotiEmer> {
     return ListView.builder(
       itemCount: emergencyModels.length,
       itemBuilder: (context, index) => Card(
-        color: Colors.grey[100],
+        color: Colors.blueGrey[50],
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -114,15 +116,15 @@ class _showNotiEmerState extends State<showNotiEmer> {
                             child: ShowTitle(
                                 title: '${emergencyModels[index].E_type}' == 'B'
                                     ? 'รถล้ม , รถชน'
+                                    : '${emergencyModels[index].E_type}' == 'A'
+                                    ? 'หมดสติ'
+                                    : '${emergencyModels[index].E_type}' == 'n'
+                                    ? 'ไม่ระบุประเภทอุบัติเหตุ'
                                     : '${emergencyModels[index].E_type}' == 'C'
-                                        ? '${emergencyModels[index].E_name}'
-                                        : '${emergencyModels[index].E_type}' == 'A' 
-                                        ? 'หมดสติ'
-                                        : '${emergencyModels[index].E_type}' == 'n'
-                                        ? 'ไม่ระบุประเภทอุบัติเหตุ'
-                                        // : '${emergencyModels[index].E_name}' == ''
-                                        // ? 'ไม่ระบุประเภทอุบัติเหตุ'
-                                        : '${emergencyModels[index].E_type}',
+                                    ? '${emergencyModels[index].E_name}'
+                                    : '${emergencyModels[index].E_name}' == ' '
+                                    ? 'ไม่ระบุประเภทอุบัติเหตุ'
+                                    : '${emergencyModels[index].E_type}',
                                 textStyle: MyConstant().h8Style()),
                             onPressed: () => Navigator.push(
                                 context,

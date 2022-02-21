@@ -2,23 +2,22 @@ import 'dart:convert';
 import 'dart:io';
 import 'dart:math';
 import 'package:dio/dio.dart';
+import 'package:emer_projectnew/models/emergency_model.dart';
 import 'package:emer_projectnew/models/user_model.dart';
 import 'package:emer_projectnew/utility/my_constant.dart';
 import 'package:emer_projectnew/utility/my_dialog.dart';
 import 'package:emer_projectnew/widgets/show_imgae.dart';
 import 'package:emer_projectnew/widgets/show_progress.dart';
 import 'package:emer_projectnew/widgets/show_title.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:timezone/data/latest_all.dart' as tz;
-import 'package:timezone/timezone.dart' as tz;
-
-FlutterLocalNotificationsPlugin notificationsPlugin =
-    FlutterLocalNotificationsPlugin();
 
 class Emergent extends StatefulWidget {
   const Emergent({Key? key}) : super(key: key);
@@ -65,8 +64,6 @@ class _EmergentState extends State<Emergent> {
   void initState() {
     super.initState();
     checkPermission();
-    initializeSetting();
-    tz.initializeTimeZones();
   }
 
   Future<Null> checkPermission() async {
@@ -123,34 +120,6 @@ class _EmergentState extends State<Emergent> {
     }
   }
 
-  Row buildOther(double size) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Container(
-            margin: EdgeInsets.only(top: 10),
-            width: size * 0.8,
-            child: TextFormField(
-              validator: (value) {
-                if (value!.isEmpty) {
-                  return 'กรุณากรอกข้อมูลด้วย';
-                } else {}
-              },
-              decoration: InputDecoration(
-                  enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: MyConstant.white),
-                      borderRadius: BorderRadius.circular(5)),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: MyConstant.white),
-                    borderRadius: BorderRadius.circular(5),
-                  ),
-                  filled: true,
-                  fillColor: Colors.grey[400]),
-            )),
-      ],
-    );
-  }
-
   Row buildPhone(double size) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
@@ -168,14 +137,14 @@ class _EmergentState extends State<Emergent> {
               },
               decoration: InputDecoration(
                   enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: MyConstant.white),
+                      borderSide: BorderSide(color: MyConstant.gray),
                       borderRadius: BorderRadius.circular(5)),
                   focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: MyConstant.white),
+                    borderSide: BorderSide(color: MyConstant.gray),
                     borderRadius: BorderRadius.circular(5),
                   ),
                   filled: true,
-                  fillColor: Colors.grey[350]),
+                  fillColor: Colors.grey[300]),
             )),
       ],
     );
@@ -192,14 +161,14 @@ class _EmergentState extends State<Emergent> {
               controller: e_nameController,
               decoration: InputDecoration(
                   enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: MyConstant.white),
+                      borderSide: BorderSide(color: MyConstant.gray),
                       borderRadius: BorderRadius.circular(5)),
                   focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: MyConstant.white),
+                    borderSide: BorderSide(color: MyConstant.gray),
                     borderRadius: BorderRadius.circular(5),
                   ),
                   filled: true,
-                  fillColor: Colors.grey[350]),
+                  fillColor: Colors.grey[300]),
             )),
       ],
     );
@@ -260,11 +229,9 @@ class _EmergentState extends State<Emergent> {
           buildRadioType1(),
           buildRadioType2(),
           buildRadioType3(),
-          // buildTitle('โปรดระบุ'),
-          // buildOther(size),
           buildTitle('ชื่ออุบัติเหตุ'),
           buildName(size),
-          buildTitle2('เบอร์โทรศัพท์'),
+          buildTitle2('เบอร์โทรศัพท์  *'),
           buildPhone(size),
           buildTitle('ถ่ายรูป'),
           buildAvatar(size),
@@ -310,14 +277,13 @@ class _EmergentState extends State<Emergent> {
             onPressed: () {
               if (formKey.currentState!.validate()) {
                 if (typeEmer == null) print('Insert to Database');
-                //uploadImageAndInsertData();
-                displayNotification();
+                uploadImageAndInsertData();
               }
             },
             child: Text(
               'เรียกรถพยาบาล',
               style: TextStyle(
-                color: Colors.black,
+                color: Colors.white,
                 fontSize: 17,
                 fontWeight: FontWeight.w700,
               ),
@@ -340,6 +306,7 @@ class _EmergentState extends State<Emergent> {
     await Dio().get(path).then((value) async {
       SharedPreferences preferences = await SharedPreferences.getInstance();
       String send_emer = preferences.getString('Name')!;
+      String code = preferences.getString('Code')!;
       print('## name_send ==>> $send_emer');
       if (value.toString() == 'null') {
         print('## แจ้งเหตุสำเร็จ');
@@ -350,6 +317,7 @@ class _EmergentState extends State<Emergent> {
             e_name: e_name,
             e_date: e_date,
             phone: phone,
+            code: code,
             send_emer: send_emer,
           );
         } else {
@@ -369,6 +337,7 @@ class _EmergentState extends State<Emergent> {
               e_name: e_name,
               e_date: e_date,
               phone: phone,
+              code: code,
               send_emer: send_emer,
             );
           });
@@ -385,14 +354,20 @@ class _EmergentState extends State<Emergent> {
       String? e_date,
       String? phone,
       String? status,
+      String? code,
       String? send_emer,
       String? rec_emer}) async {
     print('## processInsertMySQL Work and picEmergency ==>> $picEmergency , ');
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    String TypeUser = preferences.getString('type')!;
+
     String apiInsertEmergency =
-        '${MyConstant.domain}/emer_projectnew/api/insertEmergency.php?isAdd=true&e_type=$typeEmer&e_name=$e_name&e_date=$e_date&pic=$picEmergency&lat=$lat&lng=$lng&location=$valueChoose&phone=$phone&status=$status&send_emer=$send_emer&rec_emer=$rec_emer';
+        '${MyConstant.domain}/emer_projectnew/api/insertEmergency.php?isAdd=true&e_type=$typeEmer&e_name=$e_name&e_date=$e_date&pic=$picEmergency&lat=$lat&lng=$lng&location=$valueChoose&phone=$phone&status=$status&code=$code&send_emer=$send_emer&rec_emer=$rec_emer';
     await Dio().get(apiInsertEmergency).then((value) {
       if (value.toString() == 'true') {
-        Navigator.pop(context);
+        notificationToDriver(TypeUser);
+        MyDialog().normalDialog1(
+            context, 'การแจ้งเหตุฉุกเฉินสำเร็จ', 'กรุณารอสักครู่');
       } else {
         MyDialog()
             .normalDialog(context, 'แจ้งเหตุไม่สำเร็จ', 'กรุณาลองใหม่อีกครั้ง');
@@ -410,6 +385,7 @@ class _EmergentState extends State<Emergent> {
       );
       setState(() {
         file = File(result!.path);
+        print('$file');
       });
     } catch (e) {}
   }
@@ -500,33 +476,29 @@ class _EmergentState extends State<Emergent> {
     );
   }
 
-  Future<void> displayNotification() async {
-    SharedPreferences preferences = await SharedPreferences.getInstance();
-    String type = preferences.getString('type')!;
-    
-    if (type == 'S') {
-      notificationsPlugin.zonedSchedule(
-        0,
-        'การแจ้งเตือนใหม่',
-        'มีการแจ้งเหตุด่วน',
-        tz.TZDateTime.now(tz.local).add(
-          Duration(seconds: 5),
-        ),
-        NotificationDetails(
-          android:
-              AndroidNotificationDetails('channel name', 'channel description'),
-        ),
-        uiLocalNotificationDateInterpretation:
-            UILocalNotificationDateInterpretation.absoluteTime,
-        androidAllowWhileIdle: true);
-    } else {
-      print('ไม่สำเร็จ');
-    }
-  }
-}
+  Future<Null> notificationToDriver(String TypeUser) async {
+    String urlFindToken =
+        '${MyConstant.domain}/emer_projectnew/api/getUserWhereUsername.php?isAdd=true&type=$TypeUser';
+    await Dio().get(urlFindToken).then((value) {
+      var result = json.decode(value.data);
+      print('result ==> ${result.toString()}');
+      for (var json in result) {
+        UserModel model = UserModel.fromMap(json);
+        var tokenDriver = model.Token;
+        print('tokenDriver ===> $tokenDriver');
 
-void initializeSetting() async {
-  var initializeAndroid = new AndroidInitializationSettings('@mipmap/ic_launcher');
-  var initializeSetting = InitializationSettings(android: initializeAndroid);
-  notificationsPlugin.initialize(initializeSetting);
+        String title = 'มีการแจ้งเหตุฉุกเฉิน';
+        String body = 'มีการแจ้งเหตุฉุกเฉินจากผู้ใช้';
+
+        String urlSendToken =
+            '${MyConstant.domain}/emer_projectnew/api/apiNotification.php?isAdd=true&token=$tokenDriver&title=$title&body=$body';
+
+        sendNotificationToDriver(urlSendToken);
+      }
+    });
+  }
+
+  Future<Null> sendNotificationToDriver(String urlSendToken) async {
+    await Dio().get(urlSendToken).then((value) {});
+  }
 }

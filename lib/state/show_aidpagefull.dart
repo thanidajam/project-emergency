@@ -80,7 +80,7 @@ class _ShowAidpagefullState extends State<ShowAidpagefull> {
             padding: EdgeInsets.only(top: 20),
             child: CachedNetworkImage(
               imageUrl:
-                  '${MyConstant.domain}/emer_projectnew/assets/pic/firstaid/${firstaidModel!.Media}',
+                  '${MyConstant.domain}/emer_projectnew/assets/pic/firstaid  /${firstaidModel!.Media}',
               placeholder: (context, url) => ShowProgress(),
             ),
           ),

@@ -6,7 +6,7 @@ class MyConstant {
   static String appName1 = 'Rmutt Emergency Notification';
   static String appName2 = 'นักศึกษา/บุคคลากร';
   static String appName3 = 'พนักงานขับรถพยาบาล';
-  static String domain = 'http://c860-183-88-98-134.ngrok.io';
+  static String domain = 'http://7845-183-89-147-216.ngrok.io';
 
   //Route
   static String routeUser = '/user';
@@ -22,7 +22,7 @@ class MyConstant {
   static String routeShowAidpagefull = '/showAidpagefull';
   static String routeAddUser = '/addUser';
   static String routeshowNotiEmer = '/showNotiEmer';
-  static String routeshowNotiEmergency = '/shownotiEmergency';
+  static String routeshownotiEmergency = '/showNotiEmergency';
   static String routeshowNotiEmergen = '/showNotiEmergen';
   static String routeShowDataEmer = '/showDataEmer';
   static String routeEditprofileDriver = '/editprofileDriver';
@@ -48,6 +48,9 @@ class MyConstant {
   static Color bg3 = Color(0xFF64DD17);
   static Color bg4 = Color(0xFFFF7043);
   static Color bg5 = Color(0xFFFFD54F);
+  static Color bg6 = Color(0xFF2E7D32);
+  static Color bg7 = Color(0xFFECEFF1);
+  static Color bg8 = Color(0xFF263238);
 
   //Style
   TextStyle h1Style() => TextStyle(
@@ -104,10 +107,16 @@ class MyConstant {
         fontWeight: FontWeight.bold,
       );
 
-    TextStyle h10Style() => TextStyle(
+  TextStyle h10Style() => TextStyle(
         fontSize: 18,
         color: dark,
         fontWeight: FontWeight.bold,
+      );
+
+  TextStyle h11Style() => TextStyle(
+        fontSize: 18,
+        color: bg8,
+        fontWeight: FontWeight.normal,
       );
 
   ButtonStyle myButtonStyle() => ElevatedButton.styleFrom(
@@ -147,6 +156,13 @@ class MyConstant {
 
   ButtonStyle myButtonStyle5() => ElevatedButton.styleFrom(
         primary: MyConstant.bg5,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(5),
+        ),
+      );
+
+  ButtonStyle myButtonStyle6() => ElevatedButton.styleFrom(
+        primary: MyConstant.bg6,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(5),
         ),

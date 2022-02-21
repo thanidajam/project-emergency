@@ -3,6 +3,7 @@ import 'dart:io';
 import 'dart:math';
 
 import 'package:dio/dio.dart';
+import 'package:emer_projectnew/bodys/showdriperson.dart';
 import 'package:emer_projectnew/models/user_model.dart';
 import 'package:emer_projectnew/utility/my_constant.dart';
 import 'package:emer_projectnew/utility/my_dialog.dart';
@@ -38,10 +39,10 @@ class _EditprofileDriverState extends State<EditprofileDriver> {
 
   Future<Null> findUser() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
-    String username = preferences.getString('Username')!;
+    String uid = preferences.getString('UID')!;
 
     String apiGetUser =
-        '${MyConstant.domain}/emer_projectnew/api/getUserWhereUser.php?isAdd=true&username=$username';
+        '${MyConstant.domain}/emer_projectnew/api/getUserWhereUID.php?isAdd=true&uid=$uid';
     await Dio().get(apiGetUser).then((value) {
       print('value from API ==> $value');
 
@@ -86,9 +87,9 @@ class _EditprofileDriverState extends State<EditprofileDriver> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              buildButton1(),
-                              SizedBox(width: 30),
                               buildButton(),
+                              SizedBox(width: 30),
+                              buildButton1(),
                             ],
                           ),
                         ),
@@ -124,21 +125,20 @@ class _EditprofileDriverState extends State<EditprofileDriver> {
         map['file'] =
             await MultipartFile.fromFile(file!.path, filename: nameFile);
         FormData formData = FormData.fromMap(map);
-        await Dio()
-            .post(apiSaveImage, data: formData)
-            .then((value) {
-              print('Upload Success');
-              String pathImage = '/emer_projectnew/api/user/$nameFile';
-              editValueToMySQL(pathImage);
-            });
+        await Dio().post(apiSaveImage, data: formData).then((value) {
+          print('Upload Success');
+          String pathImage = '/emer_projectnew/api/user/$nameFile';
+          editValueToMySQL(pathImage);
+        });
       }
     }
   }
 
   Future<Null> editValueToMySQL(String pathImage) async {
     print('pathImage ==> $pathImage');
-    String apiEditProfile = '${MyConstant.domain}/emer_projectnew/api/editProfileDriverWhereUID.php?isAdd=true&uid=${userModel!.UID}&name=${nameController.text}&username=${usernameController.text}&phone=${phoneController.text}&password=${passwordController.text}&image=$pathImage';
-    await Dio().get(apiEditProfile).then((value) => Navigator.pop(context));
+    String apiEditProfile =
+        '${MyConstant.domain}/emer_projectnew/api/editProfileDriverWhereUID.php?isAdd=true&uid=${userModel!.UID}&name=${nameController.text}&username=${usernameController.text}&phone=${phoneController.text}&password=${passwordController.text}&image=$pathImage';
+    await Dio().get(apiEditProfile).then((value) => Navigator.pop(context),);
   }
 
   Future<Null> createImage({ImageSource? source}) async {
@@ -239,7 +239,8 @@ class _EditprofileDriverState extends State<EditprofileDriver> {
           style: MyConstant().myButtonStyle1(),
           child: Text(
             'ยกเลิก',
-            style: TextStyle(color: Colors.black),
+            style: TextStyle(
+                color: Colors.white, fontSize: 17, fontWeight: FontWeight.w700),
           )),
     );
   }
@@ -249,10 +250,11 @@ class _EditprofileDriverState extends State<EditprofileDriver> {
       padding: const EdgeInsets.only(top: 25),
       child: ElevatedButton(
           onPressed: () => processEditProfileDriver(),
-          style: MyConstant().myButtonStyle3(),
+          style: MyConstant().myButtonStyle6(),
           child: Text(
             'บันทึก',
-            style: TextStyle(color: Colors.black),
+            style: TextStyle(
+                color: Colors.white, fontSize: 17, fontWeight: FontWeight.w700),
           )),
     );
   }
@@ -283,7 +285,7 @@ class _EditprofileDriverState extends State<EditprofileDriver> {
                     borderRadius: BorderRadius.circular(5),
                   ),
                   filled: true,
-                  fillColor: Colors.grey),
+                  fillColor: Colors.grey[300]),
             ),
           ),
         ),
@@ -318,7 +320,7 @@ class _EditprofileDriverState extends State<EditprofileDriver> {
                     borderRadius: BorderRadius.circular(5),
                   ),
                   filled: true,
-                  fillColor: Colors.grey),
+                  fillColor: Colors.grey[300]),
             ),
           ),
         ),
@@ -352,7 +354,7 @@ class _EditprofileDriverState extends State<EditprofileDriver> {
                     borderRadius: BorderRadius.circular(5),
                   ),
                   filled: true,
-                  fillColor: Colors.grey),
+                  fillColor: Colors.grey[300]),
             ),
           ),
         ),
