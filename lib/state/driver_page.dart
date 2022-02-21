@@ -3,6 +3,7 @@ import 'package:dio/dio.dart';
 import 'package:emer_projectnew/bodys/showemergen.dart';
 import 'package:emer_projectnew/models/emergency_model.dart';
 import 'package:emer_projectnew/models/user_model.dart';
+import 'package:emer_projectnew/state/notiemer.dart';
 import 'package:emer_projectnew/state/show_dataemer.dart';
 import 'package:emer_projectnew/bodys/showdriperson.dart';
 import 'package:emer_projectnew/utility/my_constant.dart';
@@ -203,6 +204,9 @@ class _DriverServerState extends State<DriverServer> {
       print('A new onMessageOpenedApp event was published!');
       RemoteNotification? notification = message.notification;
       AndroidNotification? android = message.notification?.android;
+      if (notification != null && android != null) {
+        Navigator.push(context, MaterialPageRoute(builder: (context) => showNotiEmer()));
+      }
     });
   }
 }
