@@ -142,8 +142,9 @@ class _PageLoginState extends State<PageLogin> {
         Container(
           padding: EdgeInsets.only(top: 20),
           width: size * 0.4,
+          height: size * 0.15,
           child: ElevatedButton(
-            style: MyConstant().myButtonStyle(),
+            style: MyConstant().myButtonStyle7(),
             onPressed: () {
               if (formKey.currentState!.validate()) {
                 String username = usernameController.text;
@@ -239,14 +240,14 @@ class _PageLoginState extends State<PageLogin> {
                     color: MyConstant.dark,
                   ),
                   enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: MyConstant.white),
-                      borderRadius: BorderRadius.circular(5)),
+                      borderSide: BorderSide(color: MyConstant.kPrimaryColor),
+                      borderRadius: BorderRadius.circular(20)),
                   focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: MyConstant.white),
-                    borderRadius: BorderRadius.circular(5),
+                    borderSide: BorderSide(color: MyConstant.kPrimaryColor),
+                    borderRadius: BorderRadius.circular(20),
                   ),
                   filled: true,
-                  fillColor: Colors.white),
+                  fillColor: MyConstant.kPrimaryLightColor),
             )),
       ],
     );
@@ -294,14 +295,14 @@ class _PageLoginState extends State<PageLogin> {
                     color: MyConstant.dark,
                   ),
                   enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: MyConstant.white),
-                      borderRadius: BorderRadius.circular(5)),
+                      borderSide: BorderSide(color: MyConstant.kPrimaryColor),
+                      borderRadius: BorderRadius.circular(20)),
                   focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: MyConstant.white),
-                    borderRadius: BorderRadius.circular(5),
+                    borderSide: BorderSide(color: MyConstant.kPrimaryColor),
+                    borderRadius: BorderRadius.circular(20),
                   ),
                   filled: true,
-                  fillColor: Colors.white),
+                  fillColor: MyConstant.kPrimaryLightColor),
             )),
       ],
     );

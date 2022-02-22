@@ -52,6 +52,8 @@ class MyConstant {
   static Color bg6 = Color(0xFF2E7D32);
   static Color bg7 = Color(0xFFECEFF1);
   static Color bg8 = Color(0xFF263238);
+  static Color kPrimaryColor = Color.fromARGB(255, 245, 199, 253);
+  static Color kPrimaryLightColor = Color(0xFFF1E6FF);
 
   //Style
   TextStyle h1Style() => GoogleFonts.prompt(
@@ -166,6 +168,13 @@ class MyConstant {
         primary: MyConstant.bg6,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(5),
+        ),
+      );
+
+  ButtonStyle myButtonStyle7() => ElevatedButton.styleFrom(
+        primary: MyConstant.white,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20),
         ),
       );
 }
