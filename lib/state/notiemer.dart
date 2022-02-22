@@ -9,6 +9,7 @@ import 'package:emer_projectnew/widgets/show_progress.dart';
 import 'package:emer_projectnew/widgets/show_title.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class showNotiEmer extends StatefulWidget {
   showNotiEmer({Key? key}) : super(key: key);
@@ -63,7 +64,7 @@ class _showNotiEmerState extends State<showNotiEmer> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('การแจ้งเตือน'),
+        title: Text('การแจ้งเตือน', style: GoogleFonts.prompt(),),
         backgroundColor: MyConstant.bg2,
       ),
       body: load
@@ -137,7 +138,7 @@ class _showNotiEmerState extends State<showNotiEmer> {
                             padding: const EdgeInsets.only(left: 5),
                             child: ShowTitle(
                                 title: '${emergencyModels[index].E_date}',
-                                textStyle: MyConstant().h8Style()),
+                                textStyle: MyConstant().h4Style()),
                           )
                         ],
                       ),

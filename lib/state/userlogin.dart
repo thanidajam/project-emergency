@@ -8,6 +8,7 @@ import 'package:emer_projectnew/widgets/show_title.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class User extends StatefulWidget {
@@ -124,7 +125,7 @@ class _PageLoginState extends State<PageLogin> {
               padding: const EdgeInsets.only(right: 35, top: 3),
               child: Text(
                 'ลืมรหัสผ่าน',
-                style: TextStyle(
+                style: GoogleFonts.prompt(
                     color: Colors.white,
                     fontSize: 16,
                     fontWeight: FontWeight.bold),
@@ -153,7 +154,7 @@ class _PageLoginState extends State<PageLogin> {
             },
             child: Text(
               'เข้าสู่ระบบ',
-              style: TextStyle(
+              style: GoogleFonts.prompt(
                   color: Colors.black,
                   fontSize: 18,
                   fontWeight: FontWeight.w700),
@@ -221,6 +222,7 @@ class _PageLoginState extends State<PageLogin> {
             margin: EdgeInsets.only(top: 50),
             width: size * 0.8,
             child: TextFormField(
+              style: GoogleFonts.prompt(),
               controller: usernameController,
               validator: (value) {
                 if (value!.isEmpty) {
@@ -231,6 +233,7 @@ class _PageLoginState extends State<PageLogin> {
               },
               decoration: InputDecoration(
                   hintText: 'ชื่อผู้ใช้/รหัสนักศึกษา มีขีด (-)',
+                  hintStyle: GoogleFonts.prompt(),
                   prefixIcon: Icon(
                     Icons.perm_identity,
                     color: MyConstant.dark,
@@ -257,6 +260,7 @@ class _PageLoginState extends State<PageLogin> {
             margin: EdgeInsets.only(top: 20),
             width: size * 0.8,
             child: TextFormField(
+              style: GoogleFonts.prompt(),
               controller: passwordController,
               validator: (value) {
                 if (value!.isEmpty) {
@@ -284,6 +288,7 @@ class _PageLoginState extends State<PageLogin> {
                           ),
                   ),
                   hintText: 'รหัสผ่าน',
+                  hintStyle: GoogleFonts.prompt(),
                   prefixIcon: Icon(
                     Icons.lock,
                     color: MyConstant.dark,

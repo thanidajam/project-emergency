@@ -7,6 +7,7 @@ import 'package:emer_projectnew/utility/my_constant.dart';
 import 'package:emer_projectnew/widgets/show_progress.dart';
 import 'package:emer_projectnew/widgets/show_title.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ShowDataEmer extends StatefulWidget {
@@ -46,7 +47,7 @@ class _ShowDataEmerState extends State<ShowDataEmer> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('ข้อมูลการแจ้งเหตุ'),
+        title: Text('ข้อมูลการแจ้งเหตุ', style: GoogleFonts.prompt(),),
         backgroundColor: MyConstant.bg2,
       ),
       body: SingleChildScrollView(
@@ -81,7 +82,7 @@ class _ShowDataEmerState extends State<ShowDataEmer> {
           children: [
              Text(
               'เบอร์โทร :  ',
-              style: TextStyle(
+              style: GoogleFonts.prompt(
                 fontSize: 18,
                 color: Colors.black,
                 fontWeight: FontWeight.bold,
@@ -105,7 +106,7 @@ class _ShowDataEmerState extends State<ShowDataEmer> {
           children: [
             Text(
                   'ผู้แจ้งเหตุ :  ',
-                  style: TextStyle(
+                  style: GoogleFonts.prompt(
                     fontSize: 18,
                     color: Colors.black,
                     fontWeight: FontWeight.bold,
@@ -129,7 +130,7 @@ class _ShowDataEmerState extends State<ShowDataEmer> {
           children: [
             Text(
               'ตำแหน่ง :  ',
-              style: TextStyle(
+              style: GoogleFonts.prompt(
                 fontSize: 18,
                 color: Colors.black,
                 fontWeight: FontWeight.bold,
@@ -155,7 +156,7 @@ class _ShowDataEmerState extends State<ShowDataEmer> {
           children: [
              Text(
               'วันเวลาที่แจ้ง :  ',
-              style: TextStyle(
+              style: GoogleFonts.prompt(
                 fontSize: 18,
                 color: Colors.black,
                 fontWeight: FontWeight.bold,
@@ -179,7 +180,7 @@ class _ShowDataEmerState extends State<ShowDataEmer> {
           children: [
             Text(
               'รับแจ้ง :  ',
-              style: TextStyle(
+              style: GoogleFonts.prompt(
                   fontSize: 18,
                   color: Colors.black,
                   fontWeight: FontWeight.bold),

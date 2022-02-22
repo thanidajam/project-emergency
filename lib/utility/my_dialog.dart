@@ -4,6 +4,7 @@ import 'package:emer_projectnew/widgets/show_imgae.dart';
 import 'package:emer_projectnew/widgets/show_title.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class MyDialog {
   Future<Null> alertLocationService(
@@ -23,12 +24,13 @@ class MyDialog {
         ),
         actions: [
           TextButton(
-              onPressed: () async {
-                Navigator.pop(context);
-                await Geolocator.openLocationSettings();
-                exit(0);
-              },
-              child: Text('OK'))
+            onPressed: () async {
+              Navigator.pop(context);
+              await Geolocator.openLocationSettings();
+              exit(0);
+            },
+            child: Text('OK', style: GoogleFonts.prompt()),
+          )
         ],
       ),
     );
@@ -48,7 +50,7 @@ class MyDialog {
         children: [
           TextButton(
               onPressed: () => Navigator.pop(context),
-              child: Text('OK', style: TextStyle(fontSize: 18)))
+              child: Text('OK', style: GoogleFonts.prompt(fontSize: 18)))
         ],
       ),
     );
@@ -71,12 +73,12 @@ class MyDialog {
               title: Center(
                   child: Text(
                 title,
-                style: TextStyle(fontSize: 18),
+                style: GoogleFonts.prompt(fontSize: 18),
               )),
               subtitle: Center(
                   child: Text(
                 message,
-                style: TextStyle(fontSize: 18),
+                style: GoogleFonts.prompt(fontSize: 18),
               )),
             ),
           ],
@@ -85,7 +87,7 @@ class MyDialog {
           TextButton(
               onPressed: () =>
                   Navigator.pushNamed(context, MyConstant.routeStdServer),
-              child: Text('ตกลง', style: TextStyle(fontSize: 18)))
+              child: Text('ตกลง', style: GoogleFonts.prompt(fontSize: 18)))
         ],
       ),
     );
@@ -108,13 +110,13 @@ class MyDialog {
               title: Center(
                 child: Text(
                   title,
-                  style: TextStyle(fontSize: 18),
+                  style: GoogleFonts.prompt(fontSize: 18),
                 ),
               ),
               subtitle: Center(
                 child: Text(
                   message,
-                  style: TextStyle(fontSize: 18),
+                  style: GoogleFonts.prompt(fontSize: 18),
                 ),
               ),
             ),
@@ -123,7 +125,7 @@ class MyDialog {
         children: [
           TextButton(
               onPressed: () => Navigator.pop(context),
-              child: Text('ตกลง', style: TextStyle(fontSize: 18)))
+              child: Text('ตกลง', style: GoogleFonts.prompt(fontSize: 18)))
         ],
       ),
     );

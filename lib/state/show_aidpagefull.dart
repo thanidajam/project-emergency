@@ -4,6 +4,7 @@ import 'package:emer_projectnew/utility/my_constant.dart';
 import 'package:emer_projectnew/widgets/show_progress.dart';
 import 'package:emer_projectnew/widgets/show_title.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class ShowAidpagefull extends StatefulWidget {
   final FirstaidModel? firstaidModel;
@@ -40,7 +41,7 @@ class _ShowAidpagefullState extends State<ShowAidpagefull> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(firstaidModel!.Title),
+        title: Text(firstaidModel!.Title, style: GoogleFonts.prompt(),),
         backgroundColor: MyConstant.bg2,
       ),
       body: SingleChildScrollView(
@@ -80,7 +81,7 @@ class _ShowAidpagefullState extends State<ShowAidpagefull> {
             padding: EdgeInsets.only(top: 20),
             child: CachedNetworkImage(
               imageUrl:
-                  '${MyConstant.domain}/emer_projectnew/assets/pic/firstaid  /${firstaidModel!.Media}',
+                  '${MyConstant.domain}/emer_projectnew/assets/pic/firstaid/${firstaidModel!.Media}',
               placeholder: (context, url) => ShowProgress(),
             ),
           ),

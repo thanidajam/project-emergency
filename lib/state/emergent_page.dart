@@ -15,6 +15,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -128,6 +129,7 @@ class _EmergentState extends State<Emergent> {
             margin: EdgeInsets.only(top: 10),
             width: size * 0.8,
             child: TextFormField(
+              style: GoogleFonts.prompt(),
               controller: phoneController,
               keyboardType: TextInputType.phone,
               validator: (value) {
@@ -136,6 +138,7 @@ class _EmergentState extends State<Emergent> {
                 } else {}
               },
               decoration: InputDecoration(
+                  hintText: 'กรอกเบอร์โทรศัพท์',
                   enabledBorder: OutlineInputBorder(
                       borderSide: BorderSide(color: MyConstant.gray),
                       borderRadius: BorderRadius.circular(5)),
@@ -158,8 +161,10 @@ class _EmergentState extends State<Emergent> {
             margin: EdgeInsets.only(top: 10),
             width: size * 0.8,
             child: TextFormField(
+              style: GoogleFonts.prompt(),
               controller: e_nameController,
               decoration: InputDecoration(
+                  hintText: 'กรอกข้อมูลอุบัติเหตุเพิ่มเติม',
                   enabledBorder: OutlineInputBorder(
                       borderSide: BorderSide(color: MyConstant.gray),
                       borderRadius: BorderRadius.circular(5)),
@@ -189,7 +194,7 @@ class _EmergentState extends State<Emergent> {
             iconSize: 36,
             isExpanded: true,
             underline: SizedBox(),
-            style: TextStyle(
+            style: GoogleFonts.prompt(
               color: Colors.black,
               fontSize: 16,
             ),
@@ -202,7 +207,7 @@ class _EmergentState extends State<Emergent> {
             items: listItem.map((valueItem) {
               return DropdownMenuItem(
                 value: valueItem,
-                child: Text(valueItem),
+                child: Text(valueItem, style: GoogleFonts.prompt(),),
               );
             }).toList(),
           ),
@@ -216,7 +221,7 @@ class _EmergentState extends State<Emergent> {
     double size = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
-        title: Text('แจ้งเหตุฉุกเฉิน'),
+        title: Text('แจ้งเหตุฉุกเฉิน', style: GoogleFonts.prompt(),),
         backgroundColor: MyConstant.bg2,
       ),
       body: Form(
@@ -282,7 +287,7 @@ class _EmergentState extends State<Emergent> {
             },
             child: Text(
               'เรียกรถพยาบาล',
-              style: TextStyle(
+              style: GoogleFonts.prompt(
                 color: Colors.white,
                 fontSize: 17,
                 fontWeight: FontWeight.w700,

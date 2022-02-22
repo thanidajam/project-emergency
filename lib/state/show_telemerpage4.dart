@@ -1,6 +1,7 @@
 import 'package:emer_projectnew/utility/my_constant.dart';
 import 'package:emer_projectnew/widgets/show_title.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class ShowTelemerPage4 extends StatefulWidget {
   const ShowTelemerPage4({ Key? key }) : super(key: key);
@@ -33,7 +34,7 @@ class _ShowTelemerPage4State extends State<ShowTelemerPage4> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('บริการทางการแพทย์'),
+        title: Text('บริการทางการแพทย์', style: GoogleFonts.prompt(),),
         backgroundColor: MyConstant.bg2,
       ),
        body: ListView.builder(

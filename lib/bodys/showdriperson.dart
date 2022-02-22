@@ -5,6 +5,7 @@ import 'package:emer_projectnew/models/user_model.dart';
 import 'package:emer_projectnew/utility/my_constant.dart';
 import 'package:emer_projectnew/widgets/show_title.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class ShowDripersons extends StatefulWidget {
   final UserModel userModel;
@@ -72,9 +73,11 @@ class _ShowDripersonsState extends State<ShowDripersons> {
                 width: constraints.maxWidth * 0.8,
                 padding: EdgeInsets.only(top: 10),
                 child: TextFormField(
+                  style: GoogleFonts.prompt(),
                   readOnly: true,
                   decoration: InputDecoration(
                       hintText: '${userModel!.Name}',
+                      helperStyle: GoogleFonts.prompt(),
                       enabledBorder: OutlineInputBorder(
                           borderSide: BorderSide(color: MyConstant.gray),
                           borderRadius: BorderRadius.circular(5)),
@@ -99,9 +102,11 @@ class _ShowDripersonsState extends State<ShowDripersons> {
                 width: constraints.maxWidth * 0.8,
                 padding: EdgeInsets.only(top: 10),
                 child: TextFormField(
+                  style: GoogleFonts.prompt(),
                   readOnly: true,
                   decoration: InputDecoration(
                       hintText: '${userModel!.Username}',
+                      hintStyle: GoogleFonts.prompt(),
                       enabledBorder: OutlineInputBorder(
                           borderSide: BorderSide(color: MyConstant.gray),
                           borderRadius: BorderRadius.circular(5)),
@@ -127,9 +132,11 @@ class _ShowDripersonsState extends State<ShowDripersons> {
                 width: constraints.maxWidth * 0.8,
                 padding: EdgeInsets.only(top: 10),
                 child: TextFormField(
+                  style: GoogleFonts.prompt(),
                   readOnly: true,
                   decoration: InputDecoration(
                       hintText: '${userModel!.Phone}',
+                      hintStyle: GoogleFonts.prompt(),
                       enabledBorder: OutlineInputBorder(
                           borderSide: BorderSide(color: MyConstant.gray),
                           borderRadius: BorderRadius.circular(5)),
@@ -154,9 +161,11 @@ class _ShowDripersonsState extends State<ShowDripersons> {
                 width: constraints.maxWidth * 0.8,
                 padding: EdgeInsets.only(top: 10),
                 child: TextFormField(
+                  style: GoogleFonts.prompt(),
                   readOnly: true,
                   decoration: InputDecoration(
                       hintText: '${userModel!.Password}',
+                      hintStyle: GoogleFonts.prompt(),
                       enabledBorder: OutlineInputBorder(
                           borderSide: BorderSide(color: MyConstant.gray),
                           borderRadius: BorderRadius.circular(5)),
@@ -176,7 +185,7 @@ class _ShowDripersonsState extends State<ShowDripersons> {
                 style: MyConstant().myButtonStyle5(),
                 child: Text(
                   'แก้ไขข้อมูล',
-                  style: TextStyle(
+                  style: GoogleFonts.prompt(
                       color: Colors.black,
                       fontSize: 17,
                       fontWeight: FontWeight.w700),

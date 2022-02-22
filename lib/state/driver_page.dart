@@ -13,6 +13,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class DriverServer extends StatefulWidget {
@@ -110,7 +111,7 @@ class _DriverServerState extends State<DriverServer> {
                   Navigator.pushNamed(context, MyConstant.routeshowNotiEmer),
               icon: Icon(Icons.notifications))
         ],
-        title: Text('$name'),
+        title: Text('$name', style: GoogleFonts.prompt(),),
         backgroundColor: MyConstant.bg2,
       ),
       drawer: widgets.length == 0
@@ -140,8 +141,8 @@ class _DriverServerState extends State<DriverServer> {
         backgroundImage:
             NetworkImage('${MyConstant.domain}${userModel?.image}'),
       ),
-      accountName: Text(userModel == null ? 'Name ?' : userModel!.Name),
-      accountEmail: Text(userModel == null ? 'Phone ?' : userModel!.Phone),
+      accountName: Text(userModel == null ? 'Name ?' : userModel!.Name, style: GoogleFonts.prompt(),),
+      accountEmail: Text(userModel == null ? 'Phone ?' : userModel!.Phone, style: GoogleFonts.prompt(),),
     );
   }
 
@@ -157,7 +158,7 @@ class _DriverServerState extends State<DriverServer> {
       leading: Icon(Icons.history, size: 38),
       title: ShowTitle(
         title: 'ประวัติการแจ้งเหตุ',
-        textStyle: MyConstant().h7Style(),
+        textStyle: MyConstant().h8Style(),
       ),
     );
   }
@@ -174,7 +175,7 @@ class _DriverServerState extends State<DriverServer> {
       leading: Icon(Icons.portrait, size: 38),
       title: ShowTitle(
         title: 'ข้อมูลส่วนตัว',
-        textStyle: MyConstant().h7Style(),
+        textStyle: MyConstant().h8Style(),
       ),
     );
   }
@@ -233,7 +234,7 @@ class ShowSignOut extends StatelessWidget {
           ),
           title: ShowTitle(
             title: 'ออกจากระบบ',
-            textStyle: MyConstant().h7Style(),
+            textStyle: MyConstant().h8Style(),
           ),
         ),
       ],

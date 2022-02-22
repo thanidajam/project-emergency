@@ -130,7 +130,7 @@ class _ShowEmergenState extends State<ShowEmergen> {
                             padding: const EdgeInsets.only(left: 10),
                             child: ShowTitle(
                                 title: '${emergencyModels[index].E_date}',
-                                textStyle: MyConstant().h8Style()),
+                                textStyle: MyConstant().h4Style()),
                           )
                         ],
                       ),

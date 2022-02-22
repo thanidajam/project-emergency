@@ -11,6 +11,7 @@ import 'package:emer_projectnew/widgets/show_imgae.dart';
 import 'package:emer_projectnew/widgets/show_progress.dart';
 import 'package:emer_projectnew/widgets/show_title.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -62,7 +63,7 @@ class _EditprofileDriverState extends State<EditprofileDriver> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('แก้ไขข้อมูลส่วนตัว'),
+        title: Text('แก้ไขข้อมูลส่วนตัว', style: GoogleFonts.prompt(),),
         backgroundColor: MyConstant.bg2,
       ),
       body: LayoutBuilder(
@@ -239,7 +240,7 @@ class _EditprofileDriverState extends State<EditprofileDriver> {
           style: MyConstant().myButtonStyle1(),
           child: Text(
             'ยกเลิก',
-            style: TextStyle(
+            style: GoogleFonts.prompt(
                 color: Colors.white, fontSize: 17, fontWeight: FontWeight.w700),
           )),
     );
@@ -253,7 +254,7 @@ class _EditprofileDriverState extends State<EditprofileDriver> {
           style: MyConstant().myButtonStyle6(),
           child: Text(
             'บันทึก',
-            style: TextStyle(
+            style: GoogleFonts.prompt(
                 color: Colors.white, fontSize: 17, fontWeight: FontWeight.w700),
           )),
     );
@@ -268,6 +269,7 @@ class _EditprofileDriverState extends State<EditprofileDriver> {
           child: Padding(
             padding: const EdgeInsets.only(top: 10, left: 50),
             child: TextFormField(
+              style: GoogleFonts.prompt(),
               validator: (value) {
                 if (value!.isEmpty) {
                   return 'กรุณากรอกรหัสผ่านใหม่';
@@ -302,6 +304,7 @@ class _EditprofileDriverState extends State<EditprofileDriver> {
           child: Padding(
             padding: const EdgeInsets.only(top: 10, left: 50),
             child: TextFormField(
+              style: GoogleFonts.prompt(),
               keyboardType: TextInputType.phone,
               validator: (value) {
                 if (value!.isEmpty) {
@@ -337,6 +340,7 @@ class _EditprofileDriverState extends State<EditprofileDriver> {
           child: Padding(
             padding: const EdgeInsets.only(top: 10, left: 50),
             child: TextFormField(
+              style: GoogleFonts.prompt(),
               validator: (value) {
                 if (value!.isEmpty) {
                   return 'กรุณากรอกชื่อผู้ใช้';
@@ -371,6 +375,7 @@ class _EditprofileDriverState extends State<EditprofileDriver> {
           child: Padding(
             padding: const EdgeInsets.only(top: 10, left: 50),
             child: TextFormField(
+              style: GoogleFonts.prompt(),
               readOnly: true,
               controller: nameController,
               decoration: InputDecoration(

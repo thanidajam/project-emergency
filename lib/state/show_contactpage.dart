@@ -1,6 +1,7 @@
 import 'package:emer_projectnew/utility/my_constant.dart';
 import 'package:emer_projectnew/widgets/show_title.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class ShowContactpage extends StatefulWidget {
   const ShowContactpage({Key? key}) : super(key: key);
@@ -14,7 +15,7 @@ class _ShowContactpageState extends State<ShowContactpage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('ติดต่อเรา'),
+        title: Text('ติดต่อเรา', style: GoogleFonts.prompt(),),
         backgroundColor: MyConstant.bg2,
       ),
       body: Column(
@@ -35,7 +36,7 @@ class _ShowContactpageState extends State<ShowContactpage> {
             padding: const EdgeInsets.only(top: 3, left: 20),
             child: Text(
               'เว็บไซต์ : ',
-              style: TextStyle(
+              style: GoogleFonts.prompt(
                 fontSize: 18,
                 color: Colors.black,
                 fontWeight: FontWeight.bold,
@@ -59,7 +60,7 @@ class _ShowContactpageState extends State<ShowContactpage> {
           padding: const EdgeInsets.only(top: 3, left: 20),
           child: Text(
             'เบอร์ติดต่อห้องพยาบาล : ',
-            style: TextStyle(
+            style: GoogleFonts.prompt(
               fontSize: 18,
               color: Colors.black,
               fontWeight: FontWeight.bold,
@@ -84,7 +85,7 @@ class _ShowContactpageState extends State<ShowContactpage> {
           padding: const EdgeInsets.only(top: 3, left: 20),
           child: Text(
             'สถานที่ : ',
-            style: TextStyle(
+            style: GoogleFonts.prompt(
               fontSize: 18,
               color: Colors.black,
               fontWeight: FontWeight.bold,

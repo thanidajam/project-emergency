@@ -12,6 +12,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class StdServer extends StatefulWidget {
@@ -180,9 +181,9 @@ class _StdServerState extends State<StdServer> {
           backgroundImage:
               NetworkImage('${MyConstant.domain}${userModel?.image}'),
         ),
-        accountName: Text(userModel == null ? 'Name ?' : userModel!.Name),
+        accountName: Text(userModel == null ? 'Name ?' : userModel!.Name, style: GoogleFonts.prompt(),),
         accountEmail:
-            Text(userModel == null ? 'Phone ?' : userModel!.Username));
+            Text(userModel == null ? 'Phone ?' : userModel!.Username, style: GoogleFonts.prompt(),));
   }
 
   ListTile menuEmergency() {
@@ -194,7 +195,7 @@ class _StdServerState extends State<StdServer> {
       ),
       title: ShowTitle(
         title: 'แจ้งเหตุฉุกเฉิน',
-        textStyle: MyConstant().h7Style(),
+        textStyle: MyConstant().h8Style(),
       ),
     );
   }
@@ -208,7 +209,7 @@ class _StdServerState extends State<StdServer> {
       ),
       title: ShowTitle(
         title: 'การปฐมพยาบาลเบื้องต้น',
-        textStyle: MyConstant().h7Style(),
+        textStyle: MyConstant().h8Style(),
       ),
     );
   }
@@ -223,7 +224,7 @@ class _StdServerState extends State<StdServer> {
       ),
       title: ShowTitle(
         title: 'เบอร์โทรฉุกเฉิน',
-        textStyle: MyConstant().h7Style(),
+        textStyle: MyConstant().h8Style(),
       ),
     );
   }
@@ -238,7 +239,7 @@ class _StdServerState extends State<StdServer> {
       ),
       title: ShowTitle(
         title: 'ติดต่อเรา',
-        textStyle: MyConstant().h7Style(),
+        textStyle: MyConstant().h8Style(),
       ),
     );
   }
@@ -269,31 +270,8 @@ class _StdServerState extends State<StdServer> {
       ],
     );
   }
-
-  // Future<Null> aboutNotification() async {
-//     if (Platform.isAndroid) {
-//       print('Noti workAndroid');
-//       WidgetsFlutterBinding.ensureInitialized();
-//       await Firebase.initializeApp();
-//       FirebaseMessaging.instance
-//           .getInitialMessage()
-//           .then((RemoteMessage? message) {
-//         if (message != null) {
-//           Navigator.pushNamed(
-//             context,
-//             '/message',
-//           );
-//         }
-//       });
-//       FirebaseMessaging.onMessage.listen((RemoteMessage message) {
-//         RemoteNotification? notification = message.notification;
-//         AndroidNotification? android = message.notification?.android;
-//       });
-//     } else if (Platform.isIOS) {
-//       print('Noti workiOS');
-//     }
 }
-// }
+
 
 Row buildButtomHospital(BuildContext context) {
   return Row(
@@ -375,7 +353,7 @@ class ShowSignOut extends StatelessWidget {
           ),
           title: ShowTitle(
             title: 'ออกจากระบบ',
-            textStyle: MyConstant().h7Style(),
+            textStyle: MyConstant().h8Style(),
           ),
         ),
       ],

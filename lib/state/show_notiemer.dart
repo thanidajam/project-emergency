@@ -10,6 +10,7 @@ import 'package:emer_projectnew/widgets/show_imgae.dart';
 import 'package:emer_projectnew/widgets/show_progress.dart';
 import 'package:emer_projectnew/widgets/show_title.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ShownotiEmergency extends StatefulWidget {
@@ -82,7 +83,7 @@ class _ShownotiEmergencyState extends State<ShownotiEmergency> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('ข้อมูลการแจ้งเหตุ'),
+        title: Text('ข้อมูลการแจ้งเหตุ', style: GoogleFonts.prompt(),),
         backgroundColor: MyConstant.bg2,
       ),
       body: SingleChildScrollView(
@@ -131,7 +132,7 @@ class _ShownotiEmergencyState extends State<ShownotiEmergency> {
         style: MyConstant().myButtonStyle6(),
         child: Text(
           'ยืนยันการแจ้งเหตุ',
-          style: TextStyle(
+          style: GoogleFonts.prompt(
             color: Colors.white,
             fontSize: 17,
             fontWeight: FontWeight.w700,
@@ -154,8 +155,8 @@ class _ShownotiEmergencyState extends State<ShownotiEmergency> {
         },
         style: MyConstant().myButtonStyle1(),
         child: Text(
-          '      แจ้งเหตุเท็จ     ',
-          style: TextStyle(
+          '    แจ้งเหตุเท็จ    ',
+          style: GoogleFonts.prompt(
             color: Colors.white,
             fontSize: 17,
             fontWeight: FontWeight.w700,
@@ -174,7 +175,7 @@ class _ShownotiEmergencyState extends State<ShownotiEmergency> {
           children: [
             Text(
               'เบอร์โทร :  ',
-              style: TextStyle(
+              style: GoogleFonts.prompt(
                 fontSize: 18,
                 color: Colors.black,
                 fontWeight: FontWeight.bold,
@@ -198,7 +199,7 @@ class _ShownotiEmergencyState extends State<ShownotiEmergency> {
           children: [
             Text(
               'ผู้แจ้งเหตุ :  ',
-              style: TextStyle(
+              style: GoogleFonts.prompt(
                 fontSize: 18,
                 color: Colors.black,
                 fontWeight: FontWeight.bold,
@@ -221,7 +222,7 @@ class _ShownotiEmergencyState extends State<ShownotiEmergency> {
           child: Row(children: [
             Text(
               'ตำแหน่ง : ',
-              style: TextStyle(
+              style: GoogleFonts.prompt(
                 fontSize: 18,
                 color: Colors.black,
                 fontWeight: FontWeight.bold,
@@ -245,7 +246,7 @@ class _ShownotiEmergencyState extends State<ShownotiEmergency> {
           children: [
             Text(
               'วันเวลาที่แจ้ง :  ',
-              style: TextStyle(
+              style: GoogleFonts.prompt(
                 fontSize: 18,
                 color: Colors.black,
                 fontWeight: FontWeight.bold,
@@ -269,7 +270,7 @@ class _ShownotiEmergencyState extends State<ShownotiEmergency> {
           children: [
             Text(
               'รับแจ้ง : ',
-              style: TextStyle(
+              style: GoogleFonts.prompt(
                   fontSize: 18,
                   color: Colors.black,
                   fontWeight: FontWeight.bold),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class MyConstant {
   // Gerneral
@@ -6,7 +7,7 @@ class MyConstant {
   static String appName1 = 'Rmutt Emergency Notification';
   static String appName2 = 'นักศึกษา/บุคคลากร';
   static String appName3 = 'พนักงานขับรถพยาบาล';
-  static String domain = 'http://38f1-183-89-147-216.ngrok.io';
+  static String domain = 'http://291c-183-89-147-216.ngrok.io';
 
   //Route
   static String routeUser = '/user';
@@ -53,67 +54,67 @@ class MyConstant {
   static Color bg8 = Color(0xFF263238);
 
   //Style
-  TextStyle h1Style() => TextStyle(
+  TextStyle h1Style() => GoogleFonts.prompt(
         fontSize: 24,
         color: dark,
         fontWeight: FontWeight.bold,
       );
 
-  TextStyle h2Style() => TextStyle(
+  TextStyle h2Style() => GoogleFonts.prompt(
         fontSize: 20,
         color: dark,
         fontWeight: FontWeight.w700,
       );
 
-  TextStyle h3Style() => TextStyle(
+  TextStyle h3Style() => GoogleFonts.prompt(
         fontSize: 16,
         color: primary,
         fontWeight: FontWeight.bold,
       );
 
-  TextStyle h4Style() => TextStyle(
+  TextStyle h4Style() => GoogleFonts.prompt(
         fontSize: 16,
         color: dark,
         fontWeight: FontWeight.normal,
       );
 
-  TextStyle h5Style() => TextStyle(
+  TextStyle h5Style() => GoogleFonts.prompt(
         fontSize: 16,
         color: dark,
         fontWeight: FontWeight.w700,
       );
 
-  TextStyle h6Style() => TextStyle(
+  TextStyle h6Style() => GoogleFonts.prompt(
         fontSize: 14,
         color: dark,
         fontWeight: FontWeight.normal,
       );
 
-  TextStyle h7Style() => TextStyle(
+  TextStyle h7Style() => GoogleFonts.prompt(
         fontSize: 20,
         color: dark,
         fontWeight: FontWeight.normal,
       );
 
-  TextStyle h8Style() => TextStyle(
+  TextStyle h8Style() => GoogleFonts.prompt(
         fontSize: 18,
         color: dark,
         fontWeight: FontWeight.normal,
       );
 
-  TextStyle h9Style() => TextStyle(
+  TextStyle h9Style() => GoogleFonts.prompt(
         fontSize: 20,
         color: primary,
         fontWeight: FontWeight.bold,
       );
 
-  TextStyle h10Style() => TextStyle(
+  TextStyle h10Style() => GoogleFonts.prompt(
         fontSize: 18,
         color: dark,
         fontWeight: FontWeight.bold,
       );
 
-  TextStyle h11Style() => TextStyle(
+  TextStyle h11Style() => GoogleFonts.prompt(
         fontSize: 18,
         color: bg8,
         fontWeight: FontWeight.normal,

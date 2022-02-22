@@ -6,6 +6,7 @@ import 'package:emer_projectnew/utility/my_constant.dart';
 import 'package:emer_projectnew/widgets/show_progress.dart';
 import 'package:emer_projectnew/widgets/show_title.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class ShowAidpage extends StatefulWidget {
   const ShowAidpage({Key? key}) : super(key: key);
@@ -58,7 +59,7 @@ class _ShowAidpageState extends State<ShowAidpage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('การปฐมพยาบาลเบื้องต้น'),
+        title: Text('การปฐมพยาบาลเบื้องต้น', style: GoogleFonts.prompt(),),
         backgroundColor: MyConstant.bg2,
       ),
       body: load
