@@ -240,14 +240,14 @@ class _PageLoginState extends State<PageLogin> {
                     color: MyConstant.dark,
                   ),
                   enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: MyConstant.kPrimaryColor),
+                      borderSide: BorderSide(color: MyConstant.white),
                       borderRadius: BorderRadius.circular(20)),
                   focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: MyConstant.kPrimaryColor),
+                    borderSide: BorderSide(color: MyConstant.white),
                     borderRadius: BorderRadius.circular(20),
                   ),
                   filled: true,
-                  fillColor: MyConstant.kPrimaryLightColor),
+                  fillColor: Colors.white),
             )),
       ],
     );
@@ -295,14 +295,14 @@ class _PageLoginState extends State<PageLogin> {
                     color: MyConstant.dark,
                   ),
                   enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: MyConstant.kPrimaryColor),
+                      borderSide: BorderSide(color: MyConstant.white),
                       borderRadius: BorderRadius.circular(20)),
                   focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: MyConstant.kPrimaryColor),
+                    borderSide: BorderSide(color: MyConstant.white),
                     borderRadius: BorderRadius.circular(20),
                   ),
                   filled: true,
-                  fillColor: MyConstant.kPrimaryLightColor),
+                  fillColor: Colors.white),
             )),
       ],
     );
