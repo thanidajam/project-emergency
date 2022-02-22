@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 23, 2021 at 08:59 AM
+-- Generation Time: Feb 22, 2022 at 02:10 AM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.0.13
 
@@ -35,7 +35,10 @@ CREATE TABLE `emergency` (
   `Pic` mediumtext COLLATE utf8_unicode_ci NOT NULL,
   `lat` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `lng` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `Location` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `Phone` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
   `Status` varchar(1) COLLATE utf8_unicode_ci NOT NULL,
+  `Code` varchar(5) COLLATE utf8_unicode_ci NOT NULL,
   `Send_emer` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `Rec_emer` varchar(50) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -44,12 +47,49 @@ CREATE TABLE `emergency` (
 -- Dumping data for table `emergency`
 --
 
-INSERT INTO `emergency` (`EID`, `E_type`, `E_name`, `E_date`, `Pic`, `lat`, `lng`, `Status`, `Send_emer`, `Rec_emer`) VALUES
-(1, 'A', 'รถล้ม', '2020-02-18 18:20:55', 'accident.png', '0.3', '0.5', 'T', '', ''),
-(2, 'C', 'กระดูกหักบริเวณนิ้วมือ', '2021-08-11 09:50:55', '476194.jpg', '0.6', '63.2', 'T', '', ''),
-(3, 'A', 'เป็นลมหมดสติ', '2021-10-01 15:51:11', 'Image1.png', 'โรงอาหารกลาง', '', 'T', '', ''),
-(4, 'C', 'เกิดอุบัติเหตุ', '2020-03-11 15:51:11', 'accident.png', 'คณะวิทยาศาสตร์', '', 'F', '', ''),
-(5, 'C', 'เจ็บป่วย', '2021-12-21 09:51:11', 'Image1.png', '1.2', '0.22', 'F', '', '');
+INSERT INTO `emergency` (`EID`, `E_type`, `E_name`, `E_date`, `Pic`, `lat`, `lng`, `Location`, `Phone`, `Status`, `Code`, `Send_emer`, `Rec_emer`) VALUES
+(1, 'B', 'รถชน', '2022-01-19 11:17:46', '/emer_projectnew/api/emergency/emergency86911.jpg', '37.4220069', '-122.0839954', 'ตึกสำนักงานอธิการบดี', '0820214875', 'T', '', 'ฐนิดา ทาบุเรศ', 'บุญมี ธรรมรงค์'),
+(2, 'B', 'รถล้ม', '2022-02-11 15:21:00', '/emer_projectnew/api/emergency/emergency53303.jpg', '37.4220069', '-122.0839954', 'หอประชุมมทร.ธัญบุรี', '0820214875', 'T', '', 'ฐนิดา ทาบุเรศ', 'บุญมี ธรรมรงค์'),
+(3, 'A', '', '2022-01-25 15:42:10', '/emer_projectnew/api/emergency/emergency92075.jpg', '37.4220069', '-122.0839954', 'หอประชุมมทร.ธัญบุรี', '0820214875', 'T', '', 'ฐนิดา ทาบุเรศ', 'บุญมี ธรรมรงค์'),
+(4, 'A', 'หมดสติ', '2021-04-14 11:23:01', '/emer_projectnew/api/emergency/emergency63137.jpg', '37.4220069', '-122.0839954', 'โรงอาหารกลาง', '0820214875', 'T', '', 'ฐนิดา ทาบุเรศ', 'บุญมี ธรรมรงค์'),
+(5, 'C', 'หัวแตก', '2021-05-15 12:29:49', '/emer_projectnew/api/emergency/emergency87999.jpg', '37.4220069', '-122.0839954', 'ตึกคณะวิศวกรรมศาสตร์', '0820214875', 'T', '', 'ฐนิดา ทาบุเรศ', 'บุญมี ธรรมรงค์'),
+(6, 'C', 'ไฟช็อต', '2021-06-24 14:26:14', '/emer_projectnew/api/emergency/emergency7129.jpg', '37.4220069', '-122.0839954', 'กองอำนวยการ', '0820214875', 'T', '', 'ฐนิดา ทาบุเรศ', 'บุญมี ธรรมรงค์'),
+(7, 'C', 'จมน้ำ', '2021-07-15 15:30:36', '/emer_projectnew/api/emergency/emergency35326.jpg', '37.4220069', '-122.0839954', 'สระว่ายน้ำ', '0820214875', 'T', '', 'ฐนิดา ทาบุเรศ', 'บุญมี ธรรมรงค์'),
+(8, 'A', 'หมดสติ', '2021-08-01 12:33:08', '/emer_projectnew/api/emergency/emergency37320.jpg', '37.4220069', '-122.0839954', 'คณะวิทยาศาสตร์', '0820214875', 'T', '', 'ฐนิดา ทาบุเรศ', 'บุญมี ธรรมรงค์'),
+(9, 'B', 'รถล้ม', '2021-10-11 11:35:13', '/emer_projectnew/api/emergency/emergency19545.jpg', '37.4220069', '-122.0839954', 'คณะศิลปศาสตร์', '0820214875', 'T', '', 'ฐนิดา ทาบุเรศ', 'บุญมี ธรรมรงค์'),
+(10, 'A', 'เป็นลม', '2021-11-15 15:36:05', '/emer_projectnew/api/emergency/emergency92873.jpg', '37.4220069', '-122.0839954', 'คณะศิลปศาสตร์', '0820214875', 'T', '', 'ฐนิดา ทาบุเรศ', 'บุญมี ธรรมรงค์'),
+(11, 'A', 'เป็นลมหมดสติ', '2021-12-21 14:38:04', '/emer_projectnew/api/emergency/emergency19892.jpg', '37.4220069', '-122.0839954', 'อาคารเรียนรวม 13 ชั้น', '0820214875', 'T', '', 'ฐนิดา ทาบุเรศ', 'บุญมี ธรรมรงค์'),
+(12, 'B', 'รถชนกัน', '2021-12-15 12:39:20', '/emer_projectnew/api/emergency/emergency13295.jpg', '37.4220069', '-122.0839954', 'ตึกภาควิชานาฎดุริยางคศิลป์', '0820214875', 'T', '', 'ฐนิดา ทาบุเรศ', 'บุญมี ธรรมรงค์'),
+(13, 'n', 'ปวดท้องอาหารเป็นพิษ', '2021-11-18 12:40:38', '/emer_projectnew/api/emergency/emergency66157.jpg', '37.4220069', '-122.0839954', 'ตึกคณะวิทยาศาตร์และเทคโนโลยี', '0820214875', 'T', '', 'ฐนิดา ทาบุเรศ', 'บุญมี ธรรมรงค์'),
+(15, 'B', 'รถชน', '2021-01-20 16:12:50', '/emer_projectnew/api/emergency/emergency86911.jpg', '', '', 'คณะวิศวกรรมศาสตร์', '0859698215', 'T', '', 'นภสร  สุขใจ', 'บุญมี ธรรมรงค์'),
+(16, 'B', 'รถชน', '2021-02-16 09:22:50', '/emer_projectnew/api/emergency/emergency86911.jpg', '', '', 'คณะบริหารธุรกิจ', '0859698215', 'T', '', 'นภสร  สุขใจ', 'บุญมี ธรรมรงค์'),
+(17, 'B', 'รถชน', '2021-03-10 11:45:50', '/emer_projectnew/api/emergency/emergency86911.jpg', '', '', 'ตึกสำนักงานอธิการบดี', '0859698215', 'T', '', 'นภสร  สุขใจ', 'บุญมี ธรรมรงค์'),
+(18, 'B', 'รถชน', '2021-03-24 12:08:50', '/emer_projectnew/api/emergency/emergency86911.jpg', '', '', 'ตึกคณะวิศวกรรมศาสตร์', '0859698215', 'T', '', 'นภสร สุขใจ', 'บุญมี ธรรมรงค์'),
+(19, 'B', 'รถชน', '2021-04-15 13:47:50', '/emer_projectnew/api/emergency/emergency86911.jpg', '', '', 'คณะเทคโนโลยีสารสนเทศ', '0859698215', 'T', '', 'นภสร สุขใจ', 'บุญมี ธรรมรงค์'),
+(20, 'B', 'รถชน', '2021-05-24 13:29:50', '/emer_projectnew/api/emergency/emergency86911.jpg', '', '', 'คณะศิลปศาสตร์', '0859698215', 'T', '', 'นภสร สุขใจ', 'บุญมี ธรรมรงค์'),
+(21, 'B', 'รถชน', '2021-06-15 15:43:50', '/emer_projectnew/api/emergency/emergency86911.jpg', '', '', 'คณะศิลปกรรมศาสตร์', '0859698215', 'T', '', 'นภสร สุขใจ', 'บุญมี ธรรมรงค์'),
+(22, 'B', 'รถชน', '2021-07-02 13:49:50', '/emer_projectnew/api/emergency/emergency86911.jpg', '', '', 'ตึกคณะวิศวกรรมศาสตร์', '0859698215', 'T', '', 'นภสร สุขใจ', 'บุญมี ธรรมรงค์'),
+(23, 'B', 'รถชน', '2021-08-16 11:39:50', '/emer_projectnew/api/emergency/emergency86911.jpg', '', '', 'คณะวิทยาศาสตร์', '0859698215', 'T', '', 'นภสร สุขใจ', 'บุญมี ธรรมรงค์'),
+(24, 'B', 'รถชน', '2021-09-01 15:29:50', '/emer_projectnew/api/emergency/emergency86911.jpg', '', '', 'คณะวิทยาศาสตร์', '0859698215', 'T', '', 'นภสร สุขใจ', 'บุญมี ธรรมรงค์'),
+(25, 'A', 'เป็นลม', '2021-01-27 15:12:50', '/emer_projectnew/api/emergency/emergency92075.jpg', '', '', 'คณะศิลปศาสตร์', '0859698215', 'T', '', 'นภสร สุขใจ', 'บุญมี ธรรมรงค์'),
+(26, 'A', 'เป็นลม', '2021-02-28 11:22:50', '/emer_projectnew/api/emergency/emergency92075.jpg', '', '', 'ตึกคณะวิศวกรรมศาสตร์', '0859698215', 'T', '', 'นภสร สุขใจ', 'บุญมี ธรรมรงค์'),
+(27, 'A', 'เป็นลม', '2021-03-12 12:20:50', '/emer_projectnew/api/emergency/emergency92075.jpg', '', '', 'ตึกสำนักงานอธิการบดี', '0859698215', 'T', '', 'นภสร  สุขใจ', 'บุญมี ธรรมรงค์'),
+(28, 'A', 'เป็นลม', '2021-03-31 10:25:50', '/emer_projectnew/api/emergency/emergency92075.jpg', '', '', 'คณะศิลปศาสตร์', '0859698215', 'T', '', 'นภสร สุขใจ', 'บุญมี ธรรมรงค์'),
+(29, 'A', 'เป็นลม', '2021-04-10 10:23:50', '/emer_projectnew/api/emergency/emergency92075.jpg', '', '', 'คณะศิลปศาสตร์', '085969815', 'T', '', 'นภสร สุขใจ', 'บุญมี ธรรมรงค์'),
+(30, 'A', 'เป็นลม', '2021-05-09 10:12:50', '/emer_projectnew/api/emergency/emergency92075.jpg', '', '', 'คณะศิลปศาสตร์', '0859698215', 'T', '', 'นภสร สุขใจ', 'บุญมี ธรรมรงค์'),
+(31, 'C', 'ปวดท้องอาหารเป็นพิษ', '2021-01-18 14:42:50', '/emer_projectnew/api/emergency/emergency66157.jpg', '', '', 'อาคารเรียนรวม 13 ชั้น', '0859698215', 'T', '', 'นภสร สุขใจ', 'บุญมี ธรรมรงค์'),
+(32, 'C', 'ปวดท้องอาหารเป็นพิษ', '2021-02-26 13:32:50', '/emer_projectnew/api/emergency/emergency66157.jpg', '', '', 'อาคารเรียนรวม 13 ชั้น', '0859698215', 'T', '', 'นภสร สุขใจ', 'บุญมี ธรรมรงค์'),
+(33, 'C', 'ปวดท้องอาหารเป็นพิษ', '2021-03-13 15:01:50', '/emer_projectnew/api/emergency/emergency66157.jpg', '', '', 'อาคารเรียนรวม 13 ชั้น', '0859698215', 'T', '', 'นภสร สุขใจ', 'บุญมี ธรรมรงค์'),
+(34, 'C', 'หัวแตก', '2021-04-05 16:22:50', '/emer_projectnew/api/emergency/emergency87999.jpg', '', '', 'อาคารเรียนรวม 13 ชั้น', '0859698215', 'T', '', 'นภสร สุขใจ', 'บุญมี ธรรมรงค์'),
+(35, 'C', 'หัวแตก', '2021-05-22 15:22:50', '/emer_projectnew/api/emergency/emergency87999.jpg', '', '', 'อาคารเรียนรวม 13 ชั้น', '085969821', 'T', '', 'นภสร สุขใจ', 'บุญมี ธรรมรงค์'),
+(36, 'C', 'หัวแตก', '2021-06-26 11:22:50', '/emer_projectnew/api/emergency/emergency87999.jpg', '', '', 'อาคารเรียนรวม 13 ชั้น', '0859698215', 'T', '', 'นภสร สุขใจ', 'บุญมี ธรรมรงค์'),
+(37, 'C', 'หัวแตก', '2021-07-03 14:52:50', '/emer_projectnew/api/emergency/emergency87999.jpg', '', '', 'อาคารเรียนรวม 13 ชั้น', '0859698215', 'T', '', 'นภสร สุขใจ', 'บุญมี ธรรมรงค์'),
+(38, 'C', 'ไฟช็อต', '2021-08-22 11:38:50', '/emer_projectnew/api/emergency/emergency7129.jpg', '', '', 'อาคารเรียนรวม 13 ชั้น', '0859698215', 'T', '', 'นภสร สุขใจ', 'บุญมี ธรรมรงค์'),
+(39, 'C', 'จมน้ำ', '2021-09-17 16:43:50', '/emer_projectnew/api/emergency/emergency35326.jpg', '', '', 'อาคารเรียนรวม 13 ชั้น', '0859698215', 'T', '', 'นภสร สุขใจ', 'บุญมี ธรรมรงค์'),
+(40, 'A', '', '2022-02-11 17:04:22', '', '37.4220012', '-122.0840024', 'ตึกคณะวิทยาศาตร์และเทคโนโลยี', '0820214875', 'F', '', 'ฐนิดา ทาบุเรศ', 'บุญมี ธรรมรงค์'),
+(41, 'A', '', '2021-08-02 11:53:13', '/emer_projectnew/api/emergency/emergency92075.jpg\r\n', '', '', '', '0820214877', 'F', '', 'นภสร  สุขใจ', 'บุญมี ธรรมรงค์'),
+(42, 'B', '', '2021-04-22 14:23:13', '', '', '', 'สระว่ายน้ำ', '0888898889', 'F', '', 'นภสร  สุขใจ', 'บุญมี ธรรมรงค์'),
+(107, 'C', '', '2022-02-20 05:42:47', '', '37.4220047', '-122.0839995', 'null', '0850214875', 'n', '', 'ฐนิดา ทาบุเรศ', 'null');
 
 -- --------------------------------------------------------
 
@@ -78,6 +118,25 @@ INSERT INTO `first_aid` (`FID`, `Code`, `Title`, `Text`, `Status`, `Media`) VALU
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `password_reset_temp`
+--
+
+CREATE TABLE `password_reset_temp` (
+  `email` varchar(100) NOT NULL,
+  `key` varchar(200) NOT NULL,
+  `expDate` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `password_reset_temp`
+--
+
+INSERT INTO `password_reset_temp` (`email`, `key`, `expDate`) VALUES
+('bitboss.123@gmail.com', 'a8eed26ea214008bd9deaf910ea405aa8361e1a594', '2022-02-12 13:45:15');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `user`
 --
 
@@ -90,18 +149,20 @@ CREATE TABLE `user` (
   `Email` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `Phone` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
   `Type` varchar(1) COLLATE utf8_unicode_ci NOT NULL,
-  `image` mediumtext COLLATE utf8_unicode_ci NOT NULL
+  `image` mediumtext COLLATE utf8_unicode_ci NOT NULL,
+  `Token` text COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`UID`, `Code`, `Username`, `Password`, `Name`, `Email`, `Phone`, `Type`, `image`) VALUES
-(1, 'A001', 'Admin', 'Admin', 'Admin', 'Admin@gmail.com', '0888888888', 'A', 'AnnThongprasom.png'),
-(6, 'S002', '116110905015-2', '174980', 'พบธรรม กุนราช', 'pobtumkunratch@gmail.com', '0928475800', 'S', '/emer_projectnew/api/user/image92039.jpg'),
-(7, 'S001', '116110905043-4', '04042542', 'ฐนิดา ทาบุเรศ', 'thanidajam2542@gmail.com', '0820214875', 'S', '/emer_projectnew/api/user/avatar3575.jpg'),
-(10, 'D001', 'boonmee', 'boonmee123', 'บุญมี ธรรมรงค์', 'boonmee@gmail.com', '0612897500', 'D', '/emer_projectnew/api/user/image86085.jpg');
+INSERT INTO `user` (`UID`, `Code`, `Username`, `Password`, `Name`, `Email`, `Phone`, `Type`, `image`, `Token`) VALUES
+(1, 'A001', 'Admin', 'Admin', 'Admin', 'bitboss.123@gmail.com', '0888888888', 'A', 'AnnThongprasom.png', ''),
+(6, 'S002', '116110905015-2', '174980', 'พบธรรม กุนราช', 'pobtumkunratch@gmail.com', '0928475800', 'S', '/emer_projectnew/api/user/image92039.jpg', 'dRCHH1xPTP6y8LJP5BUEmh:APA91bEE4cUROU7IYBUFtr9pI-GAxXO04TFvDYAgMmqKRoXqOwXtw51fKrMoAO7XeR2pJHt1guvOmz8Fqo_9LJ-6lYqrmtXvbFs1NO0TBlHZIF_aLmE7dxNahKB2FY3yiVRhPPEPofWo'),
+(7, 'S001', '116110905043-4', '04042542', 'ฐนิดา ทาบุเรศ', 'thanidajam2542@gmail.com', '0820214875', 'S', '/emer_projectnew/api/user/avatar3575.jpg', 'eeqWCqzCSmqfVFlP_eOHQM:APA91bHxx9zssOjKGdUJlFO2rqa4tKxndj6qHkzY-BjeRm1asIkhYQMevaMLRb1hA-6aa74P19SWMIW2IybcKavwg1dT0yjEuajEKkzD3YXu-hviMf2yFRLrZglscEUBYTYAySkFO9CH'),
+(10, 'D001', 'boonmee', 'boonmee123', 'บุญมี ธรรมรงค์', 'boonmee@gmail.com', '0612894000', 'D', '/emer_projectnew/api/user/edit39edit94edit76image86085.jpg', 'cfvfz-HpQYmSd51TJIK6Ta:APA91bHvEOufAJtC-1W7IkgSklkLxTlS4sRHViXUjXOwjz5ihynLPNOfCbj7Zj7eJ3G0g8ie7XXK9yYLZ5EpROuD79crhh9ryH2GP6tvGvjHO50AKeLOXx_SKC1Hm4sgkFK6D7tXj4Eq'),
+(12, 'S003', '116110905010-3', '463461', 'นภสร สุขใจ', 'bitboss.123@gmail.com', '0800591456', 'S', '', '');
 
 --
 -- Indexes for dumped tables
@@ -133,7 +194,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `emergency`
 --
 ALTER TABLE `emergency`
-  MODIFY `EID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `EID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=181;
 
 --
 -- AUTO_INCREMENT for table `first_aid`
@@ -145,7 +206,7 @@ ALTER TABLE `first_aid`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `UID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `UID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

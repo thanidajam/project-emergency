@@ -101,8 +101,8 @@ class _PageLoginState extends State<PageLogin> {
                 buildAppName(),
                 buildUser(size),
                 buildPassword(size),
-                buildLogin(size),
                 buildEmergent(),
+                buildLogin(size),
               ],
             ),
           ),
@@ -113,16 +113,22 @@ class _PageLoginState extends State<PageLogin> {
 
   Row buildEmergent() {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.end,
       children: [
         TextButton(
             onPressed: () {
-              MyDialog().normalDialog2(context, 'ลืมรหัสผ่าน',
+              MyDialog().normalDialog2(context, '',
                   'กรุณานำบัตรนักศึกษาหรือบัตรประชาชน ติดต่อที่สำนักส่งเสริมวิชาการและงานทะเบียน ชั้น 1');
             },
-            child: Text(
-              'ลืมรหัสผ่าน',
-              style: TextStyle(color: Colors.black, fontSize: 16),
+            child: Padding(
+              padding: const EdgeInsets.only(right: 35, top: 3),
+              child: Text(
+                'ลืมรหัสผ่าน',
+                style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold),
+              ),
             )),
       ],
     );

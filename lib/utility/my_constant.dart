@@ -6,7 +6,7 @@ class MyConstant {
   static String appName1 = 'Rmutt Emergency Notification';
   static String appName2 = 'นักศึกษา/บุคคลากร';
   static String appName3 = 'พนักงานขับรถพยาบาล';
-  static String domain = 'http://7845-183-89-147-216.ngrok.io';
+  static String domain = 'http://38f1-183-89-147-216.ngrok.io';
 
   //Route
   static String routeUser = '/user';
