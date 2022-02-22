@@ -141,7 +141,7 @@ class _PageLoginState extends State<PageLogin> {
       children: [
         Container(
           padding: EdgeInsets.only(top: 20),
-          width: size * 0.3,
+          width: size * 0.4,
           child: ElevatedButton(
             style: MyConstant().myButtonStyle(),
             onPressed: () {
