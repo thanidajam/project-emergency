@@ -276,7 +276,7 @@ class _EmergentState extends State<Emergent> {
       children: [
         Container(
           padding: EdgeInsets.only(top: 20),
-          width: size * 0.4,
+          width: size * 0.5,
           child: ElevatedButton(
             style: MyConstant().myButtonStyle1(),
             onPressed: () {
