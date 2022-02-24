@@ -15,7 +15,10 @@ class _ShowContactpageState extends State<ShowContactpage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('ติดต่อเรา', style: GoogleFonts.prompt(),),
+        title: Text(
+          'ติดต่อเรา',
+          style: GoogleFonts.prompt(),
+        ),
         backgroundColor: MyConstant.bg2,
       ),
       body: Column(
@@ -108,9 +111,18 @@ class _ShowContactpageState extends State<ShowContactpage> {
       children: [
         Padding(
           padding: const EdgeInsets.only(top: 20, left: 20),
-          child: ShowTitle(
-            title: 'กองพัฒนานักศึกษาฝ่ายสุขภาพและอนามัย',
-            textStyle: MyConstant().h10Style(),
+          child: Column(
+            children: [
+              Image.asset(
+                'assets/images/doctor.png',
+                width: 250,
+                height: 250,
+              ),
+              ShowTitle(
+                title: 'กองพัฒนานักศึกษาฝ่ายสุขภาพและอนามัย',
+                textStyle: MyConstant().h10Style(),
+              ),
+            ],
           ),
         ),
       ],

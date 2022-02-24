@@ -1,13 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+const List<String> allMonth = [
+  "มกราคม",
+  "กุมภาพันธ์",
+  "มีนาคม",
+  "เมษายน",
+  "พฤษภาคม",
+  "มิถุนายน",
+  "กรกฎาคม",
+  "สิงหาคม",
+  "กันยายน",
+  "ตุลาคม",
+  "พฤศจิกายน",
+  "ธันวาคม"
+];
+
 class MyConstant {
   // Gerneral
   static String appName = 'Welcome To Appication';
   static String appName1 = 'Rmutt Emergency Notification';
   static String appName2 = 'นักศึกษา/บุคคลากร';
   static String appName3 = 'พนักงานขับรถพยาบาล';
-  static String domain = 'http://4661-183-89-147-216.ngrok.io';
+  static String domain = 'http://a345-183-89-90-177.ngrok.io';
 
   //Route
   static String routeUser = '/user';
@@ -37,6 +52,7 @@ class MyConstant {
   static String telemer = 'assets/images/telemer.png';
   static String contact = 'assets/images/contact.png';
   static String avatar = 'assets/images/avata.png';
+  static String login = 'assets/images/Market launch-amico.png';
 
   //Color
   static Color primary = Color(0xff003300);
@@ -52,6 +68,7 @@ class MyConstant {
   static Color bg6 = Color(0xFF2E7D32);
   static Color bg7 = Color(0xFFECEFF1);
   static Color bg8 = Color(0xFF263238);
+  static Color bg9 = Color(0xFFEF9A9A);
 
   //Style
   TextStyle h1Style() => GoogleFonts.prompt(
@@ -120,6 +137,12 @@ class MyConstant {
         fontWeight: FontWeight.normal,
       );
 
+  TextStyle h12Style() => GoogleFonts.prompt(
+        fontSize: 20,
+        color: white,
+        fontWeight: FontWeight.normal,
+      );
+
   ButtonStyle myButtonStyle() => ElevatedButton.styleFrom(
         primary: MyConstant.white,
         shape: RoundedRectangleBorder(
@@ -170,7 +193,7 @@ class MyConstant {
       );
 
   ButtonStyle myButtonStyle7() => ElevatedButton.styleFrom(
-        primary: MyConstant.white,
+        primary: MyConstant.bg9,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(20),
         ),

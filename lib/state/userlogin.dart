@@ -40,9 +40,9 @@ Widget buildImage(double size) {
     mainAxisAlignment: MainAxisAlignment.center,
     children: [
       Container(
-          margin: EdgeInsets.only(top: 25, bottom: 10),
-          width: size * 0.4,
-          child: ShowImage(path: MyConstant.image)),
+          margin: EdgeInsets.only(bottom: 55),
+          width: size * 0.58,
+          child: ShowImage(path: MyConstant.login)),
     ],
   );
 }
@@ -50,16 +50,14 @@ Widget buildImage(double size) {
 Widget buildAppName() {
   return Column(
     children: [
-      ShowTitle(
-        title: MyConstant.appName,
-        textStyle: MyConstant().h1Style(),
-      ),
-      SizedBox(
-        height: 5,
-      ),
-      ShowTitle(
-        title: MyConstant.appName1,
-        textStyle: MyConstant().h1Style(),
+      Text(
+        'Rmutt Emergency Notification',
+        style: GoogleFonts.prompt(
+          fontSize: 20,
+          color: Colors.black,
+          fontWeight: FontWeight.bold,
+        ),
+        textAlign: TextAlign.center,
       ),
     ],
   );
@@ -86,8 +84,8 @@ class _PageLoginState extends State<PageLogin> {
       constraints: BoxConstraints.expand(),
       decoration: BoxDecoration(
         image: DecorationImage(
-          image: AssetImage('assets/images/bg.png'),
-          fit: BoxFit.cover,
+          image: AssetImage('assets/images/bg_emer.png'),
+          fit: BoxFit.fill,
         ),
       ),
       child: Container(
@@ -126,7 +124,7 @@ class _PageLoginState extends State<PageLogin> {
               child: Text(
                 'ลืมรหัสผ่าน',
                 style: GoogleFonts.prompt(
-                    color: Colors.white,
+                    color: Colors.black,
                     fontSize: 16,
                     fontWeight: FontWeight.bold),
               ),
@@ -140,7 +138,7 @@ class _PageLoginState extends State<PageLogin> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Container(
-          padding: EdgeInsets.only(top: 20),
+          padding: EdgeInsets.only(top: 10),
           width: size * 0.4,
           height: size * 0.15,
           child: ElevatedButton(
@@ -240,10 +238,10 @@ class _PageLoginState extends State<PageLogin> {
                     color: MyConstant.dark,
                   ),
                   enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: MyConstant.white),
+                      borderSide: BorderSide(color: MyConstant.dark, width: 2),
                       borderRadius: BorderRadius.circular(20)),
                   focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: MyConstant.white),
+                    borderSide: BorderSide(color: MyConstant.dark, width: 2),
                     borderRadius: BorderRadius.circular(20),
                   ),
                   filled: true,
@@ -295,10 +293,10 @@ class _PageLoginState extends State<PageLogin> {
                     color: MyConstant.dark,
                   ),
                   enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: MyConstant.white),
+                      borderSide: BorderSide(color: MyConstant.dark, width: 2),
                       borderRadius: BorderRadius.circular(20)),
                   focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: MyConstant.white),
+                    borderSide: BorderSide(color: MyConstant.dark, width: 2),
                     borderRadius: BorderRadius.circular(20),
                   ),
                   filled: true,

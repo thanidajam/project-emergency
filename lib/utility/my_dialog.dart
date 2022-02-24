@@ -50,7 +50,7 @@ class MyDialog {
         children: [
           TextButton(
               onPressed: () => Navigator.pop(context),
-              child: Text('OK', style: GoogleFonts.prompt(fontSize: 18)))
+              child: Text('ตกลง', style: GoogleFonts.prompt(fontSize: 18)))
         ],
       ),
     );

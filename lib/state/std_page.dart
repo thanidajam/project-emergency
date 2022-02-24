@@ -59,6 +59,8 @@ class _StdServerState extends State<StdServer> {
   int indexWidget = 0;
   UserModel? userModel;
 
+  GlobalKey<ScaffoldState> _globalKey = GlobalKey<ScaffoldState>();
+
   @override
   void initState() {
     super.initState();
@@ -100,7 +102,7 @@ class _StdServerState extends State<StdServer> {
       RemoteNotification? notification = message.notification;
       AndroidNotification? android = message.notification?.android;
       if (notification != null && android != null) {
-        MyDialog().normalDialog2(context, 'คนขับตอบรับการแจ้งเหตุเรียบร้อยแล้ว', '');
+        // MyDialog().normalDialog2(context, 'คนขับตอบรับการแจ้งเหตุเรียบร้อยแล้ว', '');
         flutterLocalNotificationsPlugin.show(
           notification.hashCode,
           notification.title,
@@ -122,39 +124,17 @@ class _StdServerState extends State<StdServer> {
       RemoteNotification? notification = message.notification;
       AndroidNotification? android = message.notification?.android;
       if (notification != null && android != null) {
-        MyDialog().normalDialog2(context, 'คนขับตอบรับการแจ้งเหตุเรียบร้อยแล้ว', '');
+        MyDialog()
+            .normalDialog2(context, 'คนขับตอบรับการแจ้งเหตุเรียบร้อยแล้ว', '');
       }
     });
   }
 
   @override
   Widget build(BuildContext context) {
+    double size = MediaQuery.of(context).size.width;
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: MyConstant.bg2,
-      ),
-      body: Form(
-        child: ListView(
-          children: [
-            buildButtomEmer(context),
-            Column(
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    buildButtomHospital(context),
-                    buildButtomTelemer(context),
-                  ],
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 20),
-                  child: buildButtomContact(context),
-                ),
-              ],
-            ),
-          ],
-        ),
-      ),
+      key: _globalKey,
       drawer: Drawer(
         child: Stack(
           children: [
@@ -171,6 +151,59 @@ class _StdServerState extends State<StdServer> {
           ],
         ),
       ),
+      body: Stack(children: [
+        Container(
+          constraints: BoxConstraints.expand(),
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage('assets/images/bg_emer.png'),
+              fit: BoxFit.fill,
+            ),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.only(
+            top: 20,
+          ),
+          child: IconButton(
+            onPressed: () {
+              _globalKey.currentState!.openDrawer();
+            },
+            icon: Icon(
+              Icons.menu,
+              size: 30,
+            ),
+            color: Colors.white,
+          ),
+        ),
+        SafeArea(
+            child: Column(
+          children: [
+            Container(
+              child: Padding(
+                padding: const EdgeInsets.only(top: 5),
+                child: Column(children: [
+                  buildButtomEmer(context),
+                ]),
+              ),
+            ),
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.only(top: 40),
+                child: GridView.count(
+                  childAspectRatio: (1 / 1.1),
+                  crossAxisCount: 2,
+                  children: [
+                    buildButtomHospital(context),
+                    buildButtomTelemer(context),
+                    buildButtomContact(context)
+                  ],
+                ),
+              ),
+            ),
+          ],
+        )),
+      ]),
     );
   }
 
@@ -181,9 +214,14 @@ class _StdServerState extends State<StdServer> {
           backgroundImage:
               NetworkImage('${MyConstant.domain}${userModel?.image}'),
         ),
-        accountName: Text(userModel == null ? 'Name ?' : userModel!.Name, style: GoogleFonts.prompt(),),
-        accountEmail:
-            Text(userModel == null ? 'Phone ?' : userModel!.Username, style: GoogleFonts.prompt(),));
+        accountName: Text(
+          userModel == null ? 'Name ?' : userModel!.Name,
+          style: GoogleFonts.prompt(),
+        ),
+        accountEmail: Text(
+          userModel == null ? 'Phone ?' : userModel!.Username,
+          style: GoogleFonts.prompt(),
+        ));
   }
 
   ListTile menuEmergency() {
@@ -191,7 +229,7 @@ class _StdServerState extends State<StdServer> {
       onTap: () => Navigator.pushNamed(context, MyConstant.routeEmergent),
       leading: FaIcon(
         FontAwesomeIcons.ambulance,
-        size: 30,
+        size: 25,
       ),
       title: ShowTitle(
         title: 'แจ้งเหตุฉุกเฉิน',
@@ -205,7 +243,7 @@ class _StdServerState extends State<StdServer> {
       onTap: () => Navigator.pushNamed(context, MyConstant.routeShowAidpage),
       leading: Icon(
         Icons.local_hospital,
-        size: 38,
+        size: 35,
       ),
       title: ShowTitle(
         title: 'การปฐมพยาบาลเบื้องต้น',
@@ -220,7 +258,7 @@ class _StdServerState extends State<StdServer> {
           Navigator.pushNamed(context, MyConstant.routeShowTelemerpage),
       leading: Icon(
         Icons.phone_in_talk_rounded,
-        size: 38,
+        size: 35,
       ),
       title: ShowTitle(
         title: 'เบอร์โทรฉุกเฉิน',
@@ -235,7 +273,7 @@ class _StdServerState extends State<StdServer> {
           Navigator.pushNamed(context, MyConstant.routeShowContactpage),
       leading: Icon(
         Icons.quick_contacts_dialer,
-        size: 38,
+        size: 33,
       ),
       title: ShowTitle(
         title: 'ติดต่อเรา',
@@ -244,90 +282,133 @@ class _StdServerState extends State<StdServer> {
     );
   }
 
-  Row buildButtomEmer(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Container(
-          margin: EdgeInsets.only(top: 50),
-          height: 200.0,
-          child: SizedBox.fromSize(
-              size: Size(200, 200), // button width and height
-              child: ClipOval(
-                child: Material(
-                  child: InkWell(
-                    onTap: () =>
-                        Navigator.pushNamed(context, MyConstant.routeEmergent),
-                    child: Column(
-                      children: <Widget>[
-                        ShowImage(path: MyConstant.butemer),
-                      ],
-                    ),
-                  ),
-                ),
-              )),
+  Widget buildButtomEmer(BuildContext context) {
+    return Center(
+      child: Padding(
+        padding: const EdgeInsets.only(top: 2),
+        child: Column(
+          children: [
+            InkWell(
+              onTap: () =>
+                  Navigator.pushNamed(context, MyConstant.routeEmergent),
+              child: Image.asset(
+                'assets/images/icom_am.png',
+                height: 180,
+                width: 180,
+              ),
+            ),
+            ShowTitle(
+              title: 'แจ้งเหตุฉุกเฉิน',
+              textStyle: MyConstant().h12Style(),
+            ),
+          ],
         ),
-      ],
+      ),
     );
   }
 }
 
-
-Row buildButtomHospital(BuildContext context) {
-  return Row(
-    children: [
-      Container(
-          height: 170.0,
-          child: SizedBox.fromSize(
-              size: Size(170, 170), // button width and height
-              child: Material(
-                  child: InkWell(
-                      onTap: () => Navigator.pushNamed(
-                          context, MyConstant.routeShowAidpage),
-                      child: Column(
-                        children: <Widget>[
-                          ShowImage(path: MyConstant.hospial),
-                        ],
-                      ))))),
-    ],
+Widget buildButtomHospital(BuildContext context) {
+  return InkWell(
+    onTap: () => Navigator.pushNamed(context, MyConstant.routeShowAidpage),
+    child: Card(
+      child: Padding(
+        padding: const EdgeInsets.only(top: 10),
+        child: Column(
+          children: [
+            Image.asset(
+              'assets/images/icon_pital.png',
+              height: 100,
+              width: 100,
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 10),
+              child: Text(
+                'การปฐมพยาบาล\nเบื้องต้น',
+                style: GoogleFonts.prompt(
+                  fontSize: 18,
+                  color: Colors.black,
+                  fontWeight: FontWeight.normal,
+                ),
+                textAlign: TextAlign.center,
+              ),
+            ),
+          ],
+        ),
+      ),
+      elevation: 8,
+      shadowColor: Colors.green,
+      margin: EdgeInsets.all(20),
+      shape: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(20),
+          borderSide: BorderSide(color: Colors.white)),
+    ),
   );
 }
 
-Container buildButtomTelemer(BuildContext context) {
-  return Container(
-      height: 170.0,
-      child: SizedBox.fromSize(
-          size: Size(170, 170), // button width and height
-          child: Material(
-              child: InkWell(
-                  onTap: () => Navigator.pushNamed(
-                      context, MyConstant.routeShowTelemerpage),
-                  child: Column(
-                    children: <Widget>[
-                      ShowImage(path: MyConstant.telemer),
-                    ],
-                  )))));
+Widget buildButtomTelemer(BuildContext context) {
+  return InkWell(
+    onTap: () => Navigator.pushNamed(context, MyConstant.routeShowTelemerpage),
+    child: Card(
+      child: Padding(
+        padding: const EdgeInsets.only(top: 15),
+        child: Column(
+          children: [
+            Image.asset(
+              'assets/images/icon_tel.png',
+              height: 100,
+              width: 100,
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 15),
+              child: ShowTitle(
+                title: 'เบอร์โทรฉุกเฉิน',
+                textStyle: MyConstant().h8Style(),
+              ),
+            ),
+          ],
+        ),
+      ),
+      elevation: 8,
+      shadowColor: Colors.green,
+      margin: EdgeInsets.all(20),
+      shape: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(20),
+          borderSide: BorderSide(color: Colors.white)),
+    ),
+  );
 }
 
-Row buildButtomContact(BuildContext context) {
-  return Row(
-    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-    children: [
-      Container(
-          margin: EdgeInsets.only(top: 20),
-          height: 170.0,
-          child: SizedBox.fromSize(
-              size: Size(170, 170), // button width and height
-              child: Material(
-                  child: InkWell(
-                      onTap: () => Navigator.pushNamed(
-                          context, MyConstant.routeShowContactpage),
-                      child: Column(
-                        children: <Widget>[
-                          ShowImage(path: MyConstant.contact),
-                        ],
-                      ))))),
-    ],
+Widget buildButtomContact(BuildContext context) {
+  return InkWell(
+    onTap: () => Navigator.pushNamed(context, MyConstant.routeShowContactpage),
+    child: Card(
+      child: Padding(
+        padding: const EdgeInsets.only(top: 15),
+        child: Column(
+          children: [
+            Image.asset(
+              'assets/images/icon_contact.png',
+              height: 100,
+              width: 100,
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 15),
+              child: ShowTitle(
+                title: 'ติดต่อเรา',
+                textStyle: MyConstant().h8Style(),
+              ),
+            ),
+          ],
+        ),
+      ),
+      elevation: 8,
+      shadowColor: Colors.green,
+      margin: EdgeInsets.all(20),
+      shape: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(20),
+          borderSide: BorderSide(color: Colors.white)),
+    ),
   );
 }
 
@@ -349,7 +430,7 @@ class ShowSignOut extends StatelessWidget {
           },
           leading: Icon(
             Icons.phonelink_erase_rounded,
-            size: 36,
+            size: 33,
           ),
           title: ShowTitle(
             title: 'ออกจากระบบ',
