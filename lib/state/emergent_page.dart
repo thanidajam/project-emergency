@@ -18,6 +18,7 @@ import 'package:geolocator/geolocator.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:lottie/lottie.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Emergent extends StatefulWidget {
@@ -27,7 +28,8 @@ class Emergent extends StatefulWidget {
   _EmergentState createState() => _EmergentState();
 }
 
-class _EmergentState extends State<Emergent> {
+class _EmergentState extends State<Emergent>
+    with SingleTickerProviderStateMixin {
   String? typeEmer;
   String picEmergency = '';
   File? file;
@@ -37,6 +39,8 @@ class _EmergentState extends State<Emergent> {
   TextEditingController phoneController = TextEditingController();
   TextEditingController e_nameController = TextEditingController();
   TextEditingController e_dateController = TextEditingController();
+
+  late AnimationController controller;
 
   String? valueChoose;
   List listItem = [
@@ -65,6 +69,22 @@ class _EmergentState extends State<Emergent> {
   void initState() {
     super.initState();
     checkPermission();
+    controller = AnimationController(
+      vsync: this,
+    );
+
+    controller.addStatusListener((status) {
+      if (status == AnimationStatus.completed) {
+        Navigator.pushNamed(context, MyConstant.routeStdServer);
+        controller.reset();
+      }
+    });
+  }
+
+  @override
+  void dispone() {
+    controller.dispose();
+    super.dispose();
   }
 
   Future<Null> checkPermission() async {
@@ -207,7 +227,10 @@ class _EmergentState extends State<Emergent> {
             items: listItem.map((valueItem) {
               return DropdownMenuItem(
                 value: valueItem,
-                child: Text(valueItem, style: GoogleFonts.prompt(),),
+                child: Text(
+                  valueItem,
+                  style: GoogleFonts.prompt(),
+                ),
               );
             }).toList(),
           ),
@@ -221,7 +244,10 @@ class _EmergentState extends State<Emergent> {
     double size = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
-        title: Text('แจ้งเหตุฉุกเฉิน', style: GoogleFonts.prompt(),),
+        title: Text(
+          'แจ้งเหตุฉุกเฉิน',
+          style: GoogleFonts.prompt(),
+        ),
         backgroundColor: MyConstant.bg2,
       ),
       body: Form(
@@ -246,14 +272,14 @@ class _EmergentState extends State<Emergent> {
     );
   }
 
-  Set<Marker> setMarker() => <Marker>[
-        Marker(
-          markerId: MarkerId('id'),
-          position: LatLng(lat!, lng!),
-          infoWindow: InfoWindow(
-              title: 'คุณอยู่ที่นี่', snippet: 'Lat = $lat, Lng = $lng'),
-        ),
-      ].toSet();
+  // Set<Marker> setMarker() => <Marker>{
+  //       Marker(
+  //         markerId: MarkerId('id'),
+  //         position: LatLng(lat!, lng!),
+  //         infoWindow: InfoWindow(
+  //             title: 'คุณอยู่ที่นี่', snippet: 'Lat = $lat, Lng = $lng'),
+  //       ),
+  //     };
 
   Widget buildMap() => Container(
         width: double.infinity,
@@ -266,7 +292,7 @@ class _EmergentState extends State<Emergent> {
                   zoom: 16,
                 ),
                 onMapCreated: (controller) {},
-                markers: setMarker(),
+                // markers: setMarker(),
               ),
       );
 
@@ -371,13 +397,50 @@ class _EmergentState extends State<Emergent> {
     await Dio().get(apiInsertEmergency).then((value) {
       if (value.toString() == 'true') {
         notificationToDriver(TypeUser);
-        MyDialog().normalDialog1(
-            context, 'การแจ้งเหตุฉุกเฉินสำเร็จ', 'กรุณารอสักครู่');
+        normalDialog1(context);
       } else {
         MyDialog()
             .normalDialog(context, 'แจ้งเหตุไม่สำเร็จ', 'กรุณาลองใหม่อีกครั้ง');
       }
     });
+  }
+
+  Future<Null> normalDialog1(BuildContext context) async {
+    showDialog(
+      barrierDismissible: false,
+      context: context,
+      builder: (context) => Dialog(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Lottie.asset(
+              'assets/images/done.json',
+              width: 120,
+              height: 120,
+              repeat: false,
+              controller: controller,
+              onLoaded: (composition) {
+                controller.duration = composition.duration;
+                controller.forward();
+              },
+            ),
+            ListTile(
+              title: Center(
+                  child: Text(
+                'การแจ้งเหตุฉุกเฉินสำเร็จ',
+                style: GoogleFonts.prompt(fontSize: 18),
+              )),
+              subtitle: Center(
+                  child: Text(
+                'กรุณารอสักครู่',
+                style: GoogleFonts.prompt(fontSize: 18),
+              )),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 
   Future<Null> chooseImage(ImageSource source) async {

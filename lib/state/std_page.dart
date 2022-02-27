@@ -181,7 +181,7 @@ class _StdServerState extends State<StdServer> {
           children: [
             Container(
               child: Padding(
-                padding: const EdgeInsets.only(top: 5),
+                padding: const EdgeInsets.only(top: 13),
                 child: Column(children: [
                   buildButtomEmer(context),
                 ]),
@@ -337,7 +337,7 @@ Widget buildButtomHospital(BuildContext context) {
         ),
       ),
       elevation: 8,
-      shadowColor: Colors.green,
+      shadowColor: Colors.black,
       margin: EdgeInsets.all(20),
       shape: OutlineInputBorder(
           borderRadius: BorderRadius.circular(20),
@@ -370,7 +370,7 @@ Widget buildButtomTelemer(BuildContext context) {
         ),
       ),
       elevation: 8,
-      shadowColor: Colors.green,
+      shadowColor: Colors.black,
       margin: EdgeInsets.all(20),
       shape: OutlineInputBorder(
           borderRadius: BorderRadius.circular(20),
@@ -403,7 +403,7 @@ Widget buildButtomContact(BuildContext context) {
         ),
       ),
       elevation: 8,
-      shadowColor: Colors.green,
+      shadowColor: Colors.black,
       margin: EdgeInsets.all(20),
       shape: OutlineInputBorder(
           borderRadius: BorderRadius.circular(20),

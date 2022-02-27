@@ -30,6 +30,7 @@ class _EditprofileDriverState extends State<EditprofileDriver> {
   TextEditingController passwordController = TextEditingController();
   final formKey = GlobalKey<FormState>();
   File? file;
+  bool statusRedEye = true;
 
   @override
   void initState() {
@@ -278,6 +279,7 @@ class _EditprofileDriverState extends State<EditprofileDriver> {
                 }
               },
               controller: passwordController,
+              obscureText: statusRedEye,
               decoration: InputDecoration(
                   enabledBorder: OutlineInputBorder(
                       borderSide: BorderSide(color: MyConstant.gray),

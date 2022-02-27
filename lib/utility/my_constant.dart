@@ -22,7 +22,7 @@ class MyConstant {
   static String appName1 = 'Rmutt Emergency Notification';
   static String appName2 = 'นักศึกษา/บุคคลากร';
   static String appName3 = 'พนักงานขับรถพยาบาล';
-  static String domain = 'http://a345-183-89-90-177.ngrok.io';
+  static String domain = 'http://b03b-183-89-90-177.ngrok.io';
 
   //Route
   static String routeUser = '/user';

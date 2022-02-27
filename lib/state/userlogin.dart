@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:dio/dio.dart';
+import 'package:emer_projectnew/animation/FadeAnimation.dart';
 import 'package:emer_projectnew/models/user_model.dart';
 import 'package:emer_projectnew/utility/my_constant.dart';
 import 'package:emer_projectnew/utility/my_dialog.dart';
@@ -39,10 +40,13 @@ Widget buildImage(double size) {
   return Row(
     mainAxisAlignment: MainAxisAlignment.center,
     children: [
-      Container(
-          margin: EdgeInsets.only(bottom: 55),
-          width: size * 0.58,
-          child: ShowImage(path: MyConstant.login)),
+      FadeAnimation(
+        1.5,
+        Container(
+            margin: EdgeInsets.only(bottom: 55),
+            width: size * 0.58,
+            child: ShowImage(path: MyConstant.login)),
+      )
     ],
   );
 }
@@ -50,15 +54,18 @@ Widget buildImage(double size) {
 Widget buildAppName() {
   return Column(
     children: [
-      Text(
-        'Rmutt Emergency Notification',
-        style: GoogleFonts.prompt(
-          fontSize: 20,
-          color: Colors.black,
-          fontWeight: FontWeight.bold,
+      FadeAnimation(
+        1.7,
+        Text(
+          'Rmutt Emergency Notification',
+          style: GoogleFonts.prompt(
+            fontSize: 20,
+            color: Colors.black,
+            fontWeight: FontWeight.bold,
+          ),
+          textAlign: TextAlign.center,
         ),
-        textAlign: TextAlign.center,
-      ),
+      )
     ],
   );
 }
@@ -115,20 +122,23 @@ class _PageLoginState extends State<PageLogin> {
       mainAxisAlignment: MainAxisAlignment.end,
       children: [
         TextButton(
-            onPressed: () {
-              MyDialog().normalDialog2(context, '',
-                  'กรุณานำบัตรนักศึกษาหรือบัตรประชาชน ติดต่อที่สำนักส่งเสริมวิชาการและงานทะเบียน ชั้น 1');
-            },
-            child: Padding(
+          onPressed: () {
+            MyDialog().normalDialog2(context, '',
+                'กรุณานำบัตรนักศึกษาหรือบัตรประชาชน ติดต่อที่สำนักส่งเสริมวิชาการและงานทะเบียน ชั้น 1');
+          },
+          child: Padding(
               padding: const EdgeInsets.only(right: 35, top: 3),
-              child: Text(
-                'ลืมรหัสผ่าน',
-                style: GoogleFonts.prompt(
-                    color: Colors.black,
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold),
-              ),
-            )),
+              child: FadeAnimation(
+                1.7,
+                Text(
+                  'ลืมรหัสผ่าน',
+                  style: GoogleFonts.prompt(
+                      color: Colors.black,
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold),
+                ),
+              )),
+        )
       ],
     );
   }
@@ -137,29 +147,32 @@ class _PageLoginState extends State<PageLogin> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Container(
-          padding: EdgeInsets.only(top: 10),
-          width: size * 0.4,
-          height: size * 0.15,
-          child: ElevatedButton(
-            style: MyConstant().myButtonStyle7(),
-            onPressed: () {
-              if (formKey.currentState!.validate()) {
-                String username = usernameController.text;
-                String password = passwordController.text;
-                print('username = $username, password = $password');
-                checkUser(username: username, password: password);
-              }
-            },
-            child: Text(
-              'เข้าสู่ระบบ',
-              style: GoogleFonts.prompt(
-                  color: Colors.black,
-                  fontSize: 18,
-                  fontWeight: FontWeight.w700),
+        FadeAnimation(
+          1.9,
+          Container(
+            padding: EdgeInsets.only(top: 10),
+            width: size * 0.4,
+            height: size * 0.15,
+            child: ElevatedButton(
+              style: MyConstant().myButtonStyle7(),
+              onPressed: () {
+                if (formKey.currentState!.validate()) {
+                  String username = usernameController.text;
+                  String password = passwordController.text;
+                  print('username = $username, password = $password');
+                  checkUser(username: username, password: password);
+                }
+              },
+              child: Text(
+                'เข้าสู่ระบบ',
+                style: GoogleFonts.prompt(
+                    color: Colors.black,
+                    fontSize: 18,
+                    fontWeight: FontWeight.w700),
+              ),
             ),
           ),
-        ),
+        )
       ],
     );
   }
@@ -217,36 +230,40 @@ class _PageLoginState extends State<PageLogin> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Container(
-            margin: EdgeInsets.only(top: 50),
-            width: size * 0.8,
-            child: TextFormField(
-              style: GoogleFonts.prompt(),
-              controller: usernameController,
-              validator: (value) {
-                if (value!.isEmpty) {
-                  return 'กรุณากรอกชื่อผู้ใช้/รหัสนักศึกษา';
-                } else {
-                  return null;
-                }
-              },
-              decoration: InputDecoration(
-                  hintText: 'ชื่อผู้ใช้/รหัสนักศึกษา มีขีด (-)',
-                  hintStyle: GoogleFonts.prompt(),
-                  prefixIcon: Icon(
-                    Icons.perm_identity,
-                    color: MyConstant.dark,
-                  ),
-                  enabledBorder: OutlineInputBorder(
+        FadeAnimation(
+          1.7,
+          Container(
+              margin: EdgeInsets.only(top: 50),
+              width: size * 0.8,
+              child: TextFormField(
+                style: GoogleFonts.prompt(),
+                controller: usernameController,
+                validator: (value) {
+                  if (value!.isEmpty) {
+                    return 'กรุณากรอกชื่อผู้ใช้/รหัสนักศึกษา';
+                  } else {
+                    return null;
+                  }
+                },
+                decoration: InputDecoration(
+                    hintText: 'ชื่อผู้ใช้/รหัสนักศึกษา มีขีด (-)',
+                    hintStyle: GoogleFonts.prompt(),
+                    prefixIcon: Icon(
+                      Icons.perm_identity,
+                      color: MyConstant.dark,
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                        borderSide:
+                            BorderSide(color: MyConstant.dark, width: 2),
+                        borderRadius: BorderRadius.circular(20)),
+                    focusedBorder: OutlineInputBorder(
                       borderSide: BorderSide(color: MyConstant.dark, width: 2),
-                      borderRadius: BorderRadius.circular(20)),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: MyConstant.dark, width: 2),
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  filled: true,
-                  fillColor: Colors.white),
-            )),
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    filled: true,
+                    fillColor: Colors.white),
+              )),
+        )
       ],
     );
   }
@@ -255,53 +272,57 @@ class _PageLoginState extends State<PageLogin> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Container(
-            margin: EdgeInsets.only(top: 20),
-            width: size * 0.8,
-            child: TextFormField(
-              style: GoogleFonts.prompt(),
-              controller: passwordController,
-              validator: (value) {
-                if (value!.isEmpty) {
-                  return 'กรุณากรอกรหัสผ่าน';
-                } else {
-                  return null;
-                }
-              },
-              obscureText: statusRedEye,
-              decoration: InputDecoration(
-                  suffixIcon: IconButton(
-                    onPressed: () {
-                      setState(() {
-                        statusRedEye = !statusRedEye;
-                      });
-                    },
-                    icon: statusRedEye
-                        ? Icon(
-                            Icons.remove_red_eye,
-                            color: MyConstant.dark,
-                          )
-                        : Icon(
-                            Icons.remove_red_eye_outlined,
-                            color: MyConstant.dark,
-                          ),
-                  ),
-                  hintText: 'รหัสผ่าน',
-                  hintStyle: GoogleFonts.prompt(),
-                  prefixIcon: Icon(
-                    Icons.lock,
-                    color: MyConstant.dark,
-                  ),
-                  enabledBorder: OutlineInputBorder(
+        FadeAnimation(
+          1.8,
+          Container(
+              margin: EdgeInsets.only(top: 20),
+              width: size * 0.8,
+              child: TextFormField(
+                style: GoogleFonts.prompt(),
+                controller: passwordController,
+                validator: (value) {
+                  if (value!.isEmpty) {
+                    return 'กรุณากรอกรหัสผ่าน';
+                  } else {
+                    return null;
+                  }
+                },
+                obscureText: statusRedEye,
+                decoration: InputDecoration(
+                    suffixIcon: IconButton(
+                      onPressed: () {
+                        setState(() {
+                          statusRedEye = !statusRedEye;
+                        });
+                      },
+                      icon: statusRedEye
+                          ? Icon(
+                              Icons.remove_red_eye,
+                              color: MyConstant.dark,
+                            )
+                          : Icon(
+                              Icons.remove_red_eye_outlined,
+                              color: MyConstant.dark,
+                            ),
+                    ),
+                    hintText: 'รหัสผ่าน',
+                    hintStyle: GoogleFonts.prompt(),
+                    prefixIcon: Icon(
+                      Icons.lock,
+                      color: MyConstant.dark,
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                        borderSide:
+                            BorderSide(color: MyConstant.dark, width: 2),
+                        borderRadius: BorderRadius.circular(20)),
+                    focusedBorder: OutlineInputBorder(
                       borderSide: BorderSide(color: MyConstant.dark, width: 2),
-                      borderRadius: BorderRadius.circular(20)),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: MyConstant.dark, width: 2),
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  filled: true,
-                  fillColor: Colors.white),
-            )),
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    filled: true,
+                    fillColor: Colors.white),
+              )),
+        )
       ],
     );
   }

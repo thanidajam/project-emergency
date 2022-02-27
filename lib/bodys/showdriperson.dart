@@ -1,11 +1,11 @@
 import 'dart:convert';
-
 import 'package:dio/dio.dart';
 import 'package:emer_projectnew/models/user_model.dart';
 import 'package:emer_projectnew/utility/my_constant.dart';
 import 'package:emer_projectnew/widgets/show_title.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ShowDripersons extends StatefulWidget {
   final UserModel userModel;
@@ -17,11 +17,17 @@ class ShowDripersons extends StatefulWidget {
 
 class _ShowDripersonsState extends State<ShowDripersons> {
   UserModel? userModel;
+  bool statusRedEye = true;
+  TextEditingController nameController = TextEditingController();
+  TextEditingController usernameController = TextEditingController();
+  TextEditingController phoneController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+    findUser();
     userModel = widget.userModel;
   }
 
@@ -33,6 +39,26 @@ class _ShowDripersonsState extends State<ShowDripersons> {
       for (var item in json.decode(value.data)) {
         setState(() {
           userModel = UserModel.fromMap(item);
+          findUser();
+        });
+      }
+    });
+  }
+
+  Future<Null> findUser() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    String uid = preferences.getString('UID')!;
+
+    String apiGetUser =
+        '${MyConstant.domain}/emer_projectnew/api/getUserWhereUID.php?isAdd=true&uid=$uid';
+    await Dio().get(apiGetUser).then((value) {
+      for (var item in json.decode(value.data)) {
+        setState(() {
+          userModel = UserModel.fromMap(item);
+          nameController.text = userModel!.Name;
+          usernameController.text = userModel!.Username;
+          phoneController.text = userModel!.Phone;
+          passwordController.text = userModel!.Password;
         });
       }
     });
@@ -75,8 +101,9 @@ class _ShowDripersonsState extends State<ShowDripersons> {
                 child: TextFormField(
                   style: GoogleFonts.prompt(),
                   readOnly: true,
+                  controller: nameController,
                   decoration: InputDecoration(
-                      hintText: '${userModel!.Name}',
+                      // hintText: '${userModel!.Name}',
                       helperStyle: GoogleFonts.prompt(),
                       enabledBorder: OutlineInputBorder(
                           borderSide: BorderSide(color: MyConstant.gray),
@@ -104,8 +131,9 @@ class _ShowDripersonsState extends State<ShowDripersons> {
                 child: TextFormField(
                   style: GoogleFonts.prompt(),
                   readOnly: true,
+                  controller: usernameController,
                   decoration: InputDecoration(
-                      hintText: '${userModel!.Username}',
+                      // hintText: '${userModel!.Username}',
                       hintStyle: GoogleFonts.prompt(),
                       enabledBorder: OutlineInputBorder(
                           borderSide: BorderSide(color: MyConstant.gray),
@@ -134,8 +162,9 @@ class _ShowDripersonsState extends State<ShowDripersons> {
                 child: TextFormField(
                   style: GoogleFonts.prompt(),
                   readOnly: true,
+                  controller: phoneController,
                   decoration: InputDecoration(
-                      hintText: '${userModel!.Phone}',
+                      // hintText: '${userModel!.Phone}',
                       hintStyle: GoogleFonts.prompt(),
                       enabledBorder: OutlineInputBorder(
                           borderSide: BorderSide(color: MyConstant.gray),
@@ -163,8 +192,10 @@ class _ShowDripersonsState extends State<ShowDripersons> {
                 child: TextFormField(
                   style: GoogleFonts.prompt(),
                   readOnly: true,
+                  obscureText: statusRedEye,
+                  controller: passwordController,
                   decoration: InputDecoration(
-                      hintText: '${userModel!.Password}',
+                      // hintText: '${userModel!.Password}',
                       hintStyle: GoogleFonts.prompt(),
                       enabledBorder: OutlineInputBorder(
                           borderSide: BorderSide(color: MyConstant.gray),

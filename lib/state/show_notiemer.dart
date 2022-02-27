@@ -11,6 +11,7 @@ import 'package:emer_projectnew/widgets/show_progress.dart';
 import 'package:emer_projectnew/widgets/show_title.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:lottie/lottie.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ShownotiEmergency extends StatefulWidget {
@@ -23,12 +24,15 @@ class ShownotiEmergency extends StatefulWidget {
   State<ShownotiEmergency> createState() => _ShownotiEmergencyState();
 }
 
-class _ShownotiEmergencyState extends State<ShownotiEmergency> {
+class _ShownotiEmergencyState extends State<ShownotiEmergency>
+    with SingleTickerProviderStateMixin {
   EmergencyModel? emergencyModel;
   UserModel? userModel;
   String? rec_emer;
   String? status;
   List<String> pathPic = [];
+
+  late AnimationController controller;
 
   @override
   void initState() {
@@ -38,6 +42,22 @@ class _ShownotiEmergencyState extends State<ShownotiEmergency> {
     userModel = widget.userModel;
     convertStringToArray();
     processEditToMySQL(rec_emer: rec_emer, status: status);
+    controller = AnimationController(
+      vsync: this,
+    );
+
+    controller.addStatusListener((status) {
+      if (status == AnimationStatus.completed) {
+        Navigator.pushNamed(context, MyConstant.routeDriverServer);
+        controller.reset();
+      }
+    });
+  }
+
+  @override
+  void dispone() {
+    controller.dispose();
+    super.dispose();
   }
 
   Future<Null> processEditToMySQL({
@@ -58,8 +78,8 @@ class _ShownotiEmergencyState extends State<ShownotiEmergency> {
               '${MyConstant.domain}/emer_projectnew/api/editEmergency.php?isAdd=true&eid=${emergencyModel!.EID}&status=$status&rec_emer=$rec_emer';
           await Dio().get(apiEditData).then((value) async {
             if (value.toString() == 'true') {
-              Navigator.pushNamed(context, MyConstant.routeDriverServer);
               notificationToStd(code);
+              normalDialog1(context);
             } else {
               print('อัพเดตไม่สำเร็จ');
             }
@@ -67,6 +87,45 @@ class _ShownotiEmergencyState extends State<ShownotiEmergency> {
         }
       }
     });
+  }
+
+  Future<Null> normalDialog1(BuildContext context) async {
+    showDialog(
+      barrierDismissible: false,
+      context: context,
+      builder: (context) => Dialog(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Lottie.asset(
+              'assets/images/done.json',
+              width: 120,
+              height: 120,
+              repeat: false,
+              controller: controller,
+              onLoaded: (composition) {
+                controller.duration = composition.duration;
+                controller.forward();
+              },
+            ),
+            ListTile(
+              title: Center(
+                  child: Text(
+                'ยืนยันการแจ้งเหตุฉุกเฉิน\nเรียบร้อยแล้ว',
+                style: GoogleFonts.prompt(fontSize: 18),
+                textAlign: TextAlign.center,
+              )),
+              subtitle: Center(
+                  child: Text(
+                '',
+                style: GoogleFonts.prompt(fontSize: 18),
+              )),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 
   void convertStringToArray() {
@@ -83,7 +142,10 @@ class _ShownotiEmergencyState extends State<ShownotiEmergency> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('ข้อมูลการแจ้งเหตุ', style: GoogleFonts.prompt(),),
+        title: Text(
+          'ข้อมูลการแจ้งเหตุ',
+          style: GoogleFonts.prompt(),
+        ),
         backgroundColor: MyConstant.bg2,
       ),
       body: SingleChildScrollView(
@@ -326,6 +388,7 @@ class _ShownotiEmergencyState extends State<ShownotiEmergency> {
       }
     });
   }
+
   Future<Null> sendNotificationToDriver(String urlSendToken) async {
     await Dio().get(urlSendToken).then((value) {});
   }

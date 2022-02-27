@@ -1,6 +1,6 @@
 import 'dart:convert';
-
 import 'package:dio/dio.dart';
+import 'package:emer_projectnew/animation/FadeAnimation.dart';
 import 'package:emer_projectnew/models/emergency_model.dart';
 import 'package:emer_projectnew/models/user_model.dart';
 import 'package:emer_projectnew/state/show_dataemer.dart';
@@ -73,7 +73,7 @@ class _ShowEmergenState extends State<ShowEmergen> {
   ListView buildListView(BoxConstraints constraints) {
     return ListView.builder(
       itemCount: emergencyModels.length,
-      itemBuilder: (context, index) => Card(
+      itemBuilder: (context, index) => FadeAnimation(( 1.0 + index ) /4, Card(
         color: Colors.blueGrey[50],
         child: Row(
           children: [
@@ -92,6 +92,7 @@ class _ShowEmergenState extends State<ShowEmergen> {
                         padding: const EdgeInsets.only(top: 10),
                         child: IconButton(
                           onPressed: () {},
+                          // ignore: prefer_const_constructors
                           icon: Icon(
                             Icons.medical_services,
                             size: 40,
@@ -141,7 +142,7 @@ class _ShowEmergenState extends State<ShowEmergen> {
             ),
           ],
         ),
-      ),
+      ),)
     );
   }
 }
