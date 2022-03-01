@@ -10,7 +10,8 @@ import 'package:emer_projectnew/widgets/show_title.dart';
 import 'package:flutter/material.dart';
 
 class ShowEmergen extends StatefulWidget {
-  const ShowEmergen({Key? key}) : super(key: key);
+  EmergencyModel? emergencyModel;
+  ShowEmergen({Key? key, this.emergencyModel}) : super(key: key);
 
   @override
   _ShowEmergenState createState() => _ShowEmergenState();
@@ -21,12 +22,14 @@ class _ShowEmergenState extends State<ShowEmergen> {
   bool? haveData;
   List<EmergencyModel> emergencyModels = [];
   EmergencyModel? emergencyModel;
+  DateTime? date;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     readData();
+    date = DateTime.parse(widget.emergencyModel!.E_date);
   }
 
   Future<Null> readData() async {
@@ -61,7 +64,7 @@ class _ShowEmergenState extends State<ShowEmergen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: load
-          ? SizedBox()
+          ? Text('')
           : haveData!
               ? LayoutBuilder(
                   builder: (context, constraints) => buildListView(constraints),
@@ -72,77 +75,83 @@ class _ShowEmergenState extends State<ShowEmergen> {
 
   ListView buildListView(BoxConstraints constraints) {
     return ListView.builder(
-      itemCount: emergencyModels.length,
-      itemBuilder: (context, index) => FadeAnimation(( 1.0 + index ) /4, Card(
-        color: Colors.blueGrey[50],
-        child: Row(
-          children: [
-            Container(
-              padding: const EdgeInsets.only(top: 5, left: 10, bottom: 10),
-              width: constraints.maxWidth * 0.9,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(top: 10),
-                        child: IconButton(
-                          onPressed: () {},
-                          // ignore: prefer_const_constructors
-                          icon: Icon(
-                            Icons.medical_services,
-                            size: 40,
-                            color: Colors.redAccent,
+        itemCount: emergencyModels.length,
+        itemBuilder: (context, index) => FadeAnimation(
+              (0.8 + index) / 4,
+              Card(
+                color: Colors.blueGrey[50],
+                child: InkWell(
+                  onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => ShowDataEmer(
+                              emergencyModel: emergencyModels[index]))),
+                  child: Padding(
+                    padding: const EdgeInsets.only(top: 10, bottom: 10),
+                    child: Row(
+                      children: [
+                        Container(
+                          width: constraints.maxWidth * 0.9,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  Padding(
+                                      padding: const EdgeInsets.only(
+                                          top: 15, right: 5, left: 10),
+                                      child: Icon(
+                                        Icons.medical_services,
+                                        size: 40,
+                                        color: Colors.redAccent,
+                                      )),
+                                  Column(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Padding(
+                                        padding:
+                                            const EdgeInsets.only(left: 10),
+                                        child: ShowTitle(
+                                            title: '${emergencyModels[index].E_type}' ==
+                                                    'B'
+                                                ? 'รถล้ม , รถชน'
+                                                : '${emergencyModels[index].E_type}' ==
+                                                        'C'
+                                                    ? '${emergencyModels[index].E_name}'
+                                                    : '${emergencyModels[index].E_type}' ==
+                                                            'A'
+                                                        ? 'หมดสติ'
+                                                        : '${emergencyModels[index].E_type}' ==
+                                                                'n'
+                                                            ? 'ไม่ระบุประเภทอุบัติเหตุ'
+                                                            : '${emergencyModels[index].E_type}',
+                                            textStyle: MyConstant().h10Style()),
+                                      ),
+                                      Padding(
+                                        padding:
+                                            const EdgeInsets.only(left: 10),
+                                        child: ShowTitle(
+                                            title:
+                                                '${date!.day} ${allMonth[date!.month - 1]} ${date!.year + 543} \n${date!.hour.toString().padLeft(2, '0')} : ${date!.minute.toString().padLeft(2, '0')} น.',
+                                            textStyle: MyConstant().h4Style()),
+                                      )
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ],
                           ),
                         ),
-                      ),
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          TextButton(
-                            child: ShowTitle(
-                                title:
-                                    '${emergencyModels[index].E_type}' == 'B'
-                                    ? 'รถล้ม , รถชน'
-                                    : '${emergencyModels[index].E_type}' == 'C'
-                                        ? '${emergencyModels[index].E_name}'
-                                        : '${emergencyModels[index].E_type}' == 'A' 
-                                        ? 'หมดสติ'
-                                        : '${emergencyModels[index].E_type}' == 'n'
-                                        ? 'ไม่ระบุประเภทอุบัติเหตุ'
-                                        // : '${emergencyModels[index].E_name}' == ''
-                                        // ? 'ไม่ระบุประเภทอุบัติเหตุ'
-                                        : '${emergencyModels[index].E_type}',
-                                textStyle: MyConstant().h10Style()),
-                            onPressed: () => Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => ShowDataEmer(
-                                    emergencyModel: emergencyModels[index]),
-                              ),
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 10),
-                            child: ShowTitle(
-                                title: '${emergencyModels[index].E_date}',
-                                textStyle: MyConstant().h4Style()),
-                          )
-                        ],
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
-                ],
+                ),
               ),
-            ),
-          ],
-        ),
-      ),)
-    );
+            ));
   }
 }

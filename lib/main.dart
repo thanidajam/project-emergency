@@ -34,7 +34,6 @@ final Map<String, WidgetBuilder> map = {
   '/showTelemerpage4': (BuildContext context) => ShowTelemerPage4(),
   '/showAidpagefull': (BuildContext context) => ShowAidpagefull(),
   '/addUser' : (BuildContext context) => AddUser(),
-  '/showNotiEmer' :(BuildContext context) => showNotiEmer(),
   '/showNotiEmergency' :(BuildContext context) => ShownotiEmergency(),
   '/showDataEmer' :(BuildContext context) => ShowDataEmer(),
   '/editprofileDriver' : (BuildContext context) => EditprofileDriver(),

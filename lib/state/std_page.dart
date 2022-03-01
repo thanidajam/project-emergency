@@ -15,29 +15,6 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class StdServer extends StatefulWidget {
-  const StdServer({Key? key}) : super(key: key);
-
-  @override
-  _StdServerState createState() => _StdServerState();
-}
-
-const AndroidNotificationChannel channel = AndroidNotificationChannel(
-    'high_importance_channel', // id
-    'High Importance Notification', // title
-    // 'This channel is used for importance notification' , // description
-    importance: Importance.high,
-    playSound: true);
-
-final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
-    FlutterLocalNotificationsPlugin();
-
-Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
-  print('A bg message just showed up : ${message.messageId}');
-}
-
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
@@ -54,6 +31,32 @@ void main() async {
     sound: true,
   );
 }
+
+const AndroidNotificationChannel channel = AndroidNotificationChannel(
+    'high_importance_channel', // id
+    'High Importance Notification', // title
+    // 'This channel is used for importance notification' , // description
+    importance: Importance.high,
+    playSound: true);
+
+final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+    FlutterLocalNotificationsPlugin();
+
+Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  print('A bg message just showed up : ${message.notification!.title}');
+} 
+
+
+class StdServer extends StatefulWidget {
+  const StdServer({Key? key}) : super(key: key);
+
+  @override
+  _StdServerState createState() => _StdServerState();
+}
+
+
 
 class _StdServerState extends State<StdServer> {
   int indexWidget = 0;

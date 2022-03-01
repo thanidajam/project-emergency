@@ -60,6 +60,7 @@ class _DriverServerState extends State<DriverServer> {
   List<Widget> widgets = [];
   int indexWidget = 0;
   UserModel? userModel;
+  EmergencyModel? emergencyModel;
   String name = 'ประวัติการแจ้งเหตุ';
 
   @override
@@ -87,15 +88,26 @@ class _DriverServerState extends State<DriverServer> {
 
     print('## id Logined ==> $uid');
 
-    String apiGetUserWhereUID =
-        '${MyConstant.domain}/emer_projectnew/api/getUserWhereUID.php?isAdd=true&uid=$uid';
-    await Dio().get(apiGetUserWhereUID).then((value) {
-      print('value ==> $value');
+    String? status;
+    String apiGetUserWhereEmer =
+        '${MyConstant.domain}/emer_projectnew/api/getEmergencyWhereStatus.php?isAdd=true&status=$status';
+    await Dio().get(apiGetUserWhereEmer).then((value) async {
       for (var item in json.decode(value.data)) {
         setState(() {
-          userModel = UserModel.fromMap(item);
-          widgets.add(ShowEmergen());
-          widgets.add(ShowDripersons(userModel: userModel!));
+          emergencyModel = EmergencyModel.fromMap(item);
+          widgets.add(ShowEmergen(emergencyModel: emergencyModel!));
+        });
+
+        String apiGetUserWhereUID =
+            '${MyConstant.domain}/emer_projectnew/api/getUserWhereUID.php?isAdd=true&uid=$uid';
+        await Dio().get(apiGetUserWhereUID).then((value) {
+          print('value ==> $value');
+          for (var item in json.decode(value.data)) {
+            setState(() {
+              userModel = UserModel.fromMap(item);
+              widgets.add(ShowDripersons(userModel: userModel!));
+            });
+          }
         });
       }
     });
@@ -107,11 +119,17 @@ class _DriverServerState extends State<DriverServer> {
       appBar: AppBar(
         actions: [
           IconButton(
-              onPressed: () =>
-                  Navigator.pushNamed(context, MyConstant.routeshowNotiEmer),
+              onPressed: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) =>
+                          showNotiEmer(emergencyModel: emergencyModel!))),
               icon: Icon(Icons.notifications))
         ],
-        title: Text('$name', style: GoogleFonts.prompt(),),
+        title: Text(
+          '$name',
+          style: GoogleFonts.prompt(),
+        ),
         backgroundColor: MyConstant.bg2,
       ),
       drawer: widgets.length == 0
@@ -141,8 +159,14 @@ class _DriverServerState extends State<DriverServer> {
         backgroundImage:
             NetworkImage('${MyConstant.domain}${userModel?.image}'),
       ),
-      accountName: Text(userModel == null ? 'Name ?' : userModel!.Name, style: GoogleFonts.prompt(),),
-      accountEmail: Text(userModel == null ? 'Phone ?' : userModel!.Phone, style: GoogleFonts.prompt(),),
+      accountName: Text(
+        userModel == null ? 'Name ?' : userModel!.Name,
+        style: GoogleFonts.prompt(),
+      ),
+      accountEmail: Text(
+        userModel == null ? 'Phone ?' : userModel!.Phone,
+        style: GoogleFonts.prompt(),
+      ),
     );
   }
 
@@ -206,7 +230,11 @@ class _DriverServerState extends State<DriverServer> {
       RemoteNotification? notification = message.notification;
       AndroidNotification? android = message.notification?.android;
       if (notification != null && android != null) {
-        Navigator.push(context, MaterialPageRoute(builder: (context) => showNotiEmer()));
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) =>
+                    showNotiEmer(emergencyModel: emergencyModel!)));
       }
     });
   }

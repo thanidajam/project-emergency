@@ -2,16 +2,17 @@ import 'package:emer_projectnew/utility/my_constant.dart';
 import 'package:emer_projectnew/widgets/show_title.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ShowTelemerPage4 extends StatefulWidget {
-  const ShowTelemerPage4({ Key? key }) : super(key: key);
+  const ShowTelemerPage4({Key? key}) : super(key: key);
 
   @override
   _ShowTelemerPage4State createState() => _ShowTelemerPage4State();
 }
 
 class _ShowTelemerPage4State extends State<ShowTelemerPage4> {
-    List<String> textList = [
+  List<String> textList = [
     'สายด่วนยาเสพติด กรมการแพทย์',
     'สำนักงานหลักประกันสุขภาพแห่งชาติ',
     'ศูนย์พิษวิทยา โรงพยาบาลรามาธิบดี',
@@ -34,10 +35,13 @@ class _ShowTelemerPage4State extends State<ShowTelemerPage4> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('บริการทางการแพทย์', style: GoogleFonts.prompt(),),
+        title: Text(
+          'บริการทางการแพทย์',
+          style: GoogleFonts.prompt(),
+        ),
         backgroundColor: MyConstant.bg2,
       ),
-       body: ListView.builder(
+      body: ListView.builder(
         itemCount: textList.length,
         itemBuilder: (context, index) => Card(
           color: Colors.deepOrange[50],
@@ -64,7 +68,10 @@ class _ShowTelemerPage4State extends State<ShowTelemerPage4> {
               Padding(
                 padding: const EdgeInsets.only(right: 15, top: 10),
                 child: IconButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      List<String> phone = telList;
+                      launch('tel: ${phone[index]}');
+                    },
                     icon: Icon(
                       Icons.phone,
                       size: 30,

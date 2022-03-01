@@ -24,12 +24,14 @@ class _ShowDataEmerState extends State<ShowDataEmer> {
   String? rec_emer;
   String? status;
   List<String> pathPic = [];
+  DateTime? date;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     emergencyModel = widget.emergencyModel;
+    date = DateTime.parse(widget.emergencyModel!.E_date);
     convertStringToArray();
   }
 
@@ -61,6 +63,7 @@ class _ShowDataEmerState extends State<ShowDataEmer> {
                   buildImage(constraints),
                   buildText(),
                   buildText1(),
+                  buildText5(),
                   buildText2(),
                   buildText3(),
                   buildText4(),
@@ -146,6 +149,31 @@ class _ShowDataEmerState extends State<ShowDataEmer> {
       ),
     );
   }
+  
+  Container buildText5() {
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 10),
+      child: Padding(
+        padding: const EdgeInsets.only(top: 20),
+        child: Row(
+          children: [
+             Text(
+              'เวลาที่แจ้งเหตุ :  ',
+              style: GoogleFonts.prompt(
+                fontSize: 18,
+                color: Colors.black,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            ShowTitle(
+                title: '${date!.hour.toString().padLeft(2, '0')} : ${date!.minute.toString().padLeft(2, '0')} น.',
+                textStyle: MyConstant().h8Style()),
+          ],
+        ),
+      ),
+    );
+  }
+
 
   Container buildText1() {
     return Container(
@@ -155,7 +183,7 @@ class _ShowDataEmerState extends State<ShowDataEmer> {
         child: Row(
           children: [
              Text(
-              'วันเวลาที่แจ้ง :  ',
+              'วันที่แจ้งเหตุ :  ',
               style: GoogleFonts.prompt(
                 fontSize: 18,
                 color: Colors.black,
@@ -163,7 +191,7 @@ class _ShowDataEmerState extends State<ShowDataEmer> {
               ),
             ),
             ShowTitle(
-                title: '${emergencyModel!.E_date}',
+                title: '${date!.day} ${allMonth[date!.month - 1]} ${date!.year +543}',
                 textStyle: MyConstant().h8Style()),
           ],
         ),

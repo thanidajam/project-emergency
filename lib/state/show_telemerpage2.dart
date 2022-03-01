@@ -2,6 +2,7 @@ import 'package:emer_projectnew/utility/my_constant.dart';
 import 'package:emer_projectnew/widgets/show_title.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ShowTelemerPage2 extends StatefulWidget {
   const ShowTelemerPage2({Key? key}) : super(key: key);
@@ -64,7 +65,10 @@ class _ShowTelemerPage2State extends State<ShowTelemerPage2> {
               Padding(
                 padding: const EdgeInsets.only(right: 15,top: 10),
                 child: IconButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      List<String> phone = telList;
+                      launch('tel: ${phone[index]}');
+                    },
                     icon: Icon(
                       Icons.phone,
                       size: 30,

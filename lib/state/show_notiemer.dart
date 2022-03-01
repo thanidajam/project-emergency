@@ -13,6 +13,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ShownotiEmergency extends StatefulWidget {
   final EmergencyModel? emergencyModel;
@@ -31,6 +32,7 @@ class _ShownotiEmergencyState extends State<ShownotiEmergency>
   String? rec_emer;
   String? status;
   List<String> pathPic = [];
+  DateTime? date;
 
   late AnimationController controller;
 
@@ -39,6 +41,7 @@ class _ShownotiEmergencyState extends State<ShownotiEmergency>
     // TODO: implement initState
     super.initState();
     emergencyModel = widget.emergencyModel;
+    date = DateTime.parse(widget.emergencyModel!.E_date);
     userModel = widget.userModel;
     convertStringToArray();
     processEditToMySQL(rec_emer: rec_emer, status: status);
@@ -159,6 +162,7 @@ class _ShownotiEmergencyState extends State<ShownotiEmergency>
                   buildImage(constraints),
                   buildText(),
                   buildText1(),
+                  buildText5(),
                   buildText2(),
                   buildText3(),
                   buildText4(),
@@ -166,6 +170,7 @@ class _ShownotiEmergencyState extends State<ShownotiEmergency>
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
+                        buildButton2(),
                         buildButton1(),
                         buildButton(),
                       ],
@@ -180,9 +185,30 @@ class _ShownotiEmergencyState extends State<ShownotiEmergency>
     );
   }
 
-  Container buildButton1() {
+  Container buildButton2() {
     return Container(
       padding: EdgeInsets.only(top: 50),
+      child: ElevatedButton(
+        onPressed: () {
+          String? phone = emergencyModel!.Phone;
+          launch('tel: ${phone}');
+        },
+        style: MyConstant().myButtonStyle8(),
+        child: Text(
+          '       โทรด่วน      ',
+          style: GoogleFonts.prompt(
+            color: Colors.white,
+            fontSize: 17,
+            fontWeight: FontWeight.w700,
+          ),
+        ),
+      ),
+    );
+  }
+
+  Container buildButton1() {
+    return Container(
+      padding: EdgeInsets.only(top: 5),
       child: ElevatedButton(
         onPressed: () {
           setState(() {
@@ -299,6 +325,31 @@ class _ShownotiEmergencyState extends State<ShownotiEmergency>
         ));
   }
 
+  Container buildText5() {
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 10),
+      child: Padding(
+        padding: const EdgeInsets.only(top: 20),
+        child: Row(
+          children: [
+            Text(
+              'เวลาที่แจ้งเหตุ :  ',
+              style: GoogleFonts.prompt(
+                fontSize: 18,
+                color: Colors.black,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            ShowTitle(
+                title:
+                    '${date!.hour.toString().padLeft(2, '0')} : ${date!.minute.toString().padLeft(2, '0')} น.',
+                textStyle: MyConstant().h8Style()),
+          ],
+        ),
+      ),
+    );
+  }
+
   Container buildText1() {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 10),
@@ -307,7 +358,7 @@ class _ShownotiEmergencyState extends State<ShownotiEmergency>
         child: Row(
           children: [
             Text(
-              'วันเวลาที่แจ้ง :  ',
+              'วันที่แจ้งเหตุ :  ',
               style: GoogleFonts.prompt(
                 fontSize: 18,
                 color: Colors.black,
@@ -315,7 +366,8 @@ class _ShownotiEmergencyState extends State<ShownotiEmergency>
               ),
             ),
             ShowTitle(
-                title: '${emergencyModel!.E_date}',
+                title:
+                    '${date!.day} ${allMonth[date!.month - 1]} ${date!.year + 543}',
                 textStyle: MyConstant().h8Style()),
           ],
         ),

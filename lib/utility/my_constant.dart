@@ -22,7 +22,7 @@ class MyConstant {
   static String appName1 = 'Rmutt Emergency Notification';
   static String appName2 = 'นักศึกษา/บุคคลากร';
   static String appName3 = 'พนักงานขับรถพยาบาล';
-  static String domain = 'http://b03b-183-89-90-177.ngrok.io';
+  static String domain = 'http://5c2e-203-158-248-13.ngrok.io';
 
   //Route
   static String routeUser = '/user';
@@ -37,7 +37,6 @@ class MyConstant {
   static String routeShowTelemerpage4 = '/showTelemerpage4';
   static String routeShowAidpagefull = '/showAidpagefull';
   static String routeAddUser = '/addUser';
-  static String routeshowNotiEmer = '/showNotiEmer';
   static String routeshownotiEmergency = '/showNotiEmergency';
   static String routeshowNotiEmergen = '/showNotiEmergen';
   static String routeShowDataEmer = '/showDataEmer';
@@ -53,6 +52,7 @@ class MyConstant {
   static String contact = 'assets/images/contact.png';
   static String avatar = 'assets/images/avata.png';
   static String login = 'assets/images/Market launch-amico.png';
+  static String bar = 'assets/images/bg_emer.png';
 
   //Color
   static Color primary = Color(0xff003300);
@@ -69,6 +69,7 @@ class MyConstant {
   static Color bg7 = Color(0xFFECEFF1);
   static Color bg8 = Color(0xFF263238);
   static Color bg9 = Color(0xFFEF9A9A);
+  static Color bg10 = Color(0xFFF57F17);
 
   //Style
   TextStyle h1Style() => GoogleFonts.prompt(
@@ -196,6 +197,13 @@ class MyConstant {
         primary: MyConstant.bg9,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(20),
+        ),
+      );
+
+  ButtonStyle myButtonStyle8() => ElevatedButton.styleFrom(
+        primary: MyConstant.bg10,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(5),
         ),
       );
 }

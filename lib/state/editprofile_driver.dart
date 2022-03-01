@@ -147,8 +147,8 @@ class _EditprofileDriverState extends State<EditprofileDriver> {
     try {
       var result = await ImagePicker().getImage(
         source: source!,
-        maxWidth: 250,
-        maxHeight: 250,
+        maxWidth: 200,
+        maxHeight: 200,
       );
       setState(() {
         file = File(result!.path);

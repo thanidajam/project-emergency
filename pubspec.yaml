@@ -44,6 +44,8 @@ dependencies:
   simple_animations: ^4.0.1
   lottie: ^1.2.2
   google_maps_flutter: ^2.1.1
+  flutter_phone_direct_caller: ^2.1.0
+  url_launcher: ^6.0.20
 
 dev_dependencies:
   flutter_test:

@@ -2,6 +2,7 @@ import 'package:emer_projectnew/utility/my_constant.dart';
 import 'package:emer_projectnew/widgets/show_title.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ShowTelemerPage3 extends StatefulWidget {
   const ShowTelemerPage3({Key? key}) : super(key: key);
@@ -35,7 +36,10 @@ class _ShowTelemerPage3State extends State<ShowTelemerPage3> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('แจ้งเหตุด่วนเหตุฉุกเฉิน', style: GoogleFonts.prompt(),),
+        title: Text(
+          'แจ้งเหตุด่วนเหตุฉุกเฉิน',
+          style: GoogleFonts.prompt(),
+        ),
         backgroundColor: MyConstant.bg2,
       ),
       body: ListView.builder(
@@ -65,7 +69,10 @@ class _ShowTelemerPage3State extends State<ShowTelemerPage3> {
               Padding(
                 padding: const EdgeInsets.only(right: 15, top: 10),
                 child: IconButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      List<String> phone = telList;
+                      launch('tel: ${phone[index]}');
+                    },
                     icon: Icon(
                       Icons.phone,
                       size: 30,
