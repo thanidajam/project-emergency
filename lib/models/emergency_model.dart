@@ -143,4 +143,6 @@ class EmergencyModel {
       Send_emer.hashCode ^
       Rec_emer.hashCode;
   }
+
+  void add(EmergencyModel emergencyModel) {}
 }

@@ -30,7 +30,6 @@ class _showNotiEmerState extends State<showNotiEmer> {
     // TODO: implement initState
     super.initState();
     readAPI();
-    date = DateTime.parse(widget.emergencyModel.E_date);
   }
 
   Future<Null> readAPI() async {
@@ -147,8 +146,7 @@ class _showNotiEmerState extends State<showNotiEmer> {
                               Padding(
                                 padding: const EdgeInsets.only(left: 10),
                                 child: ShowTitle(
-                                    title:
-                                        '${date!.day} ${allMonth[date!.month - 1]} ${date!.year + 543} \n${date!.hour.toString().padLeft(2, '0')} : ${date!.minute.toString().padLeft(2, '0')} น.',
+                                    title: emergencyModels[index].E_date,
                                     textStyle: MyConstant().h4Style()),
                               )
                             ],

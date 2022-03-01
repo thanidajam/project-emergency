@@ -192,9 +192,9 @@ class _StdServerState extends State<StdServer> {
             ),
             Expanded(
               child: Padding(
-                padding: const EdgeInsets.only(top: 40),
+                padding: const EdgeInsets.only(top: 25),
                 child: GridView.count(
-                  childAspectRatio: (1 / 1.1),
+                  childAspectRatio: (1 / 1.15),
                   crossAxisCount: 2,
                   children: [
                     buildButtomHospital(context),
@@ -325,7 +325,7 @@ Widget buildButtomHospital(BuildContext context) {
               width: 100,
             ),
             Padding(
-              padding: const EdgeInsets.only(top: 10),
+              padding: const EdgeInsets.only(top: 5),
               child: Text(
                 'การปฐมพยาบาล\nเบื้องต้น',
                 style: GoogleFonts.prompt(

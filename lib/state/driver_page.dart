@@ -95,7 +95,7 @@ class _DriverServerState extends State<DriverServer> {
       for (var item in json.decode(value.data)) {
         setState(() {
           emergencyModel = EmergencyModel.fromMap(item);
-          widgets.add(ShowEmergen(emergencyModel: emergencyModel!));
+          widgets.add(ShowEmergen(emergencyModel: emergencyModel));
         });
 
         String apiGetUserWhereUID =

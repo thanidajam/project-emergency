@@ -29,7 +29,6 @@ class _ShowEmergenState extends State<ShowEmergen> {
     // TODO: implement initState
     super.initState();
     readData();
-    date = DateTime.parse(widget.emergencyModel!.E_date);
   }
 
   Future<Null> readData() async {
@@ -136,8 +135,7 @@ class _ShowEmergenState extends State<ShowEmergen> {
                                         padding:
                                             const EdgeInsets.only(left: 10),
                                         child: ShowTitle(
-                                            title:
-                                                '${date!.day} ${allMonth[date!.month - 1]} ${date!.year + 543} \n${date!.hour.toString().padLeft(2, '0')} : ${date!.minute.toString().padLeft(2, '0')} น.',
+                                            title: emergencyModels[index].E_date,
                                             textStyle: MyConstant().h4Style()),
                                       )
                                     ],

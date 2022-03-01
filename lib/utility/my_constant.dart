@@ -1,5 +1,10 @@
+import 'dart:convert';
+
+import 'package:dio/dio.dart';
+import 'package:emer_projectnew/models/emergency_model.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 const List<String> allMonth = [
   "มกราคม",
@@ -22,7 +27,7 @@ class MyConstant {
   static String appName1 = 'Rmutt Emergency Notification';
   static String appName2 = 'นักศึกษา/บุคคลากร';
   static String appName3 = 'พนักงานขับรถพยาบาล';
-  static String domain = 'http://5c2e-203-158-248-13.ngrok.io';
+  static String domain = 'http://bd32-14-207-189-105.ngrok.io';
 
   //Route
   static String routeUser = '/user';
@@ -207,3 +212,5 @@ class MyConstant {
         ),
       );
 }
+
+
