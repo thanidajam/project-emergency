@@ -105,7 +105,7 @@ class _StdServerState extends State<StdServer> {
       RemoteNotification? notification = message.notification;
       AndroidNotification? android = message.notification?.android;
       if (notification != null && android != null) {
-        MyDialog().normalDialog2(context, 'คนขับตอบรับการแจ้งเหตุเรียบร้อยแล้ว', '');
+        // MyDialog().normalDialog2(context, 'คนขับตอบรับการแจ้งเหตุเรียบร้อยแล้ว', '');
         flutterLocalNotificationsPlugin.show(
           notification.hashCode,
           notification.title,
