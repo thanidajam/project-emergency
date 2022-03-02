@@ -192,7 +192,7 @@ class _StdServerState extends State<StdServer> {
             ),
             Expanded(
               child: Padding(
-                padding: const EdgeInsets.only(top: 25),
+                padding: const EdgeInsets.only(top: 80),
                 child: GridView.count(
                   childAspectRatio: (1 / 1.15),
                   crossAxisCount: 2,
