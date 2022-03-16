@@ -90,7 +90,7 @@ class _DriverServerState extends State<DriverServer> {
 
     String? status;
     String apiGetUserWhereEmer =
-        '${MyConstant.domain}/emer_projectnew/api/getEmergencyWhereStatus.php?isAdd=true&status=$status';
+        '${MyConstant.domain}/emergencyproject/emer_projectnew/api/getEmergencyWhereStatus.php?isAdd=true&status=$status';
     await Dio().get(apiGetUserWhereEmer).then((value) async {
       for (var item in json.decode(value.data)) {
         setState(() {

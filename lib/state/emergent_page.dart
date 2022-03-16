@@ -363,7 +363,7 @@ class _EmergentState extends State<Emergent>
               await MultipartFile.fromFile(file!.path, filename: nameEmergency);
           FormData data = FormData.fromMap(map);
           await Dio().post(apiSaveEmergency, data: data).then((value) {
-            picEmergency = '/emer_projectnew/api/emergency/$nameEmergency';
+            picEmergency = '/emergencyproject/emer_projectnew/api/emergency/$nameEmergency';
             processInsertMySQL(
               e_name: e_name,
               e_date: e_date,
